@@ -1,0 +1,65 @@
+﻿/* wwwroot/css/custom.css */
+
+/* 1. Global Styles */
+:root {
+    --primary-color: #0d6efd;
+    --secondary-color: #6c757d;
+    --accent-color: #ffc107;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9; /* Màu nền xám nhẹ dịu mắt */
+}
+
+a {
+    text-decoration: none;
+}
+
+/* 2. Card Product Styles (Hiệu ứng thẻ sản phẩm) */
+.product-card {
+    transition: all 0.3s ease-in-out;
+    border: none;
+    border-radius: 10px;
+    background: #fff;
+    overflow: hidden;
+}
+
+    .product-card:hover {
+        transform: translateY(-5px); /* Bay lên nhẹ khi hover */
+        box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important;
+    }
+
+    .product-card img {
+        height: 200px;
+        object-fit: cover; /* Đảm bảo ảnh không bị méo */
+        transition: transform 0.3s ease;
+    }
+
+    .product-card:hover img {
+        transform: scale(1.05); /* Phóng to ảnh nhẹ */
+    }
+
+/* 3. Sidebar Sticky (Thanh bên trượt theo khi cuộn) */
+.sidebar-sticky {
+    position: sticky;
+    top: 90px; /* Cách top header */
+    z-index: 900;
+}
+
+/* 4. Spinner Loading */
+.spinner-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(255,255,255,0.8); /* Mờ hơn chút để đẹp hơn */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+/* 5. Custom Badge */
+.cart-badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.65em;
+}

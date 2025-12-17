@@ -19,15 +19,31 @@ namespace MyWeb.Controllers
             return View();
 		}
 
-		public IActionResult Privacy()
-		{
-			return View();
-		}
+        // Trang Gi?i thi?u
+        public IActionResult About()
+        {
+            return View();
+        }
 
-		[ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-		public IActionResult Error()
-		{
-			return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-		}
-	}
+        // Trang Liên h?
+        public IActionResult Contact()
+        {
+            return View();
+        }
+
+        // Trang Chính sách
+        public IActionResult Policies()
+        {
+            return View();
+        }
+
+        // Trang 404
+        [Route("Home/Error404")]
+        public IActionResult Error404()
+        {
+            return View();
+        }
+
+
+    }
 }

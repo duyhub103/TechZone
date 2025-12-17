@@ -1,25 +1,37 @@
-﻿<!-- Spinner Start -->
-<div id="spinner" class="show w-100 vh-100 bg-white position-fixed translate-middle top-50 start-50  d-flex align-items-center justify-content-center">
-    <div class="spinner-grow text-primary" role="status"></div>
-</div>
-<!-- Spinner End -->
-
-
-<!-- Modal Search Start -->
-<div class="modal fade" id="searchModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-        <div class="modal-content rounded-0">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Search by keyword</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+﻿<header class="sticky top-0 z-50 flex items-center justify-between border-b border-solid border-border-color bg-white/90 backdrop-blur-md px-6 md:px-10 py-3 transition-all">
+    <div class="flex items-center gap-8 w-full max-w-[1440px] mx-auto">
+        <a href="/" class="flex items-center gap-4 text-[#181811] no-underline">
+            <div class="size-8 text-primary">
+                <span class="material-symbols-outlined text-[32px] font-bold">laptop_mac</span>
             </div>
-            <div class="modal-body d-flex align-items-center">
-                <div class="input-group w-75 mx-auto d-flex">
-                    <input type="search" class="form-control p-3" placeholder="keywords" aria-describedby="search-icon-1">
-                    <span id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></span>
+            <h2 class="text-[#181811] text-xl font-bold leading-tight tracking-[-0.015em]">TechZone</h2>
+        </a>
+
+        <nav class="hidden lg:flex items-center gap-8 ml-8">
+            <a href="/" class="text-sm font-medium hover:text-primary transition-colors text-text-dark">Trang chủ</a>
+            <a href="/Product" class="text-sm font-medium hover:text-primary transition-colors text-text-dark">Sản phẩm</a>
+            <a href="/Home/About" class="text-sm font-medium hover:text-primary transition-colors text-text-dark">Giới thiệu</a>
+            <a href="/Home/Policies" class="text-sm font-medium hover:text-primary transition-colors text-text-dark">Chính sách</a>
+            <a href="/Home/Contact" class="text-sm font-bold text-primary">Liên hệ</a>
+        </nav>
+
+        <div class="hidden md:flex flex-1 justify-end max-w-md mx-auto mr-4">
+            <div class="relative w-full group">
+                <div class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+                    <span class="material-symbols-outlined text-[20px]">search</span>
                 </div>
+                <input class="w-full bg-neutral-light border-none rounded-full py-2.5 pl-10 pr-4 text-sm focus:ring-2 focus:ring-primary placeholder:text-gray-400"
+                       placeholder="Tìm kiếm sản phẩm..." type="text" />
             </div>
         </div>
+
+        <div class="flex gap-3 items-center">
+            <a href="/Cart" class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
+                <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+            </a>
+            <a href="/Account/Login" class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
+                <span class="material-symbols-outlined text-[20px]">person</span>
+            </a>
+        </div>
     </div>
-</div>
-<!-- Modal Search End -->
+</header>

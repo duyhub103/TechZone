@@ -1,0 +1,107 @@
+﻿@{
+    ViewData["Title"] = "Laptop Gaming";
+}
+
+<section class="w-full max-w-[1440px] px-6 md:px-10 pt-8 pb-4 mx-auto">
+    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+        <div>
+            <div class="flex items-center gap-2 text-sm text-gray-500 mb-2">
+                <a href="/" class="hover:text-primary transition-colors">Trang chủ</a>
+                <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+                <span class="text-[#181811] font-medium">Laptop Gaming</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-[#181811]">Laptop Gaming</h1>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <span class="text-sm font-medium text-gray-600 hidden sm:block">Sắp xếp theo:</span>
+            <div class="relative group">
+                <button class="flex items-center gap-2 bg-white border border-gray-200 rounded-full px-4 py-2.5 text-sm font-medium hover:border-primary transition-colors">
+                    <span>Phổ biến nhất</span>
+                    <span class="material-symbols-outlined text-[20px]">expand_more</span>
+                </button>
+                <div class="absolute right-0 top-full mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-100 hidden group-hover:block z-20">
+                    <a class="block px-4 py-2 hover:bg-neutral-light first:rounded-t-xl" href="#">Mới nhất</a>
+                    <a class="block px-4 py-2 hover:bg-neutral-light" href="#">Giá: Thấp đến Cao</a>
+                    <a class="block px-4 py-2 hover:bg-neutral-light last:rounded-b-xl" href="#">Giá: Cao đến Thấp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w-full max-w-[1440px] px-6 md:px-10 py-6 flex flex-col lg:flex-row gap-8 mx-auto">
+
+    @await Html.PartialAsync("_Sidebar")
+
+    <div class="flex-1">
+
+        <div class="flex flex-wrap gap-2 mb-6">
+            <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-neutral-light text-xs font-bold text-gray-700">
+                15 - 25 triệu
+                <button class="hover:text-red-500"><span class="material-symbols-outlined text-[14px]">close</span></button>
+            </div>
+            <div class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-neutral-light text-xs font-bold text-gray-700">
+                Dell
+                <button class="hover:text-red-500"><span class="material-symbols-outlined text-[14px]">close</span></button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+            @for (int i = 0; i < 6; i++)
+            {
+                <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300 border border-transparent hover:border-gray-100">
+                    <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
+                        <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-10%</div>
+                        <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
+                             style="background-image: url('https://placehold.co/400x400?text=Laptop+Gaming');"></div>
+                        <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary z-20">
+                            <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                        </button>
+                    </div>
+
+                    <div class="flex flex-col gap-1 px-1 flex-1">
+                        <div class="flex flex-wrap gap-1 mb-1">
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">16GB RAM</span>
+                            <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">RTX 4060</span>
+                        </div>
+                        <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors line-clamp-2">
+                            <a href="/Product/Detail" class="text-inherit no-underline">Asus ROG Zephyrus G14 2024</a>
+                        </h3>
+                        <div class="flex items-end gap-2 mt-auto pt-2">
+                            <span class="text-xl font-bold">32.990.000₫</span>
+                            <span class="text-sm text-gray-400 line-through mb-1">36.500.000₫</span>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+        <div class="flex justify-center mt-12 gap-2">
+            <button class="size-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 disabled:opacity-50">
+                <span class="material-symbols-outlined text-[20px]">chevron_left</span>
+            </button>
+            <button class="size-10 flex items-center justify-center rounded-full bg-primary text-black font-bold shadow-md shadow-primary/30">1</button>
+            <button class="size-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 hover:border-gray-300 transition-all">2</button>
+            <button class="size-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-600 font-medium hover:bg-gray-50 hover:border-gray-300 transition-all">3</button>
+            <span class="size-10 flex items-center justify-center text-gray-400">...</span>
+            <button class="size-10 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:bg-gray-50 hover:border-gray-300 transition-all">
+                <span class="material-symbols-outlined text-[20px]">chevron_right</span>
+            </button>
+        </div>
+
+    </div>
+</section>
+
+<section class="w-full max-w-[1440px] px-6 md:px-10 py-12 mb-8 bg-white border-t border-gray-100 mx-auto">
+    <div class="flex flex-col md:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
+        <div class="flex flex-col gap-2 text-center md:text-left">
+            <h3 class="text-2xl font-bold">Đăng ký nhận tin</h3>
+            <p class="text-gray-500">Nhận thông tin khuyến mãi và mã giảm giá sớm nhất.</p>
+        </div>
+        <div class="flex w-full max-w-md gap-2">
+            <input class="flex-1 rounded-full border border-gray-200 bg-neutral-light px-6 py-3 text-base outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Email của bạn" type="email" />
+            <button class="rounded-full bg-primary px-8 py-3 font-bold text-[#181811] hover:brightness-95 transition-all whitespace-nowrap">Đăng ký</button>
+        </div>
+    </div>
+</section>

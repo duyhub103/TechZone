@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Liên hệ";
+}
+
+<div class="px-4 md:px-10 lg:px-40 py-10 flex justify-center">
+    <div class="max-w-[1200px] w-full">
+        <div class="text-center mb-10">
+            <h1 class="text-4xl font-black mb-4">Liên Hệ Với Chúng Tôi</h1>
+            <p class="text-gray-500">Đội ngũ TechZone luôn sẵn sàng hỗ trợ bạn 24/7.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
+            <div class="lg:col-span-7 bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <h3 class="text-2xl font-bold mb-6">Gửi tin nhắn hỗ trợ</h3>
+                <form class="flex flex-col gap-5">
+                    <div class="flex gap-5">
+                        <input class="w-full rounded-xl border-gray-200 bg-background-light px-4 py-3" placeholder="Họ và tên" type="text" />
+                        <input class="w-full rounded-xl border-gray-200 bg-background-light px-4 py-3" placeholder="Số điện thoại" type="tel" />
+                    </div>
+                    <input class="w-full rounded-xl border-gray-200 bg-background-light px-4 py-3" placeholder="Email" type="email" />
+                    <textarea class="w-full rounded-xl border-gray-200 bg-background-light px-4 py-3 min-h-[120px]" placeholder="Nội dung..."></textarea>
+                    <button class="bg-primary px-8 py-3 rounded-full font-bold text-[#181811] w-fit hover:brightness-95">Gửi tin nhắn</button>
+                </form>
+            </div>
+
+            <div class="lg:col-span-5 flex flex-col gap-6">
+                <div class="bg-white p-6 rounded-2xl border border-gray-100 flex items-start gap-4">
+                    <div class="size-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+                        <span class="material-symbols-outlined">storefront</span>
+                    </div>
+                    <div>
+                        <h4 class="font-bold">Showroom Chính</h4>
+                        <p class="text-sm text-gray-500">123 Đường Công Nghệ, Quận 1, TP. HCM</p>
+                    </div>
+                </div>
+                <div class="w-full aspect-video rounded-2xl bg-gray-200 flex items-center justify-center text-gray-400 font-bold">
+                    [Google Map Placeholder]
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

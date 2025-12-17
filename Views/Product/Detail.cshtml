@@ -1,0 +1,347 @@
+﻿@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+}
+
+<main class="flex-1 w-full bg-[#f8f8f5]">
+    <div class="w-full max-w-[1440px] px-6 md:px-10 py-6">
+        <nav class="flex text-sm text-gray-500 overflow-x-auto whitespace-nowrap">
+            <a class="hover:text-primary transition-colors" href="/">Trang chủ</a>
+            <span class="mx-3 text-gray-300">/</span>
+            <a class="hover:text-primary transition-colors" href="/Product">Laptop Gaming</a>
+            <span class="mx-3 text-gray-300">/</span>
+            <a class="hover:text-primary transition-colors" href="#">Asus ROG</a>
+            <span class="mx-3 text-gray-300">/</span>
+            <span class="text-gray-900 font-bold">Asus ROG Zephyrus G14 (2024)</span>
+        </nav>
+    </div>
+
+    <section class="w-full max-w-[1440px] px-6 md:px-10 pb-12 mx-auto">
+        <div class="bg-white rounded-[2.5rem] p-6 md:p-10 shadow-sm">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+
+                <div class="lg:col-span-7 flex flex-col gap-6">
+                    <div class="aspect-[16/10] w-full bg-neutral-light rounded-[2rem] overflow-hidden relative group">
+                        <div class="absolute inset-0 bg-center bg-cover" style="background-image: url('https://placehold.co/800x600?text=Asus+ROG+Main');"></div>
+                        <div class="absolute top-6 left-6 flex gap-2">
+                            <span class="bg-primary text-[#181811] text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-lg shadow-primary/20">BÁN CHẠY</span>
+                            <span class="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10">-10%</span>
+                        </div>
+                        <button class="absolute bottom-6 right-6 size-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+                            <span class="material-symbols-outlined">zoom_in</span>
+                        </button>
+                    </div>
+                    <div class="grid grid-cols-4 gap-4">
+                        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-primary p-0.5 ring-2 ring-primary/20">
+                            <div class="w-full h-full bg-cover bg-center rounded-xl" style="background-image: url('https://placehold.co/200x120?text=1');"></div>
+                        </button>
+                        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-transparent bg-neutral-light hover:border-gray-200 transition-colors">
+                            <div class="w-full h-full bg-cover bg-center rounded-xl opacity-70 hover:opacity-100 transition-opacity" style="background-image: url('https://placehold.co/200x120?text=2');"></div>
+                        </button>
+                        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-transparent bg-neutral-light hover:border-gray-200 transition-colors">
+                            <div class="w-full h-full bg-cover bg-center rounded-xl opacity-70 hover:opacity-100 transition-opacity" style="background-image: url('https://placehold.co/200x120?text=3');"></div>
+                        </button>
+                        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-transparent bg-neutral-light hover:border-gray-200 transition-colors flex items-center justify-center text-gray-500 hover:text-primary hover:bg-white">
+                            <span class="material-symbols-outlined text-[32px]">videocam</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="lg:col-span-5 flex flex-col gap-6">
+                    <div>
+                        <h1 class="text-3xl md:text-4xl font-black text-[#181811] leading-[1.15] mb-3 tracking-tight">Asus ROG Zephyrus G14 (2024) - Ryzen 9, RTX 4060</h1>
+                        <div class="flex flex-wrap items-center gap-4 text-sm mb-4">
+                            <div class="flex items-center gap-1 bg-neutral-light px-3 py-1 rounded-full">
+                                <div class="flex text-yellow-500">
+                                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                    <span class="material-symbols-outlined text-[16px] fill-current">star_half</span>
+                                </div>
+                                <span class="font-bold text-[#181811] ml-1">4.8</span>
+                                <span class="text-gray-400 mx-1">|</span>
+                                <span class="text-gray-500 underline decoration-dotted">128 đánh giá</span>
+                            </div>
+                            <span class="text-gray-400">SKU: ROG-G14-24</span>
+                        </div>
+                        <p class="text-gray-600 leading-relaxed">Laptop gaming 14 inch mạnh mẽ nhất thế giới với màn hình OLED Nebula Display tuyệt đẹp, thiết kế nhôm nguyên khối sang trọng.</p>
+                    </div>
+
+                    <div class="p-6 bg-[#f9f9f7] rounded-3xl border border-[#e5e5e0]">
+                        <div class="flex items-end gap-3 mb-1">
+                            <span class="text-4xl font-black text-[#181811]">32.990.000₫</span>
+                            <span class="text-lg text-gray-400 line-through mb-1.5 font-medium">36.500.000₫</span>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-bold text-green-600 uppercase tracking-wide">
+                            <span class="material-symbols-outlined text-[16px]">verified</span>
+                            Còn hàng - Giao ngay
+                        </div>
+                    </div>
+
+                    <div class="space-y-5">
+                        <div>
+                            <div class="flex justify-between items-center mb-2">
+                                <h3 class="font-bold text-[#181811] text-sm uppercase tracking-wide">Bộ nhớ RAM</h3>
+                                <a class="text-xs text-primary font-bold hover:underline" href="#">Tư vấn chọn RAM?</a>
+                            </div>
+                            <div class="grid grid-cols-2 gap-3">
+                                <button class="flex flex-col items-start p-3 rounded-2xl border-2 border-primary bg-primary/5 transition-all relative">
+                                    <span class="font-bold text-[#181811]">16GB LPDDR5X</span>
+                                    <span class="text-xs text-gray-500">+0₫</span>
+                                    <span class="absolute top-3 right-3 size-5 bg-primary text-black rounded-full flex items-center justify-center">
+                                        <span class="material-symbols-outlined text-[14px]">check</span>
+                                    </span>
+                                </button>
+                                <button class="flex flex-col items-start p-3 rounded-2xl border border-gray-200 bg-white hover:border-gray-400 transition-all opacity-60 hover:opacity-100">
+                                    <span class="font-bold text-[#181811]">32GB LPDDR5X</span>
+                                    <span class="text-xs text-gray-500">+3.000.000₫</span>
+                                </button>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-[#181811] text-sm uppercase tracking-wide mb-2">Ổ cứng SSD</h3>
+                            <div class="flex flex-wrap gap-3">
+                                <button class="px-4 py-2 rounded-xl border border-gray-200 bg-white hover:border-primary hover:text-primary font-medium text-gray-600 text-sm transition-all">512GB NVMe</button>
+                                <button class="px-4 py-2 rounded-xl border-2 border-primary bg-[#181811] text-primary font-bold text-sm transition-all shadow-md">1TB NVMe</button>
+                                <button class="px-4 py-2 rounded-xl border border-gray-200 bg-white hover:border-primary hover:text-primary font-medium text-gray-600 text-sm transition-all">2TB NVMe</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200 mt-2">
+                        <div class="flex items-center border border-gray-200 rounded-full h-14 w-fit px-2 bg-white">
+                            <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500">
+                                <span class="material-symbols-outlined text-[20px]">remove</span>
+                            </button>
+                            <span class="w-8 text-center font-bold text-lg text-[#181811]">1</span>
+                            <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500">
+                                <span class="material-symbols-outlined text-[20px]">add</span>
+                            </button>
+                        </div>
+                        <button class="flex-1 h-14 bg-primary text-[#181811] rounded-full font-bold text-lg hover:bg-[#e6e205] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group">
+                            <span class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform">shopping_cart</span>
+                            Thêm vào giỏ
+                        </button>
+                        <button class="size-14 bg-neutral-light rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors border border-transparent hover:border-red-100">
+                            <span class="material-symbols-outlined text-[24px]">favorite</span>
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3 text-xs font-medium text-gray-500">
+                        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">local_shipping</span>
+                            Freeship toàn quốc
+                        </div>
+                        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">verified_user</span>
+                            Bảo hành 24 tháng
+                        </div>
+                        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">assignment_return</span>
+                            Đổi trả 30 ngày
+                        </div>
+                        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">support_agent</span>
+                            Hỗ trợ 24/7
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full max-w-[1440px] px-6 md:px-10 pb-16 mx-auto">
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="flex-1 flex flex-col gap-6">
+
+                <div class="sticky top-[80px] z-30 bg-[#f8f8f5]/95 backdrop-blur-md pt-2 pb-2">
+                    <div class="flex items-center gap-2 overflow-x-auto p-1.5 bg-white/50 border border-gray-200 rounded-full w-fit max-w-full">
+                        <a class="px-6 py-2.5 rounded-full bg-[#181811] text-white font-bold text-sm shadow-md transition-all whitespace-nowrap" href="#mota">Mô tả sản phẩm</a>
+                        <a class="px-6 py-2.5 rounded-full text-gray-500 hover:bg-white hover:text-[#181811] font-medium text-sm transition-all whitespace-nowrap" href="#thongso">Thông số kỹ thuật</a>
+                        <a class="px-6 py-2.5 rounded-full text-gray-500 hover:bg-white hover:text-[#181811] font-medium text-sm transition-all whitespace-nowrap" href="#danhgia">Đánh giá (128)</a>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+                    <div class="prose prose-lg max-w-none text-[#181811]" id="mota">
+                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                            <span class="w-1.5 h-8 bg-primary rounded-full block"></span>
+                            Sức mạnh Gaming trong thân hình Ultrabook
+                        </h3>
+                        <p class="mb-6 text-gray-600 leading-relaxed text-base">
+                            ROG Zephyrus G14 2024 là chiếc laptop gaming 14 inch mạnh mẽ nhất thế giới, được trang bị vi xử lý <strong>AMD Ryzen™ 9 7940HS</strong> và đồ họa <strong>NVIDIA® GeForce RTX™ 4060</strong>. Màn hình ROG Nebula HDR Mini LED mang đến trải nghiệm hình ảnh sống động chưa từng có. Thiết kế mới với dải đèn Slash Lighting độc đáo ở mặt lưng tạo nên cá tính riêng biệt.
+                        </p>
+                        <div class="my-8 rounded-3xl overflow-hidden shadow-lg border-4 border-gray-100">
+                            <img alt="Zephyrus G14 detail view" class="w-full object-cover aspect-[21/9]" src="https://placehold.co/1200x500?text=Zephyrus+G14+Internal" />
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
+                            <span class="w-1.5 h-8 bg-primary rounded-full block"></span>
+                            Màn hình ROG Nebula OLED
+                        </h3>
+                        <p class="mb-6 text-gray-600 leading-relaxed text-base">
+                            Lần đầu tiên trên laptop ROG, tận hưởng thời gian phản hồi cực nhanh 0.2ms và độ tương phản vô tận của tấm nền OLED. Màn hình 3K 120Hz này đạt chuẩn VESA DisplayHDR True Black 500, mang lại màu đen sâu thẳm và độ sáng rực rỡ.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col gap-6" id="danhgia">
+                    <div class="bg-[#181811] text-white p-8 md:p-10 rounded-[2.5rem] shadow-lg relative overflow-hidden">
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
+                        <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
+                            <div class="flex flex-col items-center gap-2 min-w-[150px]">
+                                <span class="text-6xl font-black text-primary">4.8</span>
+                                <div class="flex text-primary">
+                                    <span class="material-symbols-outlined fill-current">star</span>
+                                    <span class="material-symbols-outlined fill-current">star</span>
+                                    <span class="material-symbols-outlined fill-current">star</span>
+                                    <span class="material-symbols-outlined fill-current">star</span>
+                                    <span class="material-symbols-outlined fill-current">star_half</span>
+                                </div>
+                                <span class="text-sm text-gray-400">128 đánh giá</span>
+                            </div>
+                            <div class="flex-1 w-full flex flex-col gap-3">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-sm font-bold w-3">5</span>
+                                    <span class="material-symbols-outlined text-[16px] text-primary fill-current">star</span>
+                                    <div class="flex-1 h-2.5 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+                                        <div class="h-full bg-primary w-[80%] rounded-full shadow-[0_0_10px_rgba(249,245,6,0.5)]"></div>
+                                    </div>
+                                    <span class="text-sm text-gray-400 w-8 text-right font-mono">80%</span>
+                                </div>
+                            </div>
+                            <div class="min-w-[180px]">
+                                <button class="w-full py-4 bg-white text-[#181811] rounded-2xl font-bold hover:bg-primary transition-colors shadow-lg">Viết đánh giá</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="grid gap-4">
+                        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 hover:border-primary/30 transition-colors">
+                            <div class="flex justify-between items-start mb-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="size-12 rounded-full bg-[#181811] flex items-center justify-center font-bold text-primary text-lg">H</div>
+                                    <div>
+                                        <h5 class="font-bold text-[#181811]">Hoàng Nguyễn</h5>
+                                        <div class="flex text-yellow-400 text-[14px] mt-0.5">
+                                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <span class="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">12/05/2024</span>
+                            </div>
+                            <p class="text-gray-600 leading-relaxed pl-16">Máy rất đẹp, mỏng nhẹ nhưng hiệu năng cực khủng. Chơi Black Myth: Wukong mượt mà ở setting cao.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="lg:w-[400px] min-w-[320px]">
+                <div class="sticky top-24" id="thongso">
+                    <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border-2 border-primary/10 overflow-hidden relative">
+                        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-yellow-200 to-primary"></div>
+                        <h3 class="text-xl font-black mb-6 flex items-center gap-2">
+                            <span class="material-symbols-outlined">settings</span>
+                            Thông số kỹ thuật
+                        </h3>
+                        <table class="w-full text-sm text-left border-collapse">
+                            <tbody class="divide-y divide-gray-100">
+                                <tr>
+                                    <td class="py-3 pr-4 text-gray-500 font-medium w-1/3 align-top">CPU</td>
+                                    <td class="py-3 text-[#181811] font-bold">AMD Ryzen 9 7940HS</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 text-gray-500 font-medium align-top">RAM</td>
+                                    <td class="py-3 text-[#181811] font-bold">16GB LPDDR5X (Onboard)</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 text-gray-500 font-medium align-top">Ổ cứng</td>
+                                    <td class="py-3 text-[#181811] font-bold">1TB PCIe 4.0 NVMe SSD</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 text-gray-500 font-medium align-top">Màn hình</td>
+                                    <td class="py-3 text-[#181811] font-bold">14" 3K (2880 x 1800) OLED 120Hz</td>
+                                </tr>
+                                <tr>
+                                    <td class="py-3 pr-4 text-gray-500 font-medium align-top">VGA</td>
+                                    <td class="py-3 text-[#181811] font-bold">NVIDIA GeForce RTX 4060 8GB</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button class="w-full mt-6 py-3 border border-gray-200 rounded-xl text-sm font-bold text-[#181811] hover:bg-[#181811] hover:text-white transition-all">
+                            Xem cấu hình chi tiết
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full max-w-[1440px] px-6 md:px-10 py-12 mb-8 border-t border-gray-200 mx-auto">
+        <div class="flex items-center justify-between mb-8">
+            <h2 class="text-[#181811] text-[28px] font-bold leading-tight tracking-[-0.015em]">Sản phẩm tương tự</h2>
+            <a class="text-sm font-bold underline decoration-2 decoration-primary underline-offset-4 hover:text-gray-600 transition-colors" href="#">Xem tất cả</a>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
+                <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
+                    <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://placehold.co/300x300?text=Dell+XPS');"></div>
+                    <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
+                        <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-1 px-1">
+                    <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">Dell XPS 13 Plus</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-xl font-bold">45.990.000₫</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
+                <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
+                    <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://placehold.co/300x300?text=Macbook+Pro');"></div>
+                    <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
+                        <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-1 px-1">
+                    <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">MacBook Pro 14 M3</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-xl font-bold">49.990.000₫</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
+                <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
+                    <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://placehold.co/300x300?text=Macbook+Pro');"></div>
+                    <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
+                        <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-1 px-1">
+                    <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">MacBook Pro 14 M3</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-xl font-bold">49.990.000₫</span>
+                    </div>
+                </div>
+            </div>
+            <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
+                <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
+                    <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110" style="background-image: url('https://placehold.co/300x300?text=Macbook+Pro');"></div>
+                    <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
+                        <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+                    </button>
+                </div>
+                <div class="flex flex-col gap-1 px-1">
+                    <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">MacBook Pro 14 M3</h3>
+                    <div class="flex items-end gap-2 mt-2">
+                        <span class="text-xl font-bold">49.990.000₫</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

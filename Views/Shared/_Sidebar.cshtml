@@ -1,0 +1,57 @@
+﻿<aside class="w-full lg:w-64 flex-shrink-0">
+    <div class="sticky top-24 space-y-8 bg-white p-6 rounded-[1.5rem] border border-gray-100 shadow-sm">
+
+        <div class="flex items-center justify-between">
+            <h3 class="font-bold text-lg">Bộ Lọc</h3>
+            <button class="text-xs font-bold text-primary underline">Xóa tất cả</button>
+        </div>
+
+        <div class="space-y-3">
+            <h4 class="font-bold text-sm text-[#181811]">Khoảng giá</h4>
+            <div class="space-y-2">
+                @foreach (var price in new[] { "Dưới 15 triệu", "15 - 25 triệu", "25 - 40 triệu", "Trên 40 triệu" })
+                {
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/20" />
+                        <span class="text-sm text-gray-600 group-hover:text-black">@price</span>
+                    </label>
+                }
+            </div>
+        </div>
+
+        <div class="h-px bg-gray-100"></div>
+
+        <div class="space-y-3">
+            <h4 class="font-bold text-sm text-[#181811]">Hãng sản xuất</h4>
+            <div class="grid grid-cols-2 gap-2">
+                @foreach (var brand in new[] { "Asus", "Dell", "HP", "Lenovo", "Apple", "MSI" })
+                {
+                    /* Demo active state cho Dell */
+                    var activeClass = brand == "Dell" ? "border-primary bg-primary/10 font-bold" : "border-gray-200 hover:border-primary hover:bg-neutral-light font-medium";
+                    <button class="flex items-center justify-center h-10 border rounded-lg transition-all text-sm @activeClass">
+                        @brand
+                    </button>
+                }
+            </div>
+        </div>
+
+        <div class="h-px bg-gray-100"></div>
+
+        <div class="space-y-3">
+            <h4 class="font-bold text-sm text-[#181811]">Vi xử lý</h4>
+            <div class="space-y-2">
+                @foreach (var cpu in new[] { "Intel Core i5", "Intel Core i7", "AMD Ryzen 5", "AMD Ryzen 7" })
+                {
+                    <label class="flex items-center gap-3 cursor-pointer group">
+                        <input type="checkbox" class="w-5 h-5 rounded border-gray-300 text-primary focus:ring-primary/20" />
+                        <span class="text-sm text-gray-600 group-hover:text-black">@cpu</span>
+                    </label>
+                }
+            </div>
+        </div>
+
+        <button class="w-full py-3 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-colors">
+            Áp dụng bộ lọc
+        </button>
+    </div>
+</aside>

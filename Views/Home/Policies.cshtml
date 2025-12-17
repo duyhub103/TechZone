@@ -1,0 +1,189 @@
+﻿@{
+    ViewData["Title"] = "Chính sách & Quy định";
+}
+
+<div class="max-w-[1200px] w-full mx-auto p-4 md:p-8 lg:px-10 gap-8 lg:flex">
+    <aside class="hidden lg:block w-64 shrink-0">
+        <div class="sticky top-24 flex flex-col gap-6">
+            <div>
+                <h3 class="text-sm font-semibold text-neutral-500 uppercase tracking-wider mb-4 px-2">Danh mục</h3>
+                <nav class="flex flex-col gap-2">
+                    <a href="#bao-hanh" class="flex items-center gap-3 px-4 py-3 rounded-full bg-primary text-neutral-900 font-medium shadow-sm transition-all hover:shadow-md">
+                        <span class="material-symbols-outlined icon-fill text-[20px]">verified_user</span>
+                        Chính sách Bảo hành
+                    </a>
+                    <a href="#doi-tra" class="flex items-center gap-3 px-4 py-3 rounded-full hover:bg-white text-neutral-600 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">published_with_changes</span>
+                        Chính sách Đổi trả
+                    </a>
+                    <a href="#thanh-toan" class="flex items-center gap-3 px-4 py-3 rounded-full hover:bg-white text-neutral-600 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">payments</span>
+                        Phương thức Thanh toán
+                    </a>
+                    <a href="#van-chuyen" class="flex items-center gap-3 px-4 py-3 rounded-full hover:bg-white text-neutral-600 transition-colors">
+                        <span class="material-symbols-outlined text-[20px]">local_shipping</span>
+                        Vận chuyển & Giao nhận
+                    </a>
+                </nav>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-neutral-100">
+                <div class="flex items-center gap-3 mb-3 text-primary">
+                    <span class="material-symbols-outlined text-[28px]">support_agent</span>
+                    <span class="font-bold text-lg text-neutral-900">Hỗ trợ 24/7</span>
+                </div>
+                <p class="text-sm text-neutral-500 mb-4">Bạn cần giải đáp thêm về các chính sách?</p>
+                <button class="w-full py-2.5 rounded-full border-2 border-neutral-900 font-bold text-sm hover:bg-neutral-900 hover:text-white transition-all">
+                    Chat ngay
+                </button>
+            </div>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col min-w-0">
+        <div class="mb-10">
+            <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-4 leading-[1.1]">Chính Sách &<br class="md:hidden" /> Quy Định</h1>
+            <p class="text-lg text-neutral-500 max-w-2xl">
+                Thông tin minh bạch về quyền lợi của khách hàng khi mua sắm tại TechZone. Chúng tôi cam kết bảo vệ quyền lợi người tiêu dùng.
+            </p>
+            <div class="mt-8 relative max-w-2xl">
+                <div class="absolute left-4 top-1/2 -translate-y-1/2 text-primary">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+                <input class="w-full bg-white border-none rounded-xl py-4 pl-12 pr-4 shadow-sm text-base focus:ring-2 focus:ring-primary placeholder:text-neutral-400"
+                       placeholder="Tìm kiếm nội dung chính sách (ví dụ: bảo hành pin, trả góp 0%...)" type="text" />
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-12">
+
+            <section id="bao-hanh" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-neutral-900 font-bold text-sm">1</span>
+                    <h2 class="text-2xl font-bold">Chính Sách Bảo Hành</h2>
+                </div>
+                <div class="bg-white rounded-xl p-6 md:p-8 shadow-sm border border-neutral-100">
+                    <div class="grid md:grid-cols-2 gap-8 mb-8">
+                        <div class="flex flex-col gap-3">
+                            <div class="w-12 h-12 rounded-full bg-background-light flex items-center justify-center text-primary mb-2">
+                                <span class="material-symbols-outlined text-[24px]">timer</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Thời gian bảo hành</h3>
+                            <p class="text-neutral-600 text-sm leading-relaxed">
+                                Bảo hành chính hãng <span class="font-bold text-neutral-900">12 - 24 tháng</span> tùy theo dòng máy. Pin và sạc bảo hành 06-12 tháng.
+                            </p>
+                        </div>
+                        <div class="flex flex-col gap-3">
+                            <div class="w-12 h-12 rounded-full bg-background-light flex items-center justify-center text-primary mb-2">
+                                <span class="material-symbols-outlined text-[24px]">home_repair_service</span>
+                            </div>
+                            <h3 class="font-bold text-lg">Địa điểm tiếp nhận</h3>
+                            <p class="text-neutral-600 text-sm leading-relaxed">
+                                Tiếp nhận bảo hành tại tất cả các cửa hàng TechZone trên toàn quốc hoặc trung tâm bảo hành ủy quyền của hãng.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="bg-background-light rounded-lg p-5">
+                        <h4 class="font-bold text-sm uppercase tracking-wide text-neutral-500 mb-4">Các trường hợp từ chối bảo hành</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-red-500 text-[20px] mt-0.5">cancel</span>
+                                <span class="text-sm text-neutral-700">Máy bị hư hỏng do tác động vật lý (rơi vỡ, móp méo, cong vênh).</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-red-500 text-[20px] mt-0.5">cancel</span>
+                                <span class="text-sm text-neutral-700">Máy có dấu hiệu vào nước hoặc chất lỏng khác xâm nhập.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="material-symbols-outlined text-red-500 text-[20px] mt-0.5">cancel</span>
+                                <span class="text-sm text-neutral-700">Tem bảo hành bị rách, tẩy xóa hoặc máy đã bị can thiệp bởi bên thứ 3.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section id="doi-tra" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-neutral-900 font-bold text-sm">2</span>
+                    <h2 class="text-2xl font-bold">Chính Sách Đổi Trả</h2>
+                </div>
+                <div class="flex flex-col gap-4">
+                    <div class="bg-primary/10 border border-primary/20 rounded-xl p-6 flex flex-col md:flex-row items-center gap-6">
+                        <div class="shrink-0 w-16 h-16 rounded-full bg-primary flex items-center justify-center">
+                            <span class="material-symbols-outlined text-neutral-900 text-[32px]">autorenew</span>
+                        </div>
+                        <div class="text-center md:text-left">
+                            <h3 class="text-xl font-bold mb-1">1 Đổi 1 trong 30 ngày đầu</h3>
+                            <p class="text-neutral-600">Áp dụng cho tất cả sản phẩm có lỗi từ nhà sản xuất. Hoàn tiền 100% nếu không có sản phẩm thay thế.</p>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div class="bg-white p-6 rounded-xl border border-neutral-100">
+                            <span class="text-4xl font-black text-neutral-200 mb-2 block">01</span>
+                            <h4 class="font-bold mb-2">Kiểm tra tình trạng</h4>
+                            <p class="text-sm text-neutral-500">Máy phải giữ nguyên hiện trạng, không trầy xước, đầy đủ hộp và phụ kiện.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-neutral-100">
+                            <span class="text-4xl font-black text-neutral-200 mb-2 block">02</span>
+                            <h4 class="font-bold mb-2">Xác nhận lỗi</h4>
+                            <p class="text-sm text-neutral-500">Kỹ thuật viên kiểm tra và xác nhận lỗi phần cứng do nhà sản xuất.</p>
+                        </div>
+                        <div class="bg-white p-6 rounded-xl border border-neutral-100">
+                            <span class="text-4xl font-black text-neutral-200 mb-2 block">03</span>
+                            <h4 class="font-bold mb-2">Đổi máy mới</h4>
+                            <p class="text-sm text-neutral-500">Nhận máy mới nguyên seal cùng model hoặc đổi sang dòng khác (bù trừ chênh lệch).</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="thanh-toan" class="scroll-mt-24">
+                <div class="flex items-center gap-3 mb-6">
+                    <span class="flex items-center justify-center w-8 h-8 rounded-full bg-primary text-neutral-900 font-bold text-sm">3</span>
+                    <h2 class="text-2xl font-bold">Phương Thức Thanh Toán</h2>
+                </div>
+                <div class="bg-white rounded-xl overflow-hidden border border-neutral-100">
+                    <div class="divide-y divide-neutral-100">
+                        <div class="p-6 flex flex-col md:flex-row md:items-center gap-4">
+                            <div class="w-12 h-12 shrink-0 rounded-full bg-green-100 text-green-600 flex items-center justify-center">
+                                <span class="material-symbols-outlined">payments</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg">Tiền mặt (COD)</h4>
+                                <p class="text-sm text-neutral-500">Thanh toán trực tiếp cho nhân viên giao hàng khi nhận máy.</p>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col md:flex-row md:items-center gap-4">
+                            <div class="w-12 h-12 shrink-0 rounded-full bg-blue-100 text-blue-600 flex items-center justify-center">
+                                <span class="material-symbols-outlined">account_balance</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg">Chuyển khoản ngân hàng</h4>
+                                <p class="text-sm text-neutral-500">Hỗ trợ tất cả các ngân hàng nội địa qua mã QR Code nhanh chóng.</p>
+                            </div>
+                            <div class="flex gap-2 opacity-60">
+                                <div class="h-8 w-12 bg-neutral-200 rounded"></div>
+                                <div class="h-8 w-12 bg-neutral-200 rounded"></div>
+                                <div class="h-8 w-12 bg-neutral-200 rounded"></div>
+                            </div>
+                        </div>
+                        <div class="p-6 flex flex-col md:flex-row md:items-center gap-4">
+                            <div class="w-12 h-12 shrink-0 rounded-full bg-purple-100 text-purple-600 flex items-center justify-center">
+                                <span class="material-symbols-outlined">credit_card</span>
+                            </div>
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg">Thẻ tín dụng & Trả góp 0%</h4>
+                                <p class="text-sm text-neutral-500">Hỗ trợ trả góp 0% qua thẻ tín dụng (Visa, Master, JCB) hoặc qua công ty tài chính.</p>
+                            </div>
+                            <div class="flex gap-2 items-center">
+                                <span class="text-xs font-bold bg-primary px-2 py-1 rounded text-neutral-900">0% Lãi suất</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="h-20"></div>
+        </div>
+    </main>
+</div>
