@@ -1,0 +1,29 @@
+﻿@using MyWeb.Models
+@model Product
+
+<div class="lg:col-span-7 flex flex-col gap-6">
+    <div class="aspect-[16/10] w-full bg-neutral-light rounded-[2rem] overflow-hidden relative group">
+        <div class="absolute inset-0 bg-center bg-cover" style="background-image: url('@Model.ImageUrl');"></div>
+        <div class="absolute top-6 left-6 flex gap-2">
+            <span class="bg-primary text-[#181811] text-xs font-bold px-3 py-1.5 rounded-full z-10 shadow-lg shadow-primary/20">BÁN CHẠY</span>
+            <span class="bg-red-500 text-white text-xs font-bold px-3 py-1.5 rounded-full z-10">-10%</span>
+        </div>
+        <button class="absolute bottom-6 right-6 size-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white transition-colors shadow-lg">
+            <span class="material-symbols-outlined">zoom_in</span>
+        </button>
+    </div>
+    <div class="grid grid-cols-4 gap-4">
+        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-primary p-0.5 ring-2 ring-primary/20">
+            <div class="w-full h-full bg-cover bg-center rounded-xl" style="background-image: url('https://placehold.co/200x120?text=1');"></div>
+        </button>
+        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-transparent bg-neutral-light hover:border-gray-200 transition-colors">
+            <div class="w-full h-full bg-cover bg-center rounded-xl opacity-70 hover:opacity-100 transition-opacity" style="background-image: url('https://placehold.co/200x120?text=2');"></div>
+        </button>
+        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-transparent bg-neutral-light hover:border-gray-200 transition-colors">
+            <div class="w-full h-full bg-cover bg-center rounded-xl opacity-70 hover:opacity-100 transition-opacity" style="background-image: url('https://placehold.co/200x120?text=3');"></div>
+        </button>
+        <button class="aspect-video rounded-2xl overflow-hidden border-2 border-transparent bg-neutral-light hover:border-gray-200 transition-colors flex items-center justify-center text-gray-500 hover:text-primary hover:bg-white">
+            <span class="material-symbols-outlined text-[32px]">videocam</span>
+        </button>
+    </div>
+</div>

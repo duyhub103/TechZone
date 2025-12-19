@@ -8,11 +8,5 @@ namespace MyWeb.Controllers
         {
             return View();
         }
-
-        // GET: /Cart/Checkout
-        public IActionResult Checkout()
-        {
-            return View();
-        }
     }
 }

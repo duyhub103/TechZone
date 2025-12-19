@@ -1,0 +1,45 @@
+﻿@using MyWeb.Models
+@model Product
+
+
+<div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
+    <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
+
+        @if (Model.IsFeatured)
+        {
+            <div class="absolute top-3 left-3 bg-primary text-[#181811] text-xs font-bold px-2 py-1 rounded-full z-10">Hot</div>
+        }
+
+        <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
+             style="background-image: url('@Model.ImageUrl');">
+        </div>
+
+        <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
+            <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
+        </button>
+    </div>
+
+    <div class="flex flex-col gap-1 px-1">
+        <div class="flex gap-1 mb-1 h-6 overflow-hidden">
+            @if (Model.Attributes != null)
+            {
+                @foreach (var attr in Model.Attributes.Take(2))
+                {
+                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full whitespace-nowrap">@attr.Value</span>
+                }
+            }
+        </div>
+
+        <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors truncate">
+            <a asp-controller="Product" asp-action="Detail" asp-route-id="@Model.Id">
+                @Model.Name
+            </a>
+        </h3>
+
+        <p class="text-gray-500 text-sm line-clamp-1">@(Model.Description ?? "Chưa có mô tả")</p>
+
+        <div class="flex items-end gap-2 mt-2">
+            <span class="text-xl font-bold">@Model.Price.ToString("#,##0")₫</span>
+        </div>
+    </div>
+</div>

@@ -10,10 +10,7 @@ namespace MyWeb.Controllers
         }
 
         // GET: /Account/Login
-        public IActionResult Login()
-        {
-            return View();
-        }
+        public IActionResult Login() => View();
 
         // GET: /Account/Register
         public IActionResult Register()

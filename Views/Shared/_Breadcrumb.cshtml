@@ -1,0 +1,23 @@
+﻿@{
+    // Nhận dữ liệu từ View cha
+    var currentText = ViewData["BreadcrumbCurrent"]?.ToString() ?? "";
+    var middleText = ViewData["BreadcrumbMiddle"]?.ToString() ?? "Sản phẩm";
+    var middleUrl = ViewData["BreadcrumbMiddleUrl"]?.ToString() ?? "/Product";
+}
+
+
+<div class="w-full max-w-[1440px] px-6 md:px-10 py-6">
+    <nav class="flex items-center gap-2 text-sm text-gray-500 overflow-x-auto whitespace-nowrap">
+        <a href="/" class="hover:text-primary transition-colors">Trang chủ</a>
+
+        <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+
+        <a href="@middleUrl" class="hover:text-primary transition-colors">@middleText</a>
+
+        @if (!string.IsNullOrWhiteSpace(currentText))
+        {
+            <span class="material-symbols-outlined text-[12px]">chevron_right</span>
+            <span class="text-[#181811] font-medium">@currentText</span>
+        }
+    </nav>
+</div>

@@ -1,201 +1,27 @@
-﻿@{
+﻿
+@using MyWeb.Models
+@using MyWeb.ViewModels
+@model HomeViewModel
+
+@{
     ViewData["Title"] = "Trang chủ";
 }
 
-<section class="w-full max-w-[1440px] px-6 md:px-10 py-8 mx-auto">
-    <div class="relative overflow-hidden rounded-[2.5rem] bg-[#f2f2eb]">
-        <div class="flex flex-col lg:flex-row items-center gap-8 p-8 md:p-12 lg:p-16">
-            <div class="flex flex-col gap-6 lg:w-1/2 z-10">
-                <div class="flex flex-col gap-2">
-                    <span class="inline-block w-fit px-3 py-1 rounded-full bg-primary text-xs font-bold uppercase tracking-wider">Khuyến mãi hè</span>
-                    <h1 class="text-[#181811] text-4xl md:text-5xl lg:text-6xl font-black leading-[1.1] tracking-[-0.02em]">
-                        MacBook Air M2<br />Siêu Mỏng, Siêu Mạnh
-                    </h1>
-                    <p class="text-[#5c5b4f] text-lg font-medium leading-normal max-w-md mt-2">
-                        Giảm ngay 15% cho các dòng sản phẩm Apple M2. Tặng kèm chuột Magic Mouse khi mua online.
-                    </p>
-                </div>
-                <div class="flex gap-4 mt-2">
-                    <button class="flex items-center justify-center rounded-full h-12 px-8 bg-primary text-[#181811] text-base font-bold hover:brightness-95 transition-all shadow-lg shadow-primary/20">
-                        Mua Ngay
-                    </button>
-                    <button class="flex items-center justify-center rounded-full h-12 px-8 bg-white border border-gray-200 text-[#181811] text-base font-bold hover:bg-gray-50 transition-all">
-                        Xem Chi Tiết
-                    </button>
-                </div>
-            </div>
-            <div class="lg:w-1/2 flex justify-center lg:justify-end relative">
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-gradient-to-tr from-primary/30 to-transparent rounded-full blur-3xl -z-10"></div>
-                <div class="w-full max-w-[500px] aspect-[4/3] bg-contain bg-center bg-no-repeat transition-transform hover:scale-105 duration-500"
-                     style="background-image: url('https://placehold.co/600x450?text=Macbook+Air+M2'); border-radius: 2rem;">
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<partial name="Partials/_HeroSection" model="Model.MainSliders" />
 
-<section class="w-full max-w-[1440px] px-6 md:px-10 py-6 mx-auto">
-    <h2 class="text-[#181811] text-[22px] font-bold leading-tight tracking-[-0.015em] pb-6">Danh mục phổ biến</h2>
-    <div class="flex gap-4 flex-wrap pb-2">
-        <a href="#" class="group flex h-12 items-center gap-3 rounded-full bg-white border border-gray-100 pl-4 pr-6 hover:border-primary hover:shadow-md transition-all">
-            <div class="flex size-8 items-center justify-center rounded-full bg-neutral-light group-hover:bg-primary transition-colors">
-                <span class="material-symbols-outlined text-[20px]">sports_esports</span>
-            </div>
-            <span class="text-[#181811] font-bold">Laptop Gaming</span>
-        </a>
-        <a href="#" class="group flex h-12 items-center gap-3 rounded-full bg-white border border-gray-100 pl-4 pr-6 hover:border-primary hover:shadow-md transition-all">
-            <div class="flex size-8 items-center justify-center rounded-full bg-neutral-light group-hover:bg-primary transition-colors">
-                <span class="material-symbols-outlined text-[20px]">business_center</span>
-            </div>
-            <span class="text-[#181811] font-bold">Văn Phòng</span>
-        </a>
-        <a href="#" class="group flex h-12 items-center gap-3 rounded-full bg-white border border-gray-100 pl-4 pr-6 hover:border-primary hover:shadow-md transition-all">
-            <div class="flex size-8 items-center justify-center rounded-full bg-neutral-light group-hover:bg-primary transition-colors">
-                <span class="material-symbols-outlined text-[20px]">brush</span>
-            </div>
-            <span class="text-[#181811] font-bold">Đồ Họa</span>
-        </a>
-        <a href="#" class="group flex h-12 items-center gap-3 rounded-full bg-white border border-gray-100 pl-4 pr-6 hover:border-primary hover:shadow-md transition-all">
-            <div class="flex size-8 items-center justify-center rounded-full bg-neutral-light group-hover:bg-primary transition-colors">
-                <span class="material-symbols-outlined text-[20px]">laptop_mac</span>
-            </div>
-            <span class="text-[#181811] font-bold">MacBook</span>
-        </a>
-        <a href="#" class="group flex h-12 items-center gap-3 rounded-full bg-white border border-gray-100 pl-4 pr-6 hover:border-primary hover:shadow-md transition-all">
-            <div class="flex size-8 items-center justify-center rounded-full bg-neutral-light group-hover:bg-primary transition-colors">
-                <span class="material-symbols-outlined text-[20px]">headphones</span>
-            </div>
-            <span class="text-[#181811] font-bold">Phụ Kiện</span>
-        </a>
-    </div>
-</section>
+<partial name="Partials/_CategorySection" />
 
-<section class="w-full max-w-[1440px] px-6 md:px-10 py-8 mb-12 mx-auto">
-    <div class="flex items-center justify-between mb-6">
-        <h2 class="text-[#181811] text-[28px] font-bold leading-tight tracking-[-0.015em]">Sản phẩm bán chạy</h2>
-        <a href="/Product" class="text-sm font-bold underline decoration-2 decoration-primary underline-offset-4 hover:text-gray-600 transition-colors">Xem tất cả</a>
-    </div>
+<partial name="Partials/_HomeProductList" model="Model.FeaturedProducts" />
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
-            <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
-                <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-10%</div>
-                <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
-                     style="background-image: url('https://placehold.co/400x400?text=Asus+ROG');"></div>
-                <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
-                    <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
-                </button>
-            </div>
-            <div class="flex flex-col gap-1 px-1">
-                <div class="flex gap-1 mb-1">
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">16GB RAM</span>
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">RTX 4060</span>
-                </div>
-                <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">Asus ROG Zephyrus G14</h3>
-                <p class="text-gray-500 text-sm">Gaming đỉnh cao, mỏng nhẹ</p>
-                <div class="flex items-end gap-2 mt-2">
-                    <span class="text-xl font-bold">32.990.000₫</span>
-                    <span class="text-sm text-gray-400 line-through mb-1">36.500.000₫</span>
-                </div>
-            </div>
-        </div>
+@if (Model.PromoBanner != null)
+{
+    <partial name="Partials/_PromoSection" model="Model.PromoBanner" />
+}
+<partial name="_NewsletterSection" />
 
-        <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
-            <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
-                <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
-                     style="background-image: url('https://placehold.co/400x400?text=Dell+XPS');"></div>
-                <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
-                    <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
-                </button>
-            </div>
-            <div class="flex flex-col gap-1 px-1">
-                <div class="flex gap-1 mb-1">
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">Core i7</span>
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">SSD 512GB</span>
-                </div>
-                <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">Dell XPS 13 Plus</h3>
-                <p class="text-gray-500 text-sm">Thiết kế tương lai, hiệu năng mạnh</p>
-                <div class="flex items-end gap-2 mt-2">
-                    <span class="text-xl font-bold">45.990.000₫</span>
-                </div>
-            </div>
-        </div>
 
-        <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
-            <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
-                <div class="absolute top-3 left-3 bg-primary text-[#181811] text-xs font-bold px-2 py-1 rounded-full z-10">Mới</div>
-                <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
-                     style="background-image: url('https://placehold.co/400x400?text=Macbook+Pro');"></div>
-                <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
-                    <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
-                </button>
-            </div>
-            <div class="flex flex-col gap-1 px-1">
-                <div class="flex gap-1 mb-1">
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">M3 Pro</span>
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">18GB RAM</span>
-                </div>
-                <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">MacBook Pro 14 M3</h3>
-                <p class="text-gray-500 text-sm">Chip M3 Pro mới nhất</p>
-                <div class="flex items-end gap-2 mt-2">
-                    <span class="text-xl font-bold">49.990.000₫</span>
-                </div>
-            </div>
-        </div>
 
-        <div class="group flex flex-col gap-4 bg-white p-4 rounded-[2rem] hover:shadow-xl transition-shadow duration-300">
-            <div class="relative aspect-square w-full rounded-[1.5rem] bg-neutral-light overflow-hidden">
-                <div class="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full z-10">-5%</div>
-                <div class="w-full h-full bg-center bg-cover transition-transform duration-500 group-hover:scale-110"
-                     style="background-image: url('https://placehold.co/400x400?text=ThinkPad+X1');"></div>
-                <button class="absolute bottom-3 right-3 size-10 bg-white rounded-full flex items-center justify-center shadow-md opacity-0 translate-y-2 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 hover:bg-primary">
-                    <span class="material-symbols-outlined text-[20px]">add_shopping_cart</span>
-                </button>
-            </div>
-            <div class="flex flex-col gap-1 px-1">
-                <div class="flex gap-1 mb-1">
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">Siêu bền</span>
-                    <span class="bg-gray-100 text-gray-600 text-[10px] font-bold px-2 py-0.5 rounded-full">Business</span>
-                </div>
-                <h3 class="text-lg font-bold leading-snug group-hover:text-primary/90 transition-colors">Lenovo ThinkPad X1</h3>
-                <p class="text-gray-500 text-sm">Chuẩn doanh nhân, bền bỉ</p>
-                <div class="flex items-end gap-2 mt-2">
-                    <span class="text-xl font-bold">38.990.000₫</span>
-                    <span class="text-sm text-gray-400 line-through mb-1">41.000.000₫</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="w-full max-w-[1440px] px-6 md:px-10 py-8 mb-12 mx-auto">
-    <div class="relative w-full rounded-[2.5rem] overflow-hidden bg-[#1a1a1a] text-white">
-        <div class="absolute inset-0 bg-cover bg-center opacity-40 mix-blend-overlay" style="background-image: url('https://placehold.co/1200x600?text=Gaming+Abstract');"></div>
-        <div class="relative z-10 flex flex-col md:flex-row items-center justify-between p-10 md:p-16 gap-10">
-            <div class="max-w-xl">
-                <h2 class="text-3xl md:text-5xl font-black mb-4 tracking-tight">Chiến Game Đỉnh Cao<br /><span class="text-primary">Không Giới Hạn</span></h2>
-                <p class="text-gray-300 text-lg mb-8">Trải nghiệm sức mạnh đồ họa RTX 40 Series mới nhất trên các dòng Laptop Gaming cao cấp.</p>
-                <button class="flex items-center justify-center rounded-full h-12 px-8 bg-primary text-[#181811] text-base font-bold hover:brightness-110 transition-all">
-                    Khám Phá Ngay
-                </button>
-            </div>
-            <div class="w-full md:w-1/2 flex justify-center">
-                <img class="rounded-xl shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500 max-w-full md:max-w-md border-4 border-white/10"
-                     src="https://placehold.co/500x350?text=Gaming+Laptop" />
-            </div>
-        </div>
-    </div>
-</section>
 
-<section class="w-full max-w-[1440px] px-6 md:px-10 py-12 mb-8 bg-white border-t border-gray-100 mx-auto">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-8 max-w-5xl mx-auto">
-        <div class="flex flex-col gap-2 text-center md:text-left">
-            <h3 class="text-2xl font-bold">Đăng ký nhận tin</h3>
-            <p class="text-gray-500">Nhận thông tin khuyến mãi và mã giảm giá sớm nhất.</p>
-        </div>
-        <div class="flex w-full max-w-md gap-2">
-            <input class="flex-1 rounded-full border border-gray-200 bg-neutral-light px-6 py-3 text-base outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" placeholder="Email của bạn" type="email" />
-            <button class="rounded-full bg-primary px-8 py-3 font-bold text-[#181811] hover:brightness-95 transition-all whitespace-nowrap">Đăng ký</button>
-        </div>
-    </div>
-</section>
+
+
