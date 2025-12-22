@@ -20,6 +20,8 @@ namespace MyWeb.Data
         public DbSet<ProductImage> ProductImages => Set<ProductImage>();
         public DbSet<Order> Orders => Set<Order>();
         public DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
+        public DbSet<HomeCategory> HomeCategories => Set<HomeCategory>();
+
 
         public DbSet<Banner> Banners => Set<Banner>();
 

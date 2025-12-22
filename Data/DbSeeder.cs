@@ -127,6 +127,60 @@ namespace MyWeb.Data
                 context.Banners.AddRange(banners);
                 context.SaveChanges();
             }
+
+            // =======================
+            // HOME CATEGORIES (Trang chủ)
+            // =======================
+
+            if (!context.HomeCategories.Any())
+            {
+                var homeCategories = new List<HomeCategory>
+                {
+                    new HomeCategory
+                    {
+                        Name = "Laptop Gaming",
+                        Icon = "sports_esports",
+                        LinkType = HomeCategoryLinkType.Attribute,
+                        LinkValue = "Gaming",
+                        DisplayOrder = 1
+                    },
+                    new HomeCategory
+                    {
+                        Name = "Văn Phòng",
+                        Icon = "business_center",
+                        LinkType = HomeCategoryLinkType.Attribute,
+                        LinkValue = "Văn phòng",
+                        DisplayOrder = 2
+                    },
+                    new HomeCategory
+                    {
+                        Name = "Đồ Họa",
+                        Icon = "brush",
+                        LinkType = HomeCategoryLinkType.Attribute,
+                        LinkValue = "Đồ họa",
+                        DisplayOrder = 3
+                    },
+                    new HomeCategory
+                    {
+                        Name = "MacBook",
+                        Icon = "laptop_mac",
+                        LinkType = HomeCategoryLinkType.Brand,
+                        LinkValue = "Apple",
+                        DisplayOrder = 4
+                    },
+                    new HomeCategory
+                    {
+                        Name = "Phụ Kiện",
+                        Icon = "headphones",
+                        LinkType = HomeCategoryLinkType.Category,
+                        LinkValue = "Phụ kiện",
+                        DisplayOrder = 5
+                    }
+                };
+
+                context.HomeCategories.AddRange(homeCategories);
+                context.SaveChanges();
+            }
         }
     }
 }

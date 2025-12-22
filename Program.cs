@@ -1,6 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using MyWeb.Data;
+using MyWeb.Repositories.Implementations;
+using MyWeb.Repositories.Interfaces;
+using MyWeb.Services.Implementations;
+using MyWeb.Services.Interfaces;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +22,15 @@ builder.Services.AddDbContext<TechZoneDbContext>(options =>
 builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddEntityFrameworkStores<TechZoneDbContext>()
     .AddDefaultTokenProviders();
+
+// Repositories
+builder.Services.AddScoped<IProductRepository, ProductRepository>();
+builder.Services.AddScoped<IBannerRepository, BannerRepository>();
+
+// Services
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<IHomeService, HomeService>();
+
 
 // Đăng ký MVC Controllers
 builder.Services.AddControllersWithViews();
