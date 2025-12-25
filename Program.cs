@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using MyWeb.Data;
+using MyWeb.Models;
 using MyWeb.Repositories.Implementations;
 using MyWeb.Repositories.Interfaces;
 using MyWeb.Services.Implementations;
@@ -19,17 +20,27 @@ builder.Services.AddDbContext<TechZoneDbContext>(options =>
     options.UseSqlServer(connectionString));
 
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>()
+builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<TechZoneDbContext>()
     .AddDefaultTokenProviders();
 
 // Repositories
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<IBannerRepository, BannerRepository>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IPolicyRepository, PolicyRepository>(); 
+builder.Services.AddScoped<IReviewRepository, ReviewRepository>();
+builder.Services.AddScoped<ICartRepository, CartRepository>();
+
 
 // Services
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<IHomeService, HomeService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<ICartService, CartService>();
+
+
+
 
 
 // Đăng ký MVC Controllers

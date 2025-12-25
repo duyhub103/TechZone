@@ -29,9 +29,46 @@
             <a href="/Cart" class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
                 <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
             </a>
-            <a href="/Account/Login" class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
+
+            @if (User.Identity?.IsAuthenticated ?? false)
+            {
+                <!-- Logged in -->
+                <div class="relative group">
+                    <button class="flex items-center justify-center rounded-full size-10 bg-primary text-black hover:brightness-95 transition-all shadow-md">
+                        <span class="material-symbols-outlined text-[20px]">person</span>
+                    </button>
+
+                    <!-- Dropdown -->
+                    <div class="absolute right-0 mt-2 w-44 bg-white rounded-xl shadow-lg border border-gray-100 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
+                        <a href="/Account/Profile"
+                           class="block px-4 py-2 text-sm hover:bg-neutral-light">
+                            Tài khoản
+                        </a>
+
+                        <form asp-controller="Account" asp-action="Logout" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit"
+                                    class="w-full text-left px-4 py-2 text-sm hover:bg-neutral-light">
+                                Đăng xuất
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <!-- Not logged in -->
+                <a href="/Account/Login"
+                   class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
+                    <span class="material-symbols-outlined text-[20px]">person</span>
+                </a>
+            }
+
+
+
+            @* <a href="/Account/Login" class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
                 <span class="material-symbols-outlined text-[20px]">person</span>
-            </a>
+            </a> *@
         </div>
     </div>
 </header>

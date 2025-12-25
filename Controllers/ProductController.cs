@@ -1,8 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Services.Interfaces;
 using MyWeb.ViewModels;
+using System.Security.Claims;
 
 namespace MyWeb.Controllers
 {
@@ -23,7 +25,6 @@ namespace MyWeb.Controllers
 
         public IActionResult Detail(int id)
         {
-
             try
             {
                 var viewModel = _productService.GetProductDetail(id);
@@ -33,7 +34,6 @@ namespace MyWeb.Controllers
             {
                 return NotFound();
             }
-
-        }
+        }       
     }
 }

@@ -178,6 +178,18 @@ namespace MyWeb.Data
                     }
                 };
 
+                //policy
+                if (!context.Policies.Any())
+                {
+                    context.Policies.AddRange(
+                        new Policy { Name = "Bảo hành chính hãng", Icon = "verified", Description = "Bảo hành 12 tháng" },
+                        new Policy { Name = "Đổi trả 7 ngày", Icon = "autorenew", Description = "Lỗi 1 đổi 1" },
+                        new Policy { Name = "Giao hàng nhanh", Icon = "local_shipping", Description = "Toàn quốc" },
+                        new Policy { Name = "Hỗ trợ 24/7", Icon = "support_agent", Description = "Hỗ trợ 24/7" }
+                    );
+                }
+
+
                 context.HomeCategories.AddRange(homeCategories);
                 context.SaveChanges();
             }

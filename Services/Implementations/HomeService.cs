@@ -29,8 +29,8 @@ namespace MyWeb.Services.Implementations
                 MainSliders = _bannerRepo.GetMainSliders(),
                 PromoBanner = _bannerRepo.GetPromoBanner(),
                 PopularCategories = _context.HomeCategories
-                    .OrderBy(x => x.DisplayOrder)
-                    .ToList()
+                                    .OrderBy(x => x.DisplayOrder)
+                                    .ToList()
             };
         }
     }

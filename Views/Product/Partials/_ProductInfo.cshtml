@@ -1,4 +1,6 @@
-﻿@using MyWeb.Models
+﻿
+
+@using MyWeb.Models
 @model Product
 
 
@@ -20,9 +22,6 @@
                 <span class="text-gray-400 mx-1">|</span>
                 <span class="text-gray-500 underline decoration-dotted">128 đánh giá</span>
             </div>
-            <span class="text-gray-400">
-                SKU: @($"SKU-{Model.Id}")
-            </span>
         </div>
         <p class="text-gray-600 leading-relaxed">
             @(Model.Description ?? "Chưa có mô tả")
@@ -45,8 +44,7 @@
     <div class="space-y-5">
         <div>
             <div class="flex justify-between items-center mb-2">
-                <h3 class="font-bold text-[#181811] text-sm uppercase tracking-wide">Bộ nhớ RAM</h3>
-                <a class="text-xs text-primary font-bold hover:underline" href="#">Tư vấn chọn RAM?</a>
+                <h3 class="font-bold text-[#181811] text-sm uppercase tracking-wide">Bộ nhớ RAM</h3>               
             </div>
             <div class="grid grid-cols-2 gap-3">
                 <button class="flex flex-col items-start p-3 rounded-2xl border-2 border-primary bg-primary/5 transition-all relative">
@@ -72,41 +70,5 @@
         </div>
     </div>
 
-    <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200 mt-2">
-        <div class="flex items-center border border-gray-200 rounded-full h-14 w-fit px-2 bg-white">
-            <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500">
-                <span class="material-symbols-outlined text-[20px]">remove</span>
-            </button>
-            <span class="w-8 text-center font-bold text-lg text-[#181811]">1</span>
-            <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500">
-                <span class="material-symbols-outlined text-[20px]">add</span>
-            </button>
-        </div>
-        <button class="flex-1 h-14 bg-primary text-[#181811] rounded-full font-bold text-lg hover:bg-[#e6e205] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group">
-            <span class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform">shopping_cart</span>
-            Thêm vào giỏ
-        </button>
-        <button class="size-14 bg-neutral-light rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors border border-transparent hover:border-red-100">
-            <span class="material-symbols-outlined text-[24px]">favorite</span>
-        </button>
-    </div>
-
-    <div class="grid grid-cols-2 gap-3 text-xs font-medium text-gray-500">
-        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
-            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">local_shipping</span>
-            Freeship toàn quốc
-        </div>
-        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
-            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">verified_user</span>
-            Bảo hành 24 tháng
-        </div>
-        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
-            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">assignment_return</span>
-            Đổi trả 30 ngày
-        </div>
-        <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
-            <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">support_agent</span>
-            Hỗ trợ 24/7
-        </div>
-    </div>
+    <partial name="Partials/_ProductActions" model="Model" />
 </div>

@@ -1,0 +1,17 @@
+﻿@* @using MyWeb.Models
+@model IEnumerable<Policy>
+
+<div class="grid grid-cols-2 gap-3 text-xs font-medium text-gray-500 mt-5">
+    @if (Model != null)
+    {
+        @foreach (var item in Model)
+        {
+            <div class="flex items-center gap-2 bg-white p-2 rounded-lg border border-gray-100 shadow-sm">
+                <span class="material-symbols-outlined text-primary text-[20px] bg-black rounded-full p-0.5">
+                    @(item.Icon ?? "check_circle")
+                </span>
+                <span>@item.Name</span>
+            </div>
+        }
+    }
+</div> *@

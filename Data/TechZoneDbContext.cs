@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MyWeb.Data
 {
-    public class TechZoneDbContext : IdentityDbContext
+    public class TechZoneDbContext : IdentityDbContext<ApplicationUser>
     {
         public TechZoneDbContext(DbContextOptions<TechZoneDbContext> options) : base(options)
         {
@@ -22,8 +22,15 @@ namespace MyWeb.Data
         public DbSet<OrderDetail> OrderDetails => Set<OrderDetail>();
         public DbSet<HomeCategory> HomeCategories => Set<HomeCategory>();
 
-
         public DbSet<Banner> Banners => Set<Banner>();
+
+        public DbSet<Cart> Carts { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
+
+
+        public DbSet<Policy> Policies => Set<Policy>();
+        public DbSet<Review> Reviews => Set<Review>();
+
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MyWeb.ViewModels.LoginViewModel
+
+@{
     ViewData["Title"] = "Đăng nhập";
 }
 
@@ -57,7 +59,7 @@
                     <p class="text-gray-500 text-lg">Vui lòng nhập thông tin để đăng nhập.</p>
                 </div>
 
-                <form class="flex flex-col gap-5">
+                @* <form class="flex flex-col gap-5">
                     <div class="group">
                         <label class="block text-sm font-bold text-[#181811] mb-2 ml-1" for="email">Email</label>
                         <div class="relative">
@@ -87,7 +89,45 @@
                         <span>Đăng nhập</span>
                         <span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">arrow_forward</span>
                     </button>
+                </form> *@
+
+
+                
+                <form asp-action="Login" method="post" class="flex flex-col gap-5">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
+
+                    <div class="group">
+                        <label class="block text-sm font-bold mb-2 ml-1">Email</label>
+                        <input asp-for="Email"
+                               class="w-full h-12 rounded-xl border border-gray-200 bg-neutral-light pl-11 pr-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
+                               placeholder="name@example.com" />
+                        <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="group">
+                        <label class="block text-sm font-bold mb-2 ml-1">Mật khẩu</label>
+                        <input asp-for="Password"
+                               type="password"
+                               class="w-full h-12 rounded-xl border border-gray-200 bg-neutral-light pl-11 pr-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
+                               placeholder="••••••••" />
+                        <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="flex items-center gap-2 ml-1">
+                        <input asp-for="RememberMe" class="size-5 rounded-md border-gray-300 text-primary focus:ring-primary" />
+                        <label asp-for="RememberMe" class="text-sm font-medium text-gray-600">Ghi nhớ đăng nhập</label>
+                    </div>
+
+                    <input type="hidden" asp-for="ReturnUrl" />
+
+                    <button type="submit"
+                            class="w-full h-14 rounded-xl bg-primary text-[#181811] font-bold text-lg hover:brightness-95 transition-all">
+                        Đăng nhập
+                    </button>
                 </form>
+
 
                 <div class="relative my-8 text-center">
                     <div class="absolute inset-0 flex items-center"><span class="w-full border-t border-gray-100"></span></div>

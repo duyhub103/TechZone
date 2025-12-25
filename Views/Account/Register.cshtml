@@ -1,4 +1,6 @@
-﻿@{
+﻿@model MyWeb.ViewModels.RegisterViewModel
+
+@{
     ViewData["Title"] = "Đăng ký";
 }
 
@@ -66,7 +68,7 @@
                     <p class="text-gray-500">Nhập thông tin chi tiết của bạn để đăng ký.</p>
                 </div>
 
-                <form class="flex flex-col gap-4">
+                @* <form class="flex flex-col gap-4">
                     <div class="group">
                         <label class="block text-sm font-bold text-[#181811] mb-2 ml-1" for="fullname">Họ và tên</label>
                         <div class="relative">
@@ -114,6 +116,60 @@
                     <button class="w-full h-14 rounded-xl bg-primary text-[#181811] font-bold text-lg hover:brightness-95 hover:shadow-lg hover:-translate-y-0.5 transition-all duration-200 mt-2 flex items-center justify-center gap-2 group" type="submit">
                         <span>Đăng ký ngay</span>
                         <span class="material-symbols-outlined text-[20px] transition-transform group-hover:translate-x-1">person_add</span>
+                    </button>
+                </form> *@
+
+
+                <form asp-action="Register" method="post" class="flex flex-col gap-4">
+                    @Html.AntiForgeryToken()
+
+                    <div asp-validation-summary="ModelOnly" class="text-red-500 text-sm"></div>
+
+                    <div class="group">
+                        <label class="block text-sm font-bold mb-2 ml-1">Họ và tên</label>
+                        <input asp-for="FullName"
+                               class="w-full h-11 rounded-xl border border-gray-200 bg-neutral-light pl-11 pr-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
+                               placeholder="Nguyễn Văn A" />
+                        <span asp-validation-for="FullName" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="group">
+                        <label class="block text-sm font-bold mb-2 ml-1">Email</label>
+                        <input asp-for="Email"
+                               class="w-full h-11 rounded-xl border border-gray-200 bg-neutral-light pl-11 pr-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none font-medium"
+                               placeholder="name@example.com" />
+                        <span asp-validation-for="Email" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="group">
+                        <label class="block text-sm font-bold mb-2 ml-1">Mật khẩu</label>
+                        <input asp-for="Password"
+                               type="password"
+                               class="w-full h-11 rounded-xl border border-gray-200 bg-neutral-light pl-11 pr-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-gray-400 font-medium" 
+                               placeholder="••••••••" />
+                        <span asp-validation-for="Password" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="group">
+                        <label class="block text-sm font-bold mb-2 ml-1">Xác nhận mật khẩu</label>
+                        <input asp-for="ConfirmPassword"
+                               type="password"
+                               class="w-full h-11 rounded-xl border border-gray-200 bg-neutral-light pl-11 pr-4 focus:border-primary focus:ring-1 focus:ring-primary outline-none placeholder:text-gray-400 font-medium" 
+                               placeholder="••••••••" />
+                        <span asp-validation-for="ConfirmPassword" class="text-red-500 text-sm"></span>
+                    </div>
+
+                    <div class="flex items-start gap-3 ml-1">
+                        <input asp-for="TermsAccepted" class="size-5 rounded-md border-gray-300 text-primary focus:ring-primary" />
+                        <label asp-for="TermsAccepted" class="text-sm text-gray-600">
+                            Tôi đồng ý điều khoản & chính sách
+                        </label>
+                    </div>
+                    <span asp-validation-for="TermsAccepted" class="text-red-500 text-sm"></span>
+
+                    <button type="submit"
+                            class="w-full h-14 rounded-xl bg-primary text-[#181811] font-bold text-lg hover:brightness-95 transition-all">
+                        Đăng ký ngay
                     </button>
                 </form>
 

@@ -8,10 +8,14 @@ namespace MyWeb.Services.Implementations
     public class ProductService : IProductService
     {
         private readonly IProductRepository _productRepo;
+        
 
-        public ProductService(IProductRepository productRepo)
+        public ProductService(
+            IProductRepository productRepo
+            )
         {
             _productRepo = productRepo;
+            
         }
 
         public IEnumerable<Product> GetAllProducts(string? type = null, string? value = null)
@@ -20,7 +24,6 @@ namespace MyWeb.Services.Implementations
             {
                 return _productRepo.GetByFilter(type, value);
             }
-
             return _productRepo.GetAllActive();
         }
 
@@ -42,5 +45,7 @@ namespace MyWeb.Services.Implementations
                 RelatedProducts = relatedProducts.ToList()
             };
         }
+
+
     }
 }
