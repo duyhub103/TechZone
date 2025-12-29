@@ -11,11 +11,18 @@ namespace MyWeb.Models
 
         [Required, StringLength(200)]
         public string Name { get; set; } = null!;
+
+        [StringLength(500)]
+        public string? ShortDescription { get; set; }
+
         public string? Description { get; set; }
 
         [Column(TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
         public string? ImageUrl { get; set; }
+
+        public int Stock { get; set; }
+        public int Sold { get; set; } = 0;
 
         public bool IsActive { get; set; } = true;
         public bool IsFeatured { get; set; } = false;

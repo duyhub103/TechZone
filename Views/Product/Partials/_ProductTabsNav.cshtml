@@ -1,9 +1,12 @@
-﻿<div class="sticky top-[60px] z-30 bg-[#f8f8f5]/95 backdrop-blur-md pt-2 pb-2">
+﻿@using MyWeb.ViewModels
+@model ProductDetailViewModel
+
+<div class="sticky top-[60px] z-30 bg-[#f8f8f5]/95 backdrop-blur-md pt-2 pb-2">
     <div class="flex items-center gap-2 overflow-x-auto p-1.5 bg-white/50 border border-gray-200 rounded-full w-fit max-w-full">
         <a class="px-6 py-2.5 rounded-full bg-[#181811] text-white font-bold text-sm shadow-md transition-all whitespace-nowrap" href="#mota">
             Mô tả sản phẩm</a>
 
         <a class="px-6 py-2.5 rounded-full text-gray-500 hover:bg-white hover:text-[#181811] font-medium text-sm transition-all whitespace-nowrap" href="#danhgia">
-            Đánh giá (128)</a>
+            Đánh giá (@Model.TotalReviews)</a>
     </div>
 </div>

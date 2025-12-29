@@ -14,14 +14,25 @@ namespace MyWeb.Repositories.Implementations
             _context = context;
         }
 
-        public List<Review> GetByProductId(int productId)
+        public async Task<List<Review>> GetReviewsByProductAsync(int productId, int page, int pageSize)
         {
-            return _context.Reviews
+            return await _context.Reviews
+                .Include(r => r.User) // Join bảng User để lấy FullName
                 .Where(r => r.ProductId == productId)
-                .Include(r => r.User)
-                .OrderByDescending(r => r.CreatedAt)
-                .ToList();
+                .OrderByDescending(r => r.CreatedAt) // Mới nhất lên đầu
+                .Skip((page - 1) * pageSize) // Bỏ qua các trang trước
+                .Take(pageSize) // Lấy số lượng cần thiết
+                .ToListAsync();
         }
+
+
+        public async Task<List<Review>> GetAllReviewsByProductIdAsync(int productId)
+        {
+            return await _context.Reviews
+                .Where(r => r.ProductId == productId)
+                .ToListAsync();
+        }
+
         public async Task AddAsync(Review review)
         {
             _context.Reviews.Add(review);

@@ -1,54 +1,125 @@
-﻿
+﻿@using MyWeb.ViewModels
+@model ProductDetailViewModel
+
+@{
+    // 1. Tính phần trăm dựa trên điểm trung bình
+    // Ví dụ: 4.8 sao => 96%
+    double percent = Model.AverageRating > 0 ? (Model.AverageRating / 5.0) * 100 : 0;
+}
+
 <div class="flex flex-col gap-6" id="danhgia">
+
     <div class="bg-[#181811] text-white p-8 md:p-10 rounded-[2.5rem] shadow-lg relative overflow-hidden">
         <div class="absolute top-0 right-0 w-64 h-64 bg-primary/20 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2"></div>
         <div class="relative z-10 flex flex-col md:flex-row items-center gap-10">
             <div class="flex flex-col items-center gap-2 min-w-[150px]">
-                <span class="text-6xl font-black text-primary">4.8</span>
+                <span class="text-6xl font-black text-primary">@Model.AverageRating.ToString("0.0")</span>
                 <div class="flex text-primary">
-                    <span class="material-symbols-outlined fill-current">star</span>
-                    <span class="material-symbols-outlined fill-current">star</span>
-                    <span class="material-symbols-outlined fill-current">star</span>
-                    <span class="material-symbols-outlined fill-current">star</span>
-                    <span class="material-symbols-outlined fill-current">star_half</span>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (Model.AverageRating >= i)
+                        {
+                            <span class="material-symbols-outlined fill-current">star</span>
+                        }
+                        else if (Model.AverageRating >= i - 0.5)
+                        {
+                            <span class="material-symbols-outlined fill-current">star_half</span>
+                        }
+                        else
+                        {
+                            <span class="material-symbols-outlined text-gray-600">star</span>
+                        }
+                    }
                 </div>
-                <span class="text-sm text-gray-400">128 đánh giá</span>
+                <span class="text-sm text-gray-400">@Model.TotalReviews đánh giá</span>
             </div>
             <div class="flex-1 w-full flex flex-col gap-3">
                 <div class="flex items-center gap-4">
-                    <span class="text-sm font-bold w-3">5</span>
                     <span class="material-symbols-outlined text-[16px] text-primary fill-current">star</span>
-                    <div class="flex-1 h-2.5 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
-                        <div class="h-full bg-primary w-[80%] rounded-full shadow-[0_0_10px_rgba(249,245,6,0.5)]"></div>
+                    <div class="flex-1 h-3 bg-white/10 rounded-full overflow-hidden backdrop-blur-sm">
+                        <div class="h-full bg-primary rounded-full shadow-[0_0_10px_rgba(249,245,6,0.5)] transition-all duration-1000 ease-out"
+                             style="width: @(percent.ToString("0"))%">
+                        </div>
                     </div>
-                    <span class="text-sm text-gray-400 w-8 text-right font-mono">80%</span>
+                    <span class="text-sm text-gray-400 w-10 text-right font-mono">@(percent.ToString("0"))%</span>
                 </div>
+                <p class="text-xs text-gray-500 text-center md:text-left pl-0 md:pl-20">
+                    Dựa trên @Model.TotalReviews lượt đánh giá từ khách hàng đã mua sản phẩm.
+                </p>
             </div>
+
             <div class="min-w-[180px]">
-                <button class="w-full py-4 bg-white text-[#181811] rounded-2xl font-bold hover:bg-primary transition-colors shadow-lg">Viết đánh giá</button>
+                <button class="w-full py-4 bg-white text-[#181811] rounded-2xl font-bold hover:bg-primary transition-colors shadow-lg" onclick="toggleReviewForm()">
+                    Viết đánh giá
+                </button>
             </div>
+        </div>
+
+        <div id="reviewForm" class="hidden mt-8 pt-8 border-t border-gray-700/50">
+            <p class="text-center text-gray-400">Form đánh giá sẽ hiện ở đây...</p>
         </div>
     </div>
 
-    <div class="grid gap-4">
-        <div class="bg-white p-6 rounded-[2rem] shadow-sm border border-gray-100 hover:border-primary/30 transition-colors">
-            <div class="flex justify-between items-start mb-4">
-                <div class="flex items-center gap-4">
-                    <div class="size-12 rounded-full bg-[#181811] flex items-center justify-center font-bold text-primary text-lg">H</div>
-                    <div>
-                        <h5 class="font-bold text-[#181811]">Hoàng Nguyễn</h5>
-                        <div class="flex text-yellow-400 text-[14px] mt-0.5">
-                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                            <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                        </div>
-                    </div>
-                </div>
-                <span class="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded-full">12/05/2024</span>
+    <div class="grid gap-4" id="review-container">
+        @if (Model.Reviews != null && Model.Reviews.Any())
+        {
+            <partial name="Partials/_ReviewList" model="Model.Reviews" />
+        }
+        else
+        {
+            <div class="text-center py-10 bg-white rounded-[2rem] border border-gray-100">
+                <span class="material-symbols-outlined text-4xl text-gray-300 mb-2">rate_review</span>
+                <p class="text-gray-500">Chưa có đánh giá nào. Hãy là người đầu tiên!</p>
             </div>
-            <p class="text-gray-600 leading-relaxed pl-16">Máy rất đẹp, mỏng nhẹ nhưng hiệu năng cực khủng. Chơi Black Myth: Wukong mượt mà ở setting cao.</p>
-        </div>
+        }
     </div>
+
+    @if (Model.TotalReviews > 10)
+    {
+        <div class="flex justify-center mt-2">
+            <button id="btnLoadMore" onclick="loadMoreReviews(@Model.MainProduct.Id)" class="mx-auto text-sm font-bold text-gray-500 hover:text-[#181811] py-2 px-6 border border-gray-200 rounded-full hover:bg-white hover:shadow-md transition-all">
+                Xem thêm đánh giá
+            </button>
+        </div>
+    }
 </div>
+
+<script>
+    let currentReviewPage = 1;
+    const pageSize = 10;
+
+    // Toggle Form Viết Đánh Giá
+    function toggleReviewForm() {
+        const form = document.getElementById('reviewForm');
+        form.classList.toggle('hidden');
+    }
+
+    async function loadMoreReviews(productId) {
+        const btn = document.getElementById('btnLoadMore');
+        const originalText = btn.innerText;
+        btn.innerText = "Đang tải...";
+        btn.disabled = true;
+
+        try {
+            const response = await fetch(`/Product/GetMoreReviews?productId=${productId}&page=${currentReviewPage + 1}&pageSize=${pageSize}`);
+
+            if (response.ok) {
+                const html = await response.text();
+                if (html.trim().length > 0) {
+                    document.getElementById('review-container').insertAdjacentHTML('beforeend', html);
+                    currentReviewPage++;
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                } else {
+                    btn.style.display = 'none';
+                }
+            } else {
+                btn.innerText = "Lỗi tải trang";
+            }
+        } catch (error) {
+            console.error(error);
+            btn.innerText = "Thử lại";
+            btn.disabled = false;
+        }
+    }
+</script>

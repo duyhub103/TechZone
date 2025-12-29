@@ -47,7 +47,7 @@
             </a>
         </h3>
 
-        <p class="text-gray-500 text-sm line-clamp-1">@(Model.Description ?? "Chưa có mô tả")</p>
+        <p class="text-gray-500 text-sm line-clamp-1">@(Model.ShortDescription ?? "Chưa có mô tả ngắn")</p>
 
         <div class="flex items-end gap-2 mt-2">
             <span class="text-xl font-bold">@Model.Price.ToString("#,##0")₫</span>

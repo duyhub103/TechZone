@@ -1,74 +1,68 @@
 ﻿
 
-@using MyWeb.Models
-@model Product
+@using MyWeb.ViewModels
+@model ProductDetailViewModel
 
 
 <div class="lg:col-span-5 flex flex-col gap-6">
     <div>
         <h1 class="text-3xl md:text-4xl font-black text-[#181811] leading-[1.15] mb-3 tracking-tight">
-            @Model.Name
+            @Model.MainProduct.Name
         </h1>
         <div class="flex flex-wrap items-center gap-4 text-sm mb-4">
             <div class="flex items-center gap-1 bg-neutral-light px-3 py-1 rounded-full">
                 <div class="flex text-yellow-500">
-                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                    <span class="material-symbols-outlined text-[16px] fill-current">star</span>
-                    <span class="material-symbols-outlined text-[16px] fill-current">star_half</span>
+                    @for (int i = 1; i <= 5; i++)
+                    {
+                        if (Model.AverageRating >= i)
+                        {
+                            <span class="material-symbols-outlined text-[16px] fill-current">star</span> // Sao đầy
+                        }
+                        else if (Model.AverageRating >= i - 0.5)
+                        {
+                            <span class="material-symbols-outlined text-[16px] fill-current">star_half</span> // Sao rưỡi
+                        }
+                        else
+                        {
+                            <span class="material-symbols-outlined text-[16px] text-gray-300">star</span> // Sao rỗng
+                        }
+                    }
                 </div>
-                <span class="font-bold text-[#181811] ml-1">4.8</span>
+                <span class="font-bold text-[#181811] ml-1">
+                    @(Model.AverageRating > 0 ? Model.AverageRating.ToString("0.0") : "0.0")
+                </span>
                 <span class="text-gray-400 mx-1">|</span>
-                <span class="text-gray-500 underline decoration-dotted">128 đánh giá</span>
+                <span class="text-gray-500 underline decoration-dotted">
+                    @Model.TotalReviews đánh giá
+                </span>
             </div>
         </div>
         <p class="text-gray-600 leading-relaxed">
-            @(Model.Description ?? "Chưa có mô tả")
+            @(Model.MainProduct.ShortDescription ?? "Đang cập nhật thông tin sản phẩm...")
         </p>
     </div>
 
     <div class="p-6 bg-[#f9f9f7] rounded-3xl border border-[#e5e5e0]">
         <div class="flex items-end gap-3 mb-1">
             <span class="text-4xl font-black text-[#181811]">
-                @Model.Price.ToString("#,##0")₫
+                @Model.MainProduct.Price.ToString("#,##0")₫
             </span>
-            <span class="text-lg text-gray-400 line-through mb-1.5 font-medium">36.500.000₫</span>
         </div>
-        <div class="flex items-center gap-2 text-xs font-bold text-green-600 uppercase tracking-wide">
-            <span class="material-symbols-outlined text-[16px]">verified</span>
-            Còn hàng - Giao ngay
-        </div>
-    </div>
 
-    <div class="space-y-5">
-        <div>
-            <div class="flex justify-between items-center mb-2">
-                <h3 class="font-bold text-[#181811] text-sm uppercase tracking-wide">Bộ nhớ RAM</h3>               
+        @if (Model.MainProduct.Stock > 0)
+        {
+            <div class="flex items-center gap-2 text-xs font-bold text-green-600 uppercase tracking-wide">
+                <span class="material-symbols-outlined text-[16px]">verified</span>
+                Còn hàng - Giao ngay
             </div>
-            <div class="grid grid-cols-2 gap-3">
-                <button class="flex flex-col items-start p-3 rounded-2xl border-2 border-primary bg-primary/5 transition-all relative">
-                    <span class="font-bold text-[#181811]">16GB LPDDR5X</span>
-                    <span class="text-xs text-gray-500">+0₫</span>
-                    <span class="absolute top-3 right-3 size-5 bg-primary text-black rounded-full flex items-center justify-center">
-                        <span class="material-symbols-outlined text-[14px]">check</span>
-                    </span>
-                </button>
-                <button class="flex flex-col items-start p-3 rounded-2xl border border-gray-200 bg-white hover:border-gray-400 transition-all opacity-60 hover:opacity-100">
-                    <span class="font-bold text-[#181811]">32GB LPDDR5X</span>
-                    <span class="text-xs text-gray-500">+3.000.000₫</span>
-                </button>
-            </div>
-        </div>
-        <div>
-            <h3 class="font-bold text-[#181811] text-sm uppercase tracking-wide mb-2">Ổ cứng SSD</h3>
-            <div class="flex flex-wrap gap-3">
-                <button class="px-4 py-2 rounded-xl border border-gray-200 bg-white hover:border-primary hover:text-primary font-medium text-gray-600 text-sm transition-all">512GB NVMe</button>
-                <button class="px-4 py-2 rounded-xl border-2 border-primary bg-[#181811] text-primary font-bold text-sm transition-all shadow-md">1TB NVMe</button>
-                <button class="px-4 py-2 rounded-xl border border-gray-200 bg-white hover:border-primary hover:text-primary font-medium text-gray-600 text-sm transition-all">2TB NVMe</button>
-            </div>
-        </div>
+        }
+        else
+        {
+                <div class="flex items-center gap-2 text-xs font-bold text-red-500 uppercase tracking-wide">
+                    <span class="material-symbols-outlined text-[16px]">block</span>
+                    Tạm hết hàng - Đăng ký Email bên dưới để nhận thông báo mới nhất
+                </div>
+        }   
     </div>
-
-    <partial name="Partials/_ProductActions" model="Model" />
+    <partial name="Partials/_ProductActions" model="Model.MainProduct" />
 </div>

@@ -1,4 +1,28 @@
-﻿<div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+﻿@using MyWeb.Models
+@model Product
+
+
+<div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm">
+    <div class="prose prose-lg max-w-none text-[#181811]" id="mota">
+
+        @if (!string.IsNullOrEmpty(Model.Description))
+        {
+            @Html.Raw(Model.Description)
+        }
+        else
+        {
+            <div class="text-center py-10 text-gray-400">
+                <span class="material-symbols-outlined text-4xl mb-2">description</span>
+                <p>Nội dung chi tiết đang được cập nhật.</p>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+
+@* <div class="bg-white rounded-[2.5rem] p-8 md:p-10 shadow-sm">
     <div class="prose prose-lg max-w-none text-[#181811]" id="mota">
         <h3 class="text-2xl font-bold mb-4 flex items-center gap-2">
             <span class="w-1.5 h-8 bg-primary rounded-full block"></span>
@@ -18,4 +42,4 @@
             Lần đầu tiên trên laptop ROG, tận hưởng thời gian phản hồi cực nhanh 0.2ms và độ tương phản vô tận của tấm nền OLED. Màn hình 3K 120Hz này đạt chuẩn VESA DisplayHDR True Black 500, mang lại màu đen sâu thẳm và độ sáng rực rỡ.
         </p>
     </div>
-</div>
+</div> *@

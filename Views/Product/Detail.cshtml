@@ -22,7 +22,7 @@
 
                 <partial name="Partials/_ProductGallery" model="Model.MainProduct" />
 
-                <partial name="Partials/_ProductInfo" model="Model.MainProduct" />
+                <partial name="Partials/_ProductInfo" model="Model" />
 
                 
                              
@@ -37,13 +37,13 @@
 
                 <partial name="Partials/_ProductTabsNav" />
 
-                <partial name="Partials/_ProductDescription" />
+                <partial name="Partials/_ProductDescription" model="Model.MainProduct" />
 
-                <partial name="Partials/_ProductReviews" />
+                <partial name="Partials/_ProductReviews" model="Model" />
 
             </div>
 
-            <partial name="Partials/_TechSpecsSidebar" />
+            <partial name="Partials/_TechSpecsSidebar" model="Model.MainProduct" />
 
         </div>
     </section>  

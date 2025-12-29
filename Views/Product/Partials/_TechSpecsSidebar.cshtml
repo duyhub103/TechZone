@@ -1,4 +1,53 @@
-﻿<div class="lg:w-[400px] min-w-[320px]">
+﻿@using MyWeb.Models
+@model Product
+
+<div class="lg:w-[400px] min-w-[320px]">
+    <div class="sticky top-24" id="thongso">
+        <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border-2 border-primary/10 overflow-hidden relative">
+            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-yellow-200 to-primary"></div>
+
+            <h3 class="text-xl font-black mb-6 flex items-center gap-2">
+                <span class="material-symbols-outlined">settings</span>
+                Thông số kỹ thuật
+            </h3>
+
+            @if (Model.Attributes != null && Model.Attributes.Any())
+            {
+                <table class="w-full text-sm text-left border-collapse">
+                    <tbody class="divide-y divide-gray-100">
+                        @foreach (var attr in Model.Attributes.Take(6))
+                        {
+                            <tr>
+                                <td class="py-3 pr-4 text-gray-500 font-medium w-1/3 align-top">
+                                    @attr.Key
+                                </td>
+                                <td class="py-3 text-[#181811] font-bold">
+                                    @attr.Value
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                @if (Model.Attributes.Count > 0)
+                {
+                    <button class="w-full mt-6 py-3 border border-gray-200 rounded-xl text-sm font-bold text-[#181811] hover:bg-[#181811] hover:text-white transition-all">
+                        Xem cấu hình chi tiết
+                    </button>
+                }
+            }
+            else
+            {
+                <div class="text-center text-gray-400 py-4 text-sm italic">
+                    Chưa có thông số kỹ thuật.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+
+@* <div class="lg:w-[400px] min-w-[320px]">
     <div class="sticky top-24" id="thongso">
         <div class="bg-white rounded-[2.5rem] p-6 shadow-sm border-2 border-primary/10 overflow-hidden relative">
             <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary via-yellow-200 to-primary"></div>
@@ -35,4 +84,4 @@
             </button>
         </div>
     </div>
-</div>
+</div> *@

@@ -1,0 +1,11 @@
+﻿
+@using MyWeb.Models
+@model IEnumerable<Review>
+
+@if (Model != null && Model.Any())
+{
+    foreach (var review in Model)
+    {
+        <partial name="Partials/_ReviewItem" model="review" />
+    }
+}

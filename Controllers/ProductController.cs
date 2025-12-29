@@ -23,17 +23,33 @@ namespace MyWeb.Controllers
             return View(products);
         }
 
-        public IActionResult Detail(int id)
+        public async Task<IActionResult> Detail(int id)
         {
             try
             {
-                var viewModel = _productService.GetProductDetail(id);
+                var viewModel = await _productService.GetProductDetailAsync(id);
                 return View(viewModel);
             }
             catch (Exception)
             {
                 return NotFound();
             }
-        }       
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetMoreReviews(int productId, int page = 2, int pageSize = 10)
+        {
+            // Gọi Service lấy list review phân trang
+            var reviews = await _productService.GetMoreReviewsAsync(productId, page, pageSize);
+
+            if (!reviews.Any()) return NoContent(); // Trả về rỗng nếu hết
+
+            // Trả về PartialView, không phải JSON, để render HTML luôn
+            // Lưu ý: Tạo view tên _ReviewItemList nếu muốn loop ở view, 
+            // hoặc trả về từng item (ở đây tôi loop trong Action trả về string HTML hoặc return PartialView loop).
+
+            // Cách đơn giản nhất: return PartialView
+            return PartialView("Partials/_ReviewList", reviews);
+        }
     }
 }

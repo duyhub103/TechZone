@@ -27,7 +27,7 @@ namespace MyWeb.Repositories.Implementations
             var cart = new Cart { UserId = userId };
             _context.Carts.Add(cart);
 
-            SaveAsync();
+            await SaveAsync();
 
             return cart;
         }
@@ -54,7 +54,7 @@ namespace MyWeb.Repositories.Implementations
                 _context.CartItems.Add(newItem);
             }
 
-            SaveAsync();
+            await SaveAsync();
         }
 
 
@@ -67,7 +67,7 @@ namespace MyWeb.Repositories.Implementations
             {
                 _context.CartItems.Remove(item);
 
-                SaveAsync();
+                await SaveAsync();
             }
         }
 
@@ -80,16 +80,16 @@ namespace MyWeb.Repositories.Implementations
             {
                 item.Quantity = newQuantity;
 
-                SaveAsync();
+                await SaveAsync();
             }
         }
 
         public async Task ClearCartAsync(int cartId)
         {
-            var items = _context.CartItems.Where(x => x.CartId == cartId);
+            var items = await _context.CartItems.Where(x => x.CartId == cartId).ToListAsync();
             _context.CartItems.RemoveRange(items);
 
-            SaveAsync();
+            await SaveAsync();
         }
 
 
