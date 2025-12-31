@@ -44,11 +44,7 @@ namespace MyWeb.Controllers
 
             if (!reviews.Any()) return NoContent(); // Trả về rỗng nếu hết
 
-            // Trả về PartialView, không phải JSON, để render HTML luôn
-            // Lưu ý: Tạo view tên _ReviewItemList nếu muốn loop ở view, 
-            // hoặc trả về từng item (ở đây tôi loop trong Action trả về string HTML hoặc return PartialView loop).
-
-            // Cách đơn giản nhất: return PartialView
+            //return PartialView
             return PartialView("Partials/_ReviewList", reviews);
         }
     }

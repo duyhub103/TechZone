@@ -16,7 +16,7 @@
             <h1 class="text-[#181811] text-3xl md:text-4xl font-black tracking-[-0.02em]">Giỏ hàng của bạn</h1>
 
             <span class="text-lg font-medium text-gray-500 mb-1">
-                (@Model.Items.Sum(x => x.Quantity) sản phẩm)
+                (@Model.Items.Count sản phẩm)
             </span>
 
         </div>
@@ -31,16 +31,13 @@
         {
             <div class="flex flex-col lg:flex-row gap-8">
 
-
                 <partial name="Partials/_CartList" model="Model" />
 
+                <div class="lg:w-[400px] shrink-0">
 
-            </div>
+                    <partial name="Partials/_CartSummary" model="Model" />
 
-            <div class="lg:w-[400px] shrink-0">
-
-                <partial name="Partials/_CartSummary" model="Model" />
-
+                </div>
             </div>
         }
         

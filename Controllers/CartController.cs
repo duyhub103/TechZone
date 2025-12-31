@@ -17,15 +17,6 @@ namespace MyWeb.Controllers
             _cartService = cartService;
         }
 
-        //public IActionResult Index()
-        //{
-        //    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-        //    var viewModel = _cartService.GetCartByUserId(userId);
-
-        //    return View(viewModel);
-        //}
-
-
         public async Task<IActionResult> Index()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -35,18 +26,46 @@ namespace MyWeb.Controllers
 
 
         [HttpPost]
-        public IActionResult AddToCart(int productId, int quantity, string returnUrl)
+        public async Task<IActionResult> AddToCart(int productId, int quantity)
         {
+            // check login
             if (!User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Login", "Account",
-                    new { returnUrl });
+                
+                return Json(new
+                {
+                    message = "Bạn cần đăng nhập để thêm sản phẩm vào giỏ hàng.",
+                    success = false,
+                    requireLogin = true,
+                    loginUrl = Url.Action("Login", "Account", new { returnUrl = Request.Headers["Referer"].ToString() })
+                });
             }
 
-            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-            _cartService.AddToCartAsync(userId, productId, quantity);
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await _cartService.AddToCartAsync(userId, productId, quantity);
 
-            return Redirect(returnUrl ?? "/Cart");
+                // lấy giỏ hàng mới nhất
+                var updateCart = await _cartService.GetCartByUserIdAsync(userId);
+
+                // tổng mặt hàng trong giỏ
+                int totalItem = updateCart.Items.Count;
+
+
+                return Json(new { 
+                    success = true, 
+                    message = "Đã thêm vào giỏ hàng thành công!",
+                    newTotalItem = totalItem
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new {
+                    success = false,
+                    message = "Đã có lỗi xảy ra khi thêm sản phẩm vào giỏ hàng: " + ex.Message
+                });
+            }
         }
     }
 }

@@ -1,0 +1,14 @@
+﻿@model int
+
+    @if (Model > 0)
+    {
+        <span id="cart-badge" class="absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">
+            @Model
+        </span>
+    }
+    else
+    {
+        <span id="cart-badge" class="hidden absolute -top-1 -right-1 bg-black text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center border border-white">
+            0
+        </span>
+    }

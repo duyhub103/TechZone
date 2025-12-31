@@ -26,8 +26,9 @@
         </div>
 
         <div class="flex gap-3 items-center">
-            <a href="/Cart" class="flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
+            <a href="/Cart" class="relative flex items-center justify-center rounded-full size-10 bg-neutral-light hover:bg-primary hover:text-black transition-all text-text-dark">
                 <span class="material-symbols-outlined text-[20px]">shopping_cart</span>
+                @await Component.InvokeAsync("CartBadge")
             </a>
 
             @if (User.Identity?.IsAuthenticated ?? false)
