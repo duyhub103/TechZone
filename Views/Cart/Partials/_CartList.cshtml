@@ -6,6 +6,11 @@
         <div class="w-32 text-center">Số lượng</div>
         <div class="w-32 text-right">Thành tiền</div>
         <div class="w-10"></div>
+
+        <button onclick="clearCart()" class="text-xs font-bold text-red-500 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 sm:ml-auto">
+            <span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+            Xóa tất cả
+        </button>
     </div>
 
         @foreach (var item in Model.Items)
@@ -50,7 +55,7 @@
                             </p>
                         </div>
 
-                        <button class="hidden sm:flex size-10 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors w-10">
+                        <button onclick="removeItem(@item.ProductId)" class="hidden sm:flex size-10 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors w-10">
                             <span class="material-symbols-outlined text-[20px]">delete</span>
                         </button>
                     </div>
@@ -58,3 +63,53 @@
             </div>
         }
 </div>
+
+
+<script>
+    // 1. Xóa 1 Item
+    async function removeItem(productId) {
+        if (!confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) return;
+
+        try {
+            const formData = new FormData();
+            formData.append('productId', productId);
+
+            const response = await fetch('/Cart/RemoveItem', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                // Reload trang để cập nhật lại toàn bộ tiền
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Lỗi kết nối server');
+        }
+    }
+
+    // 2. Xóa tất cả
+    async function clearCart() {
+        if (!confirm('Bạn có chắc muốn xóa TOÀN BỘ giỏ hàng? Hành động này không thể hoàn tác.')) return;
+
+        try {
+            const response = await fetch('/Cart/ClearCart', {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Lỗi kết nối server');
+        }
+    }
+</script>

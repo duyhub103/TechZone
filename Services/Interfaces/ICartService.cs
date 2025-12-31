@@ -7,6 +7,7 @@ namespace MyWeb.Services.Interfaces
         Task<CartViewModel> GetCartByUserIdAsync(string userId);
         Task AddToCartAsync(string userId, int productId, int quantity);
         Task ClearCartByUserAsync(string userId);
+        Task RemoveItemAsync(string userId, int productId);
     }
 
 }

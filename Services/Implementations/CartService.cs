@@ -82,6 +82,15 @@ namespace MyWeb.Services.Implementations
             await _cartRepo.AddToCartAsync(cart.Id, productId, quantity);
         }
 
+        public async Task RemoveItemAsync(string userId, int productId)
+        {
+            var cart = await _cartRepo.GetCartByUserIdAsync(userId);
+            if (cart != null)
+            {
+                await _cartRepo.RemoveItemAsync(cart.Id, productId);
+            }
+        }
+
 
         public async Task ClearCartByUserAsync(string userId)
         {

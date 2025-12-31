@@ -67,5 +67,40 @@ namespace MyWeb.Controllers
                 });
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> RemoveItem(int productId)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                var cart = await _cartService.GetCartByUserIdAsync(userId);
+
+                await _cartService.RemoveItemAsync(userId, productId);
+
+                return Json(new { success = true, message = "Đã xóa sản phẩm khỏi giỏ hàng!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Lỗi: " + ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ClearCart()
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                await _cartService.ClearCartByUserAsync(userId);
+
+                return Json(new { success = true, message = "Đã xóa toàn bộ giỏ hàng!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Lỗi: " + ex.Message });
+            }
+        }
     }
 }
