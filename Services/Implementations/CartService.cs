@@ -9,10 +9,12 @@ namespace MyWeb.Services.Implementations
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepo;
+        private readonly IProductRepository _productRepo;
 
-        public CartService(ICartRepository cartRepo)
+        public CartService(ICartRepository cartRepo, IProductRepository productRepo)
         {
             _cartRepo = cartRepo;
+            _productRepo = productRepo;
         }
 
         public async Task<CartViewModel> GetCartByUserIdAsync(string userId)
@@ -60,9 +62,20 @@ namespace MyWeb.Services.Implementations
         {
             var cart = await _cartRepo.GetCartByUserIdAsync(userId);
 
+            var product =  _productRepo.GetById(productId);
+
             if (cart == null)
             {
                 cart = await _cartRepo.CreateCartAsync(userId);
+            }
+            if (product.Stock <= 0)
+            {
+                throw new Exception("Liên hệ với chung tôi qua hotline hoặc Enmail để nhận tư vấn về sản phẩm!");
+            }
+
+            if (quantity > product.Stock)
+            {
+                throw new Exception($"Số lượng yêu cầu vượt quá hạn mức.");
             }
 
 
