@@ -64,20 +64,38 @@ namespace MyWeb.Services.Implementations
 
             var product = _productRepo.GetById(productId);
 
+            int currentQtyItem = 0;
+
+            if (product == null)
+            {
+                throw new Exception("Sản phẩm không tồn tại.");
+            }
+
+            if (product.Stock <= 0)
+            {
+                throw new Exception("Liên hệ với chúng tôi qua hotline hoặc Email để nhận tư vấn về sản phẩm!");
+            }
+
             if (cart == null)
             {
                 cart = await _cartRepo.CreateCartAsync(userId);
             }
-            if (product.Stock <= 0)
+            else
             {
-                throw new Exception("Liên hệ với chung tôi qua hotline hoặc Enmail để nhận tư vấn về sản phẩm!");
+                //check sản phẩm tồn tại trong cart chưa
+                var existingItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
+                if (existingItem != null)
+                {
+                    currentQtyItem = existingItem.Quantity;
+                }
             }
 
-            if (quantity > product.Stock)
+            int newQtyItem = currentQtyItem + quantity;
+
+            if (newQtyItem > product.Stock)
             {
                 throw new Exception($"Số lượng yêu cầu vượt quá hạn mức.");
             }
-
 
             await _cartRepo.AddToCartAsync(cart.Id, productId, quantity);
         }

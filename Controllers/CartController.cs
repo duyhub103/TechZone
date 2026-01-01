@@ -123,6 +123,23 @@ namespace MyWeb.Controllers
                 return Json(new { success = false, message = ex.Message });
             }
         }
-         
+
+        public JsonResult GetCartItemCount()
+        {
+            if (!User.Identity.IsAuthenticated)
+            {
+                return Json(new { success = true, itemCount = 0 });
+            }
+
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var cartTask = _cartService.GetCartByUserIdAsync(userId);
+            cartTask.Wait();
+            var cart = cartTask.Result;
+
+            int itemCount = cart?.Items.Count ?? 0;
+
+            return Json(new { success = true, itemCount = itemCount });
+        }
+
     }
 }

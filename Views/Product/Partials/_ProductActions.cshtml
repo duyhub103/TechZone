@@ -24,7 +24,7 @@
             </button>
         </div>
 
-        <button onclick="addToCart(@Model.Id)" 
+        <button onclick="addToCartDetail(@Model.Id)" 
                 class="flex-1 h-14 bg-primary text-[#181811] rounded-full font-bold text-lg hover:bg-[#e6e205] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group cursor-pointer active:scale-95">
             <span class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform">shopping_cart</span>
                 Thêm vào giỏ
@@ -57,7 +57,7 @@
 
         if (newVal > maxStock) {
             newVal = maxStock;
-            alert(`Liên hệ với chung tôi qua hotline hoặc Enmail để nhận tư vấn về sản phẩm!`);
+            alert(`Số lượng yêu cầu vượt quá hạn mức!`);
         }
 
         input.value = newVal;
@@ -67,7 +67,5 @@
         const qty = parseInt(document.getElementById('quantity').value);
         addToCart(id, qty);
     }
-    
-
     
 </script>
