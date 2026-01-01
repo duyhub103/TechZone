@@ -66,6 +66,65 @@
     @await Html.PartialAsync("_Footer")
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+    <script>
+
+        async function addToCart(productId, quantity){
+            if(!quantity || quantity < 1) {
+                quantity = 1;
+            }
+
+            // Tạo Form Data để gửi
+            const formData = new FormData();
+            formData.append('productId', productId);
+            formData.append('quantity', quantity);
+
+            try {
+                const response = await fetch('/Cart/AddToCart', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.requireLogin) {
+                    // Nếu chưa đăng nhập Chuyển hướng sang trang Login
+                    window.location.href = data.loginUrl;
+                }
+
+                if (data.success) {
+                    alert(data.message);
+
+                    // Cập nhật số trên Header
+                    updateCartBadgeCount(data.newTotalItem);
+                } else {
+                    alert(data.message);
+                }
+
+            } catch (error) {
+                console.error('Lỗi:', error);
+                alert('Có lỗi xảy ra khi thêm vào giỏ hàng.');
+            }
+        }
+
+        // cập nhật số mặt hàng trên Header
+        function updateCartBadgeCount(count) {
+            const badge = document.getElementById('cart-badge'); //từ component default
+            if (badge) {
+                badge.innerText = count;
+                if (count > 0) {
+                    badge.classList.remove('hidden');
+                    badge.classList.add('flex');
+                } else {
+                    badge.classList.add('hidden');
+                    badge.classList.remove('flex');
+                }
+            }
+        }
+
+    </script>
+
     @await RenderSectionAsync("Scripts", required: false)
+
 </body>
 </html>
