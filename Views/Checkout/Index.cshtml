@@ -112,7 +112,40 @@
                                 </div>
                             </div>
                         </label>
-                        <label class="relative flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-primary/50 hover:bg-neutral-light/50 transition-all group">
+
+                        <label class="relative flex items-center p-4 rounded-xl border border-gray-200 cursor-not-allowed opacity-60 bg-gray-50">
+
+                            <input class="size-5 text-black border-gray-300 focus:ring-primary"
+                                   asp-for="PaymentMethod"
+                                   type="radio"
+                                   value="BANK_TRANSFER"
+                                   disabled />
+
+                            <div class="ml-4 flex flex-1 items-center justify-between">
+                                <div class="flex items-center gap-3">
+                                    <div class="flex items-center justify-center size-10 bg-gray-100 rounded-lg text-gray-400">
+                                        <span class="material-symbols-outlined">account_balance</span>
+                                    </div>
+
+                                    <div>
+                                        <span class="block font-bold text-[#181811]">
+                                            Chuyển khoản ngân hàng
+                                        </span>
+                                        <span class="block text-sm text-gray-500">
+                                            Chưa hỗ trợ – vui lòng chọn phương thức khác
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="flex gap-2">
+                                    <div class="h-6 w-10 bg-gray-200 rounded"></div>
+                                    <div class="h-6 w-10 bg-gray-200 rounded"></div>
+                                </div>
+                            </div>
+                        </label>
+
+
+                        @* <label class="relative flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-primary/50 hover:bg-neutral-light/50 transition-all group">
                             <input class="size-5 text-black border-gray-300 focus:ring-primary" 
                                    asp-for="PaymentMethod"
                                    type="radio"
@@ -132,7 +165,7 @@
                                     <div class="h-6 w-10 bg-gray-200 rounded"></div>
                                 </div>
                             </div>
-                        </label>
+                        </label> *@
                         <label class="relative flex items-center p-4 rounded-xl border border-gray-200 cursor-pointer hover:border-primary/50 hover:bg-neutral-light/50 transition-all group">
                             <input class="size-5 text-black border-gray-300 focus:ring-primary" 
                                    asp-for="PaymentMethod"

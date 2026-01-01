@@ -9,5 +9,6 @@ namespace MyWeb.Repositories.Interfaces
         IEnumerable<Product> GetFeatured(int take);
         IEnumerable<Product> GetByFilter(string type, string value);
         IEnumerable<Product> GetRelatedProducts(int categoryId, int excludeProductId, int take);
+
     }
 }

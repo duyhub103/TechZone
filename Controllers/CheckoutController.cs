@@ -10,16 +10,16 @@ namespace MyWeb.Controllers
     public class CheckoutController : Controller
     {
         private readonly ICartService _cartService;
-        private readonly IOrderRepository _orderRepo;
+        private readonly IOrderService _orderService;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CheckoutController(
-        ICartService cartService,
-        IOrderRepository orderRepo,
-        UserManager<ApplicationUser> userManager)
+            ICartService cartService,
+            IOrderService orderService,
+            UserManager<ApplicationUser> userManager)
         {
             _cartService = cartService;
-            _orderRepo = orderRepo;
+            _orderService = orderService;
             _userManager = userManager;
         }
 
@@ -29,6 +29,11 @@ namespace MyWeb.Controllers
         {
             var user = await _userManager.GetUserAsync(User);
             var cart = await _cartService.GetCartByUserIdAsync(user!.Id);
+
+            if (cart == null || !cart.Items.Any())
+            {
+                return RedirectToAction("Index", "Cart");
+            }
 
             var vm = new CheckoutViewModel
             {
@@ -47,35 +52,53 @@ namespace MyWeb.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(CheckoutViewModel vm)
         {
-            if (!ModelState.IsValid)
-                return View(vm);
 
             var user = await _userManager.GetUserAsync(User);
             var cart = await _cartService.GetCartByUserIdAsync(user!.Id);
 
-            var order = new Order
+            // Validate Form
+            if (!ModelState.IsValid)
             {
-                UserId = user.Id,
-                ReceiverName = vm.ReceiverName,
-                ReceiverPhone = vm.ReceiverPhone,
-                ReceiverEmail = vm.ReceiverEmail,
-                ReceiverAddress = vm.ReceiverAddress,
-                Note = vm.Note,
-                PaymentMethod = vm.PaymentMethod,
-                ShippingFee = cart.ShippingFee,
-                DiscountAmount = 0,
-                FinalAmount = cart.GrandTotal
-            };
+                // Nếu form lỗi, load lại giỏ hàng để hiện View
+                await RepopulateCartData(vm, user.Id);
+                return View(vm);
+            }
 
-            await _orderRepo.CreateOrderAsync(order);
-            await _cartService.ClearCartByUserAsync(user.Id);
+            try
+            {
+                //  Gọi Service xử lý trọn gói (Transaction: Trừ kho -> Lưu đơn -> Xóa giỏ -> Gửi mail)
+                // Truyền user.Email vào để gửi mail xác nhận về chính chủ tài khoản
+                int orderId = await _orderService.PlaceOrderAsync(vm, user.Id, user.Email!);
+                return RedirectToAction("OrderSuccess", new { id = orderId });
+            }
+            catch (Exception ex)
+            {
+                // Bắt lỗi Ví dụ: Sản phẩm hết hàng
+                ModelState.AddModelError("", ex.Message);
 
-            return RedirectToAction("OrderSuccess");
+                //Load lại giỏ hàng để check
+                await RepopulateCartData(vm, user.Id);
+                return View(vm);
+            }
         }
 
-        public IActionResult OrderSuccess()
+        public IActionResult OrderSuccess(int id)
         {
+            ViewBag.OrderId = id;
             return View();
+        }
+
+        // load lại giỏ hàng khi có lỗi
+        private async Task RepopulateCartData(CheckoutViewModel vm, string userId)
+        {
+            var cart = await _cartService.GetCartByUserIdAsync(userId);
+            if (cart != null)
+            {
+                vm.CartItems = cart.Items;
+                vm.SubTotal = cart.SubTotal;
+                vm.ShippingFee = cart.ShippingFee;
+                vm.GrandTotal = cart.GrandTotal;
+            }
         }
     }
 }
