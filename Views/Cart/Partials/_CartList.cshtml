@@ -6,6 +6,11 @@
         <div class="w-32 text-center">Số lượng</div>
         <div class="w-32 text-right">Thành tiền</div>
         <div class="w-10"></div>
+
+        <button onclick="clearCart()" class="text-xs font-bold text-red-500 hover:text-red-700 hover:bg-red-50 px-3 py-1.5 rounded-lg transition-colors flex items-center gap-1 sm:ml-auto">
+            <span class="material-symbols-outlined text-[16px]">delete_sweep</span>
+            Xóa tất cả
+        </button>
     </div>
 
         @foreach (var item in Model.Items)
@@ -32,16 +37,20 @@
 
                     <div class="flex items-center justify-between w-full sm:w-auto gap-8 lg:gap-12">
                         <div class="flex items-center bg-neutral-light rounded-full h-12 px-1 border border-gray-200">
-                            <button class="size-10 flex items-center justify-center rounded-full hover:bg-white transition-all text-gray-600 hover:text-primary">
+     
+                            <button onclick="updateCartItemQty(@item.ProductId, @(item.Quantity - 1))" 
+                                    class="size-10 flex items-center justify-center rounded-full hover:bg-white transition-all text-gray-600 hover:text-primary">
                                 <span class="material-symbols-outlined text-[20px]">remove</span>
                             </button>
 
                             <input class="w-10 bg-transparent border-none text-center font-bold text-[#181811] focus:ring-0 p-0"
-                                   readonly value="@item.Quantity" />
+                                   value="@item.Quantity" />
 
-                            <button class="size-10 flex items-center justify-center rounded-full hover:bg-white transition-all text-gray-600 hover:text-primary">
+                            <button onclick="updateCartItemQty(@item.ProductId, @(item.Quantity + 1))"
+                                    class="size-10 flex items-center justify-center rounded-full hover:bg-white transition-all text-gray-600 hover:text-primary">
                                 <span class="material-symbols-outlined text-[20px]">add</span>
                             </button>
+
                         </div>
 
                         <div class="text-right w-32">
@@ -50,7 +59,7 @@
                             </p>
                         </div>
 
-                        <button class="hidden sm:flex size-10 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors w-10">
+                        <button onclick="removeItem(@item.ProductId)" class="hidden sm:flex size-10 items-center justify-center rounded-full bg-gray-50 text-gray-400 hover:bg-red-50 hover:text-red-500 transition-colors w-10">
                             <span class="material-symbols-outlined text-[20px]">delete</span>
                         </button>
                     </div>
@@ -58,3 +67,85 @@
             </div>
         }
 </div>
+
+
+<script>
+    //  Xóa 1 Item
+    async function removeItem(productId) {
+        if (!confirm('Bạn có chắc muốn xóa sản phẩm này khỏi giỏ hàng?')) return;
+
+        try {
+            const formData = new FormData();
+            formData.append('productId', productId);
+
+            const response = await fetch('/Cart/RemoveItem', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                // reload để update tiền
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Lỗi kết nối server');
+        }
+    }
+
+    //  clear cart
+    async function clearCart() {
+        if (!confirm('Bạn có chắc muốn xóa TOÀN BỘ giỏ hàng? Hành động này không thể hoàn tác.')) return;
+
+        try {
+            const response = await fetch('/Cart/ClearCart', {
+                method: 'POST'
+            });
+
+            const data = await response.json();
+            if (data.success) {
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Lỗi kết nối server');
+        }
+    }
+
+    // Cập nhật số lượng
+    async function updateCartItemQty(productId, newQty){
+        if (newQty < 1) return;
+
+        try {
+            const formData = new FormData();
+            formData.append('productId', productId);
+            formData.append('quantity', newQty);
+
+            // loading tránh spam
+            document.body.style.cursor = 'wait';
+
+            const response = await fetch('/Cart/UpdateItemQuantity', {
+                method: 'POST',
+                body: formData
+            });
+
+            const data = await response.json();
+
+            if (data.success){
+                location.reload();
+            }
+            else{
+                alert(data.message);
+            }
+        }
+        catch (error){
+            console.error(error);
+            alert('Lỗi kết nối server');
+        }
+    }
+</script>

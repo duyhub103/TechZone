@@ -3,22 +3,40 @@
 @model Product
 
 <div class="flex flex-col sm:flex-row gap-3 pt-4 border-t border-gray-200 mt-2">
-    <div class="flex items-center border border-gray-200 rounded-full h-14 w-fit px-2 bg-white">
-        <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500" onclick="updateQty(-1)">
-            <span class="material-symbols-outlined text-[20px]">remove</span>
+    @if (Model.Stock > 0)
+    {
+        <div class="flex items-center border border-gray-200 rounded-full h-14 w-fit px-2 bg-white">
+            <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500" 
+                    onclick="updateQty(-1)">
+                <span class="material-symbols-outlined text-[20px]">remove</span>
+            </button>
+
+            <input type="text" 
+                id="quantity" 
+                value="1" 
+                min="1" 
+                data-max="@Model.Stock" 
+                class="w-10 text-center font-bold text-lg text-[#181811] outline-none border-none bg-transparent p-0 cursor-default" />
+
+            <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500" 
+                    onclick="updateQty(1)">
+                <span class="material-symbols-outlined text-[20px]">add</span>
+            </button>
+        </div>
+
+        <button onclick="addToCartDetail(@Model.Id)" 
+                class="flex-1 h-14 bg-primary text-[#181811] rounded-full font-bold text-lg hover:bg-[#e6e205] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group cursor-pointer active:scale-95">
+            <span class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform">shopping_cart</span>
+                Thêm vào giỏ
         </button>
-
-        <input type="text" id="quantity" value="1" min="1" max="@Model.Stock" class="w-10 text-center font-bold text-lg outline-none border-none bg-transparent" />
-
-        <button class="size-10 rounded-full hover:bg-neutral-light flex items-center justify-center transition-colors text-gray-500" onclick="updateQty(1)">
-            <span class="material-symbols-outlined text-[20px]">add</span>
+    }
+    else
+    {
+        <button disabled class="flex-1 h-14 bg-gray-200 text-gray-400 rounded-full font-bold text-lg cursor-not-allowed flex items-center justify-center gap-2">
+            <span class="material-symbols-outlined">block</span>
+            Hết hàng
         </button>
-    </div>
-
-    <button onclick="addToCart(@Model.Id)" class="flex-1 h-14 bg-primary text-[#181811] rounded-full font-bold text-lg hover:bg-[#e6e205] transition-all shadow-xl shadow-primary/20 flex items-center justify-center gap-2 group cursor-pointer active:scale-95">
-        <span class="material-symbols-outlined group-hover:-translate-y-0.5 transition-transform">shopping_cart</span>
-        Thêm vào giỏ
-    </button>
+    }
 
     <button class="size-14 bg-neutral-light rounded-full flex items-center justify-center hover:bg-red-50 hover:text-red-500 transition-colors border border-transparent hover:border-red-100">
         <span class="material-symbols-outlined text-[24px]">favorite</span>
@@ -28,76 +46,26 @@
     <partial name="Partials/_ProductBenefits" />
 
 <script>
-    // 1. Hàm tăng giảm số lượng (Frontend only)
+    // Hàm tăng giảm số lượng (Frontend only)
     function updateQty(change) {
         const input = document.getElementById('quantity');
+        const maxStock = parseInt(input.getAttribute('data-max'));
         let newVal = parseInt(input.value) + change;
 
         // Không cho nhỏ hơn 1 và không lớn hơn Stock
         if (newVal < 1) newVal = 1;
 
-        //if (newVal > @Model.Stock) newVal = @Model.Stock;
+        if (newVal > maxStock) {
+            newVal = maxStock;
+            alert(`Số lượng yêu cầu vượt quá hạn mức!`);
+        }
 
         input.value = newVal;
     }
 
-    // 2. Hàm gọi Ajax thêm vào giỏ
-    async function addToCart(productId) {
-        const quantity = parseInt(document.getElementById('quantity').value);
-
-        // Tạo Form Data để gửi
-        const formData = new FormData();
-        formData.append('productId', productId);
-        formData.append('quantity', quantity);
-
-        try {
-            const response = await fetch('/Cart/AddToCart', {
-                method: 'POST',
-                body: formData
-            });
-
-            const data = await response.json();
-
-            if (data.requireLogin) {
-                // Nếu chưa đăng nhập -> Chuyển hướng sang trang Login
-                window.location.href = data.loginUrl;
-            }
-            
-            if (data.success) {
-                // Thành công -> Hiện thông báo (Alert tạm, làm Toast sau)
-                alert(data.message);
-
-                // update số lượng item
-                updateCartBadgeCount(data.newTotalItem);
-            } else {
-                // Lỗi khác
-                alert(data.message);
-            }
-        } catch (error) {
-            console.error('Lỗi:', error);
-            alert('Có lỗi xảy ra khi kết nối server');
-        }
+    function addToCartDetail(id) {
+        const qty = parseInt(document.getElementById('quantity').value);
+        addToCart(id, qty);
     }
-
-    // cập nhật số mặt hàng trên Header
-    function updateCartBadgeCount(count) {
-        const badge = document.getElementById('cart-badge'); //từ component default
-        if (badge) {
-            badge.innerText = count;
-
-            // Cách tốt nhất: Sửa Controller trả về "newCartCount"
-            // Ở đây giả lập logic hiển thị:
-            let currentCount = parseInt(badge.innerText) || 0;
-
-            // Nếu số > 0 thì hiện badge lên (xóa class hidden, thêm flex)
-            if (count > 0) {
-                badge.classList.remove('hidden');
-                badge.classList.add('flex');
-            } else {
-                // Nếu = 0 thì ẩn
-                badge.classList.add('hidden');
-                badge.classList.remove('flex');
-            }
-        }
-    }
+    
 </script>

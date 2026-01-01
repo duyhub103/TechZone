@@ -9,10 +9,12 @@ namespace MyWeb.Services.Implementations
     public class CartService : ICartService
     {
         private readonly ICartRepository _cartRepo;
+        private readonly IProductRepository _productRepo;
 
-        public CartService(ICartRepository cartRepo)
+        public CartService(ICartRepository cartRepo, IProductRepository productRepo)
         {
             _cartRepo = cartRepo;
+            _productRepo = productRepo;
         }
 
         public async Task<CartViewModel> GetCartByUserIdAsync(string userId)
@@ -60,13 +62,51 @@ namespace MyWeb.Services.Implementations
         {
             var cart = await _cartRepo.GetCartByUserIdAsync(userId);
 
+            var product = _productRepo.GetById(productId);
+
+            int currentQtyItem = 0;
+
+            if (product == null)
+            {
+                throw new Exception("Sản phẩm không tồn tại.");
+            }
+
+            if (product.Stock <= 0)
+            {
+                throw new Exception("Liên hệ với chúng tôi qua hotline hoặc Email để nhận tư vấn về sản phẩm!");
+            }
+
             if (cart == null)
             {
                 cart = await _cartRepo.CreateCartAsync(userId);
             }
+            else
+            {
+                //check sản phẩm tồn tại trong cart chưa
+                var existingItem = cart.CartItems.FirstOrDefault(i => i.ProductId == productId);
+                if (existingItem != null)
+                {
+                    currentQtyItem = existingItem.Quantity;
+                }
+            }
 
+            int newQtyItem = currentQtyItem + quantity;
+
+            if (newQtyItem > product.Stock)
+            {
+                throw new Exception($"Số lượng yêu cầu vượt quá hạn mức.");
+            }
 
             await _cartRepo.AddToCartAsync(cart.Id, productId, quantity);
+        }
+
+        public async Task RemoveItemAsync(string userId, int productId)
+        {
+            var cart = await _cartRepo.GetCartByUserIdAsync(userId);
+            if (cart != null)
+            {
+                await _cartRepo.RemoveItemAsync(cart.Id, productId);
+            }
         }
 
 
@@ -75,6 +115,26 @@ namespace MyWeb.Services.Implementations
             var cart = await _cartRepo.GetCartByUserIdAsync(userId);
             if (cart != null)
                 await _cartRepo.ClearCartAsync(cart.Id);
+        }
+
+        public async Task UpdateQuantityAsync(string userId, int productId, int quantity)
+        {
+            var product = _productRepo.GetById(productId); //check stock
+            if (product == null)
+            {
+                throw new Exception("Sản phẩm không tồn tại.");
+            }
+
+            if (quantity > product.Stock)
+            {
+                throw new Exception($"Số lượng yêu cầu vượt quá hạn mức.");
+            }
+
+            var cart = await _cartRepo.GetCartByUserIdAsync(userId);
+            if (cart != null)
+            {
+                await _cartRepo.UpdateQuantityAsync(cart.Id, productId, quantity);
+            }
         }
     }
 }
