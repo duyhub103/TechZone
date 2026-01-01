@@ -102,5 +102,27 @@ namespace MyWeb.Controllers
                 return Json(new { success = false, message = "Lỗi: " + ex.Message });
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateItemQuantity(int productId, int quantity)
+        {
+            try
+            {
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+                if (quantity < 1)
+                {
+                    return Json(new { success = false, message = "Số lượng tối thiểu là 1." });
+                }
+
+                await _cartService.UpdateQuantityAsync(userId, productId, quantity);
+                return Json(new { success = true, message = "Cập nhật số lượng thành công!" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = ex.Message });
+            }
+        }
+         
     }
 }

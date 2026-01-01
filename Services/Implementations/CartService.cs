@@ -62,7 +62,7 @@ namespace MyWeb.Services.Implementations
         {
             var cart = await _cartRepo.GetCartByUserIdAsync(userId);
 
-            var product =  _productRepo.GetById(productId);
+            var product = _productRepo.GetById(productId);
 
             if (cart == null)
             {
@@ -97,6 +97,26 @@ namespace MyWeb.Services.Implementations
             var cart = await _cartRepo.GetCartByUserIdAsync(userId);
             if (cart != null)
                 await _cartRepo.ClearCartAsync(cart.Id);
+        }
+
+        public async Task UpdateQuantityAsync(string userId, int productId, int quantity)
+        {
+            var product = _productRepo.GetById(productId); //check stock
+            if (product == null)
+            {
+                throw new Exception("Sản phẩm không tồn tại.");
+            }
+
+            if (quantity > product.Stock)
+            {
+                throw new Exception($"Số lượng yêu cầu vượt quá hạn mức.");
+            }
+
+            var cart = await _cartRepo.GetCartByUserIdAsync(userId);
+            if (cart != null)
+            {
+                await _cartRepo.UpdateQuantityAsync(cart.Id, productId, quantity);
+            }
         }
     }
 }
