@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
@@ -80,7 +81,17 @@ namespace MyWeb.Repositories.Implementations
                     break;
             }
 
-            return query.ToList();
+            return query.ToList();  
         }
+
+        //public async Task<bool> ReduceStockAndIncreaseSoldAsync(int productId, int quantity)
+        //{
+        //    // check stock khi update
+        //    string sql = "UPDATE Product SET Stock = Stock - {0}, Sold = Sold + {0} WHERE Id = {1} AND Stock >= {0}";
+
+        //    int result = await _context.Database.ExecuteSqlRawAsync(sql, quantity, productId);
+
+        //    return result > 0;
+        //}  chuyển qua order repo
     }
 }
