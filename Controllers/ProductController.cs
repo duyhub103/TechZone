@@ -17,17 +17,18 @@ namespace MyWeb.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index(string? type, string? value, int page = 1)
+        public IActionResult Index(string? search, string? type, string? value, int page = 1)
         {
             // Nếu page < 1 thì ép nó về 1 để tránh lỗi SQL Offset
             if (page < 1) page = 1;
 
             // Giữ lại giá trị filter để truyền lại cho View (dùng cho các link phân trang)
             // khi filter "dell" thì sang trang 2 vẫn giữ filter "dell" không reload all sản phẩm
+            ViewData["CurrentSearch"] = search;
             ViewData["CurrentType"] = type;
             ViewData["CurrentValue"] = value;
 
-            var products = _productService.GetAllProducts(type, value, page);
+            var products = _productService.GetAllProducts(search, type, value, page);
             return View(products);
         }
 
@@ -54,6 +55,28 @@ namespace MyWeb.Controllers
 
             //return PartialView
             return PartialView("Partials/_ReviewList", reviews);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> SearchLive(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query)) return Json(null);
+
+            // Gọi Service -> Repo (giả sử bạn đã map service)
+            var result = await _productService.SearchLiveAsync(query);
+
+            // Trả về JSON, Price chưa format
+            return Json(new
+            {
+                suggestions = result.Suggestions,
+                products = result.Products.Select(p => new {
+                    id = p.Id,
+                    name = p.Name,
+                    price = p.Price,
+                    oldPrice = p.Price * 1.1m,
+                    image = p.ImageUrl ?? "default.png"
+                })
+            });
         }
     }
 }

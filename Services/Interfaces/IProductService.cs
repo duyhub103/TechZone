@@ -10,6 +10,7 @@ namespace MyWeb.Services.Interfaces
 
         // AJAX Load More
         Task<List<Review>> GetMoreReviewsAsync(int productId, int page, int pageSize);
-        PaginatedList<Product> GetAllProducts(string? type, string? value, int pageIndex = 1);
+        PaginatedList<Product> GetAllProducts(string? search, string? type, string? value, int pageIndex = 1);
+        Task<LiveSearchViewModel> SearchLiveAsync(string query);
     }
 }

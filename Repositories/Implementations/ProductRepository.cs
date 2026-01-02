@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
+using MyWeb.ViewModels;
 
 namespace MyWeb.Repositories.Implementations
 {
@@ -84,7 +85,7 @@ namespace MyWeb.Repositories.Implementations
             return query.ToList();  
         }
 
-        public PaginatedList<Product> GetProducts(string? type, string? value, int pageIndex, int pageSize)
+        public PaginatedList<Product> GetProducts(string? search, string? type, string? value, int pageIndex, int pageSize)
         {
             // init query, chưa exc
             var query = _context.Products
@@ -94,6 +95,17 @@ namespace MyWeb.Repositories.Implementations
                 .Include(p => p.Attributes)
                 //.OrderByDescending(p => p.CreateAt)
                 .AsQueryable();
+
+            //search
+            if (!string.IsNullOrEmpty(search))
+            {
+                // Tìm theo tên, hãng,, thuộc tính
+                query = query.Where(p => p.Name.Contains(search)
+                                      || p.Category.Name.Contains(search)
+                                      || p.Attributes.Any(a => a.Value.Contains(search))
+                                      || p.Brand.Name.Contains(search));
+            }
+
 
             if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(value))
             {
@@ -114,6 +126,44 @@ namespace MyWeb.Repositories.Implementations
             //hàm Create của PaginatedList để chạy Skip/Take và Count
             return PaginatedList<Product>.Create(query, pageIndex, pageSize);
         }
+
+
+        public async Task<LiveSearchViewModel> SearchAsync(string query)
+        {
+            var model = new LiveSearchViewModel();
+
+            // gợi ý theo keyword
+            var suggestionsCategories = await _context.Categories
+                .Where(c => c.Name.Contains(query))
+                .Select(c => c.Name)
+                .Take(3)
+                .ToListAsync();
+
+            var suggestionsBrands = await _context.Brands
+                .Where(b => b.Name.Contains(query))
+                .Select(b => b.Name)
+                .Take(3)
+                .ToListAsync();
+
+            model.Suggestions.AddRange(suggestionsCategories);
+            model.Suggestions.AddRange(suggestionsBrands);
+
+            // tìm sản phẩm theo keyword
+            model.Products = await _context.Products
+                .Include(p => p.Category)
+                .Where(p => p.IsActive && (
+                    p.Name.Contains(query) ||
+                    p.Attributes.Any(a => a.Value.Contains(query))
+                ))
+                .OrderByDescending(p => p.Name.StartsWith(query)) // Ưu tiên khớp đầu từ
+                .Take(5)
+                .ToListAsync();
+
+            return model;
+        }
+
+
+
 
         //public async Task<bool> ReduceStockAndIncreaseSoldAsync(int productId, int quantity)
         //{

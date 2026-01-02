@@ -26,10 +26,10 @@ namespace MyWeb.Services.Implementations
             return _productRepo.GetAllActive();
         }
 
-        public PaginatedList<Product> GetAllProducts(string? type, string? value, int pageIndex = 1)
+        public PaginatedList<Product> GetAllProducts(string? search, string? type, string? value, int pageIndex = 1)
         {
             int pageSize = 5; // Số sản phẩm trên 1 trang
-            return _productRepo.GetProducts(type, value, pageIndex, pageSize);
+            return _productRepo.GetProducts(search, type, value, pageIndex, pageSize);
         }
 
 
@@ -91,6 +91,16 @@ namespace MyWeb.Services.Implementations
         public async Task<List<Review>> GetMoreReviewsAsync(int productId, int page, int pageSize)
         {
             return await _reviewRepo.GetReviewsByProductAsync(productId, page, pageSize);
+        }
+
+        public async Task<LiveSearchViewModel> SearchLiveAsync(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+            {
+                return new LiveSearchViewModel();
+            }
+
+            return await _productRepo.SearchAsync(query);
         }
     }
 }
