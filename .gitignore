@@ -5,3 +5,5 @@ obj/
 appsettings.Development.json
 *.user
 *.suo
+appsettings.json
+.env

@@ -81,5 +81,13 @@ namespace MyWeb.Repositories.Implementations
                 throw; // Ném lỗi lên Service
             }
         }
+
+        public async Task<Order?> GetOrderByIdAsync(int id)
+        {
+            return await _context.Orders
+                .Include(o => o.OrderDetails)!
+                .ThenInclude(o => o.Product)
+                .FirstOrDefaultAsync(o => o.Id == id);
+        }
     }
 }

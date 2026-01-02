@@ -61,11 +61,31 @@ namespace MyWeb.Services.Implementations
             // Xóa giỏ hàng khi lưu đơn thành công
             await _cartService.ClearCartByUserAsync(userId);
 
-            // Gửi Email
-            string htmlBody = EmailContent.GenerateOrderSuccess(order, cart.Items);
-            await _emailSender.SendEmailAsync(userEmail, $"Đơn hàng #{orderId} - TechZone", htmlBody);
+            try
+            {
+                // Gửi Email
+                string htmlBody = EmailContent.GenerateOrderSuccess(order, cart.Items);
+                await _emailSender.SendEmailAsync(userEmail, $"Đơn hàng #{orderId} - TechZone", htmlBody);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Lỗi gửi mail: " + ex.Message);
+            }
+            
 
             return orderId;
+        }
+
+        public async Task<Order?> GetOrderForUserAsync(int orderId, string userId)
+        {
+            var order = await _orderRepo.GetOrderByIdAsync(orderId);
+
+            if (order == null || order.UserId != userId.ToString())
+            {
+                return null;
+            }
+
+            return order;
         }
 
         // chuyển qua helpers

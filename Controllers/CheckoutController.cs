@@ -50,7 +50,7 @@ namespace MyWeb.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Index(CheckoutViewModel vm)
+        public async Task<IActionResult> PlaceOrder(CheckoutViewModel vm)
         {
 
             var user = await _userManager.GetUserAsync(User);
@@ -61,7 +61,7 @@ namespace MyWeb.Controllers
             {
                 // Nếu form lỗi, load lại giỏ hàng để hiện View
                 await RepopulateCartData(vm, user.Id);
-                return View(vm);
+                return View("Index", vm);
             }
 
             try
@@ -78,14 +78,22 @@ namespace MyWeb.Controllers
 
                 //Load lại giỏ hàng để check
                 await RepopulateCartData(vm, user.Id);
-                return View(vm);
+                return View("Index", vm);
             }
         }
 
-        public IActionResult OrderSuccess(int id)
+        public async Task<IActionResult> OrderSuccess(int id)
         {
-            ViewBag.OrderId = id;
-            return View();
+            var userId = _userManager.GetUserId(User);
+
+            var order = await _orderService.GetOrderForUserAsync(id, userId!);
+
+            if (order == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+
+            return View(order);
         }
 
         // load lại giỏ hàng khi có lỗi
@@ -100,5 +108,7 @@ namespace MyWeb.Controllers
                 vm.GrandTotal = cart.GrandTotal;
             }
         }
+
+
     }
 }

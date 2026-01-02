@@ -8,5 +8,7 @@ namespace MyWeb.Repositories.Interfaces
         bool HasUserPurchasedProduct(string userId, int productId);
         //Task<int> CreateOrderAsync(Order order);
         Task<int> CreateOrderWithTransactionAsync(Order order, List<CartItemViewModel> cartItems);
+
+        Task<Order?> GetOrderByIdAsync(int id);
     }
 }
