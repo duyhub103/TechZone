@@ -8,7 +8,8 @@ namespace MyWeb.Services.Interfaces
         IEnumerable<Product> GetAllProducts(string? type = null, string? value = null);
         Task<ProductDetailViewModel> GetProductDetailAsync(int id);
 
-        // Hàm phục vụ AJAX Load More
+        // AJAX Load More
         Task<List<Review>> GetMoreReviewsAsync(int productId, int page, int pageSize);
+        PaginatedList<Product> GetAllProducts(string? type, string? value, int pageIndex = 1);
     }
 }

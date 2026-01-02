@@ -17,9 +17,17 @@ namespace MyWeb.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index(string? type, string? value)
+        public IActionResult Index(string? type, string? value, int page = 1)
         {
-            var products = _productService.GetAllProducts(type, value);
+            // Nếu page < 1 thì ép nó về 1 để tránh lỗi SQL Offset
+            if (page < 1) page = 1;
+
+            // Giữ lại giá trị filter để truyền lại cho View (dùng cho các link phân trang)
+            // khi filter "dell" thì sang trang 2 vẫn giữ filter "dell" không reload all sản phẩm
+            ViewData["CurrentType"] = type;
+            ViewData["CurrentValue"] = value;
+
+            var products = _productService.GetAllProducts(type, value, page);
             return View(products);
         }
 

@@ -84,6 +84,37 @@ namespace MyWeb.Repositories.Implementations
             return query.ToList();  
         }
 
+        public PaginatedList<Product> GetProducts(string? type, string? value, int pageIndex, int pageSize)
+        {
+            // init query, chưa exc
+            var query = _context.Products
+                .Where(p => p.IsActive)
+                .Include(p => p.Category)
+                .Include(p => p.Brand)
+                .Include(p => p.Attributes)
+                //.OrderByDescending(p => p.CreateAt)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(value))
+            {
+                switch (type.ToLower())
+                {
+                    case "category":
+                        query = query.Where(p => p.Category.Name == value);
+                        break;
+                    case "brand":
+                        query = query.Where(p => p.Brand.Name == value);
+                        break;
+                    case "attribute":
+                        query = query.Where(p => p.Attributes.Any(a => a.Value == value));
+                        break;
+                }
+            }
+
+            //hàm Create của PaginatedList để chạy Skip/Take và Count
+            return PaginatedList<Product>.Create(query, pageIndex, pageSize);
+        }
+
         //public async Task<bool> ReduceStockAndIncreaseSoldAsync(int productId, int quantity)
         //{
         //    // check stock khi update

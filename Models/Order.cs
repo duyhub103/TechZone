@@ -51,7 +51,7 @@ namespace MyWeb.Models
 
         public ICollection<OrderDetail>? OrderDetails { get; set; }
 
-        // 🔑 Liên kết với User
+        // Liên kết với User
         public string? UserId { get; set; }
 
         [ForeignKey("UserId")]

@@ -10,5 +10,7 @@ namespace MyWeb.Repositories.Interfaces
         IEnumerable<Product> GetByFilter(string type, string value);
         IEnumerable<Product> GetRelatedProducts(int categoryId, int excludeProductId, int take);
 
+        PaginatedList<Product> GetProducts(string? type, string? value, int pageIndex, int pageSize);
+
     }
 }
