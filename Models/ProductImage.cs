@@ -4,6 +4,7 @@ namespace MyWeb.Models
 {
     public class ProductImage
     {
+        // iamge trong gallery
         [Key]
         public int Id { get; set; }
 

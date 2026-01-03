@@ -17,21 +17,16 @@ namespace MyWeb.Services.Implementations
             _reviewRepo = reviewRepo;
         }
 
-        public IEnumerable<Product> GetAllProducts(string? type = null, string? value = null)
+        public PaginatedList<Product> GetAllProducts(string? keyword, string? type, string? value, int pageIndex = 1)
         {
-            if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(value))
-            {
-                return _productRepo.GetByFilter(type, value);
-            }
-            return _productRepo.GetAllActive();
+            int pageSize = 4; // Số lượng sản phẩm/trang (Ví dụ 12 cho đẹp grid 4 cột)
+            return _productRepo.GetProducts(keyword, type, value, pageIndex, pageSize);
         }
 
-        public PaginatedList<Product> GetAllProducts(string? search, string? type, string? value, int pageIndex = 1)
+        public async Task<IEnumerable<Product>> SearchLiveAsync(string keyword)
         {
-            int pageSize = 5; // Số sản phẩm trên 1 trang
-            return _productRepo.GetProducts(search, type, value, pageIndex, pageSize);
+            return await _productRepo.SearchLiveAsync(keyword);
         }
-
 
         public async Task<ProductDetailViewModel> GetProductDetailAsync(int id)
         {
@@ -93,14 +88,5 @@ namespace MyWeb.Services.Implementations
             return await _reviewRepo.GetReviewsByProductAsync(productId, page, pageSize);
         }
 
-        public async Task<LiveSearchViewModel> SearchLiveAsync(string query)
-        {
-            if (string.IsNullOrWhiteSpace(query))
-            {
-                return new LiveSearchViewModel();
-            }
-
-            return await _productRepo.SearchAsync(query);
-        }
     }
 }

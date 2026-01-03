@@ -1,16 +1,17 @@
-﻿using MyWeb.ViewModels;
-using MyWeb.Models;
+﻿using MyWeb.Models;
+using MyWeb.ViewModels;
 
 namespace MyWeb.Services.Interfaces
 {
     public interface IProductService
     {
-        IEnumerable<Product> GetAllProducts(string? type = null, string? value = null);
+        PaginatedList<Product> GetAllProducts(string? keyword, string? type, string? value, int pageIndex = 1);
+
+        Task<IEnumerable<Product>> SearchLiveAsync(string keyword);
+
         Task<ProductDetailViewModel> GetProductDetailAsync(int id);
 
-        // AJAX Load More
+        //ajax load more
         Task<List<Review>> GetMoreReviewsAsync(int productId, int page, int pageSize);
-        PaginatedList<Product> GetAllProducts(string? search, string? type, string? value, int pageIndex = 1);
-        Task<LiveSearchViewModel> SearchLiveAsync(string query);
     }
 }
