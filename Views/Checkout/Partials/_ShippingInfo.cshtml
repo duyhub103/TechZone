@@ -1,0 +1,53 @@
+﻿@model CheckoutViewModel
+
+<section class="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100">
+    <div asp-validation-summary="ModelOnly" class="bg-red-50 border border-red-200 text-red-600 rounded-xl p-4 mb-6 text-sm font-bold"></div>
+
+    <div class="flex items-center gap-3 mb-6 pb-4 border-b border-gray-100">
+        <span class="material-symbols-outlined text-primary text-[28px]">local_shipping</span>
+        <h2 class="text-xl font-bold">Thông tin giao hàng</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="md:col-span-2">
+            <label class="block text-sm font-bold mb-2 text-gray-700">Họ và tên</label>
+            <input asp-for="ReceiverName" class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors" placeholder="Nguyễn Văn A" />
+            <span asp-validation-for="ReceiverName" class="text-red-500 text-xs mt-1 block font-medium"></span>
+        </div>
+        <div>
+            <label class="block text-sm font-bold mb-2 text-gray-700">Số điện thoại</label>
+            <input asp-for="ReceiverPhone" class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors" placeholder="0912 xxx xxx" />
+            <span asp-validation-for="ReceiverPhone" class="text-red-500 text-xs mt-1 block font-medium"></span>
+        </div>
+        <div>
+            <label class="block text-sm font-bold mb-2 text-gray-700">Email</label>
+            <input asp-for="ReceiverEmail" class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors" placeholder="email@example.com" />
+            <span asp-validation-for="ReceiverEmail" class="text-red-500 text-xs mt-1 block font-medium"></span>
+        </div>
+        <div class="md:col-span-2">
+            <label class="block text-sm font-bold mb-2 text-gray-700">Địa chỉ nhận hàng</label>
+            <input asp-for="ReceiverAddress" class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors" placeholder="Số nhà, tên đường" />
+            <span asp-validation-for="ReceiverAddress" class="text-red-500 text-xs mt-1 block font-medium"></span>
+        </div>
+        <div>
+            <label class="block text-sm font-bold mb-2 text-gray-700">Tỉnh / Thành phố</label>
+            <select class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors">
+                <option>Hồ Chí Minh</option>
+                <option>Hà Nội</option>
+                <option>Đà Nẵng</option>
+            </select>
+        </div>
+        <div>
+            <label class="block text-sm font-bold mb-2 text-gray-700">Xã / Phường</label>
+            <select class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors">
+                <option>Quận 1</option>
+                <option>Quận 3</option>
+                <option>Thành phố Thủ Đức</option>
+            </select>
+        </div>
+        <div class="md:col-span-2">
+            <label class="block text-sm font-bold mb-2 text-gray-700">Ghi chú (Tùy chọn)</label>
+            <textarea asp-for="Note" class="w-full rounded-xl border-gray-200 bg-neutral-light px-4 py-3 focus:border-primary focus:ring-primary transition-colors" placeholder="Ví dụ: Giao hàng giờ hành chính" rows="2"></textarea>
+            <span asp-validation-for="Note" class="text-red-500 text-xs mt-1 block font-medium"></span>
+        </div>
+    </div>
+</section>

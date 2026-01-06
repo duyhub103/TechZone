@@ -1,0 +1,43 @@
+﻿@model MyWeb.Models.Order
+
+<section class="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100">
+    <div class="flex items-center justify-between mb-6">
+        <h2 class="text-xl font-bold text-[#181811] flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">shopping_bag</span>
+            Sản phẩm đã đặt
+        </h2>
+        <span class="text-sm text-gray-500 font-medium">@Model.OrderDetails?.Count() sản phẩm</span>
+    </div>
+
+    <div class="flex flex-col gap-6">
+        @if (Model.OrderDetails != null)
+        {
+            @foreach (var item in Model.OrderDetails)
+            {
+                <div class="flex flex-col sm:flex-row gap-4 sm:items-center">
+                    <div class="relative size-24 sm:size-32 rounded-2xl bg-neutral-light overflow-hidden flex-shrink-0 border border-gray-100">
+                        <div class="w-full h-full bg-center bg-cover" style="background-image: url('@(item.Product?.ImageUrl ?? "https://placehold.co/150")');"></div>
+                        <span class="absolute bottom-1 right-1 bg-black/60 text-white text-[10px] px-1.5 py-0.5 rounded backdrop-blur-sm">@item.Quantity</span>
+                    </div>
+
+                    <div class="flex-1 min-w-0">
+                        <div class="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-1 mb-2">
+                            <h3 class="font-bold text-lg text-[#181811] truncate pr-4">@item.Product?.Name</h3>
+                            <span class="font-bold text-lg whitespace-nowrap">@((item.Price * item.Quantity).ToString("#,##0"))₫</span>
+                        </div>
+
+                        <div class="flex flex-wrap gap-2 mb-3">
+                            <span class="inline-flex items-center text-sm text-gray-500 bg-gray-50 px-3 py-1 rounded-full border border-gray-100">
+                                Đơn giá: @item.Price.ToString("#,##0")₫
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                @if (item != Model.OrderDetails.Last())
+                {
+                    <div class="h-px bg-gray-100 w-full"></div>
+                }
+            }
+        }
+    </div>
+</section>

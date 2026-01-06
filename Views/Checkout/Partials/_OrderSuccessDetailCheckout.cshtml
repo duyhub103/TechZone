@@ -1,0 +1,89 @@
+﻿@model MyWeb.Models.Order
+
+<div class="lg:col-span-4">
+    <div class="sticky top-28 flex flex-col gap-6">
+
+        <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100">
+            <h2 class="text-xl font-bold text-[#181811] mb-6">Chi tiết thanh toán</h2>
+
+            <div class="flex flex-col gap-3 mb-6">
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Tạm tính</span>
+                    <span class="font-medium text-[#181811]">@Model.TotalAmount.ToString("#,##0")₫</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                    <span class="text-gray-500">Phí vận chuyển</span>
+                    <span class="font-medium text-[#181811]">@Model.ShippingFee.ToString("#,##0")₫</span>
+                </div>
+
+                @if (Model.DiscountAmount != 0)
+                {
+                    <div class="flex justify-between text-sm text-green-600">
+                        <span class="flex items-center gap-1 font-medium">
+                            <span class="material-symbols-outlined text-[16px]">loyalty</span> Giảm giá
+                        </span>
+                        <span class="font-bold">-@Model.DiscountAmount.ToString("#,##0")₫</span>
+                    </div>
+                }
+            </div>
+
+            <div class="border-t border-dashed border-gray-200 pt-4 mb-6">
+                <div class="flex justify-between items-end mb-1">
+                    <span class="text-base font-bold text-[#181811]">Tổng cộng</span>
+                    <span class="text-2xl font-black text-[#181811]">@Model.FinalAmount.ToString("#,##0")₫</span>
+                </div>
+                <p class="text-xs text-gray-500">Đã bao gồm VAT (nếu có)</p>
+            </div>
+
+            <div class="bg-gray-50 rounded-2xl p-4 border border-gray-100">
+                <div class="flex items-center gap-3">
+                    <div class="size-10 rounded-xl bg-white border border-gray-100 flex items-center justify-center">
+                        <span class="material-symbols-outlined text-primary">payments</span>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-xs text-gray-500 font-medium">Phương thức thanh toán</p>
+                        <p class="text-sm font-bold text-[#181811]">
+                            @(Model.PaymentMethod == "COD" ? "Thanh toán khi nhận hàng (COD)" : "Chuyển khoản ngân hàng")
+                        </p>
+                    </div>
+                </div>
+
+                <div class="mt-2 text-center">
+                    @if (Model.PaymentMethod == "COD")
+                    {
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gray-100 text-gray-600 text-xs font-bold">
+                            <span class="size-2 rounded-full bg-gray-400"></span> Chưa thanh toán
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-yellow-100 text-yellow-700 text-xs font-bold">
+                            <span class="size-2 rounded-full bg-yellow-500 animate-pulse"></span> Chờ xác nhận chuyển khoản
+                        </span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3">
+            <a href="/Product"
+               class="no-underline w-full flex items-center justify-center gap-2 rounded-full h-14 bg-primary text-[#181811] text-base font-bold hover:brightness-95 transition-all shadow-lg shadow-primary/20 transform hover:-translate-y-0.5">
+                Tiếp tục mua sắm
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+
+            <a href="/Account/Orders"
+               class="w-full flex items-center justify-center gap-2 rounded-full h-14 bg-white border border-gray-200 text-[#181811] text-base font-bold hover:bg-gray-50 transition-all no-underline">
+                <span class="material-symbols-outlined">history</span>
+                Xem lịch sử đơn hàng
+            </a>
+        </div>
+
+        <div class="text-center">
+            <p class="text-sm text-gray-500">
+                Có vấn đề với đơn hàng?
+                <a class="font-bold text-[#181811] underline decoration-primary decoration-2 underline-offset-2 hover:text-primary-dark" href="/Home/Contact">Liên hệ hỗ trợ</a> ngay.
+            </p>
+        </div>
+    </div>
+</div>

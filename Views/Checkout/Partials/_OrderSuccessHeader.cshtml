@@ -1,0 +1,25 @@
+﻿@model MyWeb.Models.Order
+
+<div class="flex flex-col items-center text-center mb-12">
+    <div class="relative mb-6 group">
+        <div class="absolute inset-0 bg-primary blur-2xl opacity-40 rounded-full scale-150 animate-pulse"></div>
+        <div class="relative flex items-center justify-center size-24 rounded-full bg-primary shadow-xl shadow-primary/30">
+            <span class="material-symbols-outlined text-[48px] text-[#181811] font-bold">check</span>
+        </div>
+    </div>
+
+    <h1 class="text-[#181811] text-3xl md:text-5xl font-black leading-tight tracking-[-0.02em] mb-4">
+        Đặt hàng thành công!
+    </h1>
+    <p class="text-[#5c5b4f] text-lg font-medium mb-2">Cảm ơn bạn đã tin tưởng và mua sắm tại TechZone.</p>
+
+    <div class="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full border border-gray-200 shadow-sm mt-2">
+        <span class="text-sm text-gray-500">Mã đơn hàng:</span>
+        <span class="text-base font-bold text-[#181811]">#@Model.Id</span>
+        <button class="text-gray-400 hover:text-primary transition-colors ml-2"
+                title="Sao chép"
+                onclick="navigator.clipboard.writeText('#@Model.Id'); alert('Đã sao chép mã đơn hàng!')">
+            <span class="material-symbols-outlined text-[16px]">content_copy</span>
+        </button>
+    </div>
+</div>

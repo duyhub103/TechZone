@@ -1,0 +1,58 @@
+﻿@model MyWeb.Models.Order
+
+@{
+    var estimateStart = Model.OrderDate.AddDays(3);
+    var estimateEnd = Model.OrderDate.AddDays(5);
+}
+
+<section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col h-full">
+        <h2 class="text-lg font-bold text-[#181811] mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-gray-400">local_shipping</span>
+            Giao hàng đến
+        </h2>
+
+        <div class="flex-1 flex flex-col gap-1 text-[#181811]">
+            <p class="font-bold text-lg">@Model.ReceiverName</p>
+            <p class="text-gray-600">@Model.ReceiverPhone</p>
+            <p class="text-gray-600 mt-2 leading-relaxed">@Model.ReceiverAddress</p>
+
+            @if (!string.IsNullOrEmpty(Model.Note))
+            {
+                <div class="mt-3 p-3 bg-gray-50 rounded-xl border border-dashed border-gray-200 text-sm">
+                    <span class="font-bold text-[#181811]">Ghi chú:</span>
+                    <span class="text-gray-700">@Model.Note</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="bg-white rounded-[2rem] p-6 md:p-8 shadow-sm border border-gray-100 flex flex-col h-full">
+        <h2 class="text-lg font-bold text-[#181811] mb-4 flex items-center gap-2">
+            <span class="material-symbols-outlined text-gray-400">calendar_clock</span>
+            Thông tin vận chuyển
+        </h2>
+
+        <div class="flex-1 flex flex-col justify-between gap-4">
+            <div>
+                <p class="text-sm text-gray-500 mb-1">Đơn vị vận chuyển</p>
+                <div class="flex items-center gap-2">
+                    <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/05/Logo-GHN-Slogan-En.png"
+                         class="h-6 object-contain" alt="GHN" />
+                    <p class="font-bold text-[#181811]">Giao Hàng Nhanh (GHN)</p>
+                </div>
+            </div>
+
+            <div class="p-4 bg-yellow-50 rounded-xl border border-yellow-100">
+                <p class="text-sm text-yellow-800 font-bold mb-1">Dự kiến giao hàng</p>
+                <p class="text-lg font-black text-[#181811]">
+                    @estimateStart.ToString("dd/MM") - @estimateEnd.ToString("dd/MM")
+                </p>
+                <div class="w-full bg-yellow-200 h-1.5 rounded-full mt-3 overflow-hidden">
+                    <div class="bg-primary h-full w-1/4 rounded-full animate-pulse"></div>
+                </div>
+                <p class="text-[10px] text-yellow-700 mt-1 text-right">Đang xử lý đơn hàng</p>
+            </div>
+        </div>
+    </div>
+</section>
