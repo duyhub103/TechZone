@@ -4,7 +4,7 @@ namespace MyWeb.Repositories.Interfaces
 {
     public interface IBannerRepository
     {
-        IEnumerable<Banner> GetMainSliders();
-        Banner? GetPromoBanner();
+        Task<List<Banner>> GetMainSlidersAsync();
+        Task<Banner?> GetPromoBannerAsync();
     }
 }

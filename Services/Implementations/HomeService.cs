@@ -1,4 +1,5 @@
-﻿using MyWeb.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MyWeb.Data;
 using MyWeb.Repositories.Interfaces;
 using MyWeb.Services.Interfaces;
 using MyWeb.ViewModels;
@@ -21,16 +22,16 @@ namespace MyWeb.Services.Implementations
             _context = context;
         }
 
-        public HomeViewModel GetHomeViewModel()
+        public async Task<HomeViewModel> GetHomeViewModelAsync()
         {
             return new HomeViewModel
             {
-                FeaturedProducts = _productRepo.GetFeatured(4),
-                MainSliders = _bannerRepo.GetMainSliders(),
-                PromoBanner = _bannerRepo.GetPromoBanner(),
-                PopularCategories = _context.HomeCategories
+                FeaturedProducts = await _productRepo.GetFeaturedAsync(4),
+                MainSliders = await _bannerRepo.GetMainSlidersAsync(),
+                PromoBanner = await _bannerRepo.GetPromoBannerAsync(),
+                PopularCategories = await _context.HomeCategories
                                     .OrderBy(x => x.DisplayOrder)
-                                    .ToList()
+                                    .ToListAsync()
             };
         }
     }

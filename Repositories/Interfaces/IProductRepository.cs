@@ -6,13 +6,13 @@ namespace MyWeb.Repositories.Interfaces
     public interface IProductRepository
     {
 
-        PaginatedList<Product> GetProducts(string? keyword, string? type, string? value, int pageIndex, int pageSize);
+        Task<PaginatedList<Product>> GetProductsAsync(string? keyword, string? type, string? value, int pageIndex, int pageSize);
 
         Task<IEnumerable<Product>> SearchLiveAsync(string keyword);
 
-        Product? GetById(int id);
-        IEnumerable<Product> GetFeatured(int take);
-        IEnumerable<Product> GetRelatedProducts(int categoryId, int excludeProductId, int take);
+        Task<Product?> GetByIdAsync(int id);
+        Task<List<Product>> GetFeaturedAsync(int take);
+        Task<List<Product>> GetRelatedProductsAsync(int categoryId, int excludeProductId, int take);
 
     }
 }

@@ -16,9 +16,9 @@ namespace MyWeb.Repositories.Implementations
             _context = context;
         }
 
-        public PaginatedList<Product> GetProducts(string? keyword, string? type, string? value, int pageIndex, int pageSize)
+        public async Task<PaginatedList<Product>> GetProductsAsync(string? keyword, string? type, string? value, int pageIndex, int pageSize)
         {
-            // 1. Khởi tạo query cơ bản
+            // Khởi tạo query cơ bản
             var query = _context.Products
                 .Where(p => p.IsActive)
                 .Include(p => p.Category)
@@ -26,7 +26,7 @@ namespace MyWeb.Repositories.Implementations
                 .Include(p => p.Attributes)
                 .AsQueryable();
 
-            // 2. Xử lý Tìm kiếm (Search)
+            // Xử lý Tìm kiếm (Search)
             if (!string.IsNullOrEmpty(keyword))
             {
                 // Tìm trong Tên, Danh mục, Thương hiệu hoặc Attribute
@@ -38,7 +38,7 @@ namespace MyWeb.Repositories.Implementations
                 );
             }
 
-            // 3. Xử lý Lọc (Filter theo Type/Value từ Sidebar)
+            // Xử lý Lọc (Filter theo Type/Value từ Sidebar)
             if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(value))
             {
                 switch (type.ToLower())
@@ -55,37 +55,37 @@ namespace MyWeb.Repositories.Implementations
                 }
             }
 
-            // 4. Sắp xếp (Mặc định mới nhất lên đầu)
+            // Sắp xếp (Mặc định mới nhất lên đầu)
             //query = query.OrderByDescending(p => p.CreatedAt);
 
-            // 5. Trả về PaginatedList (Nó sẽ tự chạy Count và Skip/Take)
-            return PaginatedList<Product>.Create(query, pageIndex, pageSize);
+            // Trả về PaginatedList (Nó sẽ tự chạy Count và Skip/Take)
+            return await PaginatedList<Product>.CreateAsync(query, pageIndex, pageSize);
         }
 
-        public Product? GetById(int id)
+        public async Task<Product?> GetByIdAsync(int id)
         {
-            return _context.Products
+            return await _context.Products
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.Attributes)
-                .FirstOrDefault(p => p.Id == id && p.IsActive);
+                .FirstOrDefaultAsync(p => p.Id == id && p.IsActive);
 
         }
 
-        public IEnumerable<Product> GetFeatured(int take)
+        public async Task<List<Product>> GetFeaturedAsync(int take)
         {
-            return _context.Products
+            return await _context.Products
                 .Where(p => p.IsActive && p.IsFeatured)
                 .Include(p => p.Category)
                 .Include(p => p.Attributes)
                 .OrderByDescending(p => p.Id)
                 .Take(take)
-                .ToList();
+                .ToListAsync();
         }
 
-        public IEnumerable<Product> GetRelatedProducts(int categoryId, int excludeProductId, int take)
+        public async Task<List<Product>> GetRelatedProductsAsync(int categoryId, int excludeProductId, int take)
         {
-            return _context.Products
+            return await _context.Products
                 .Where(p =>
                     p.IsActive &&
                     p.CategoryId == categoryId &&
@@ -93,7 +93,7 @@ namespace MyWeb.Repositories.Implementations
                 .Include(p => p.Attributes)
                 .OrderByDescending(p => p.IsFeatured)
                 .Take(take)
-                .ToList();
+                .ToListAsync();
         }
 
         //popup gợi ý khi gõ từ khóa

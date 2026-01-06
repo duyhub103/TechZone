@@ -4,6 +4,6 @@ namespace MyWeb.Services.Interfaces
 {
     public interface IHomeService
     {
-        HomeViewModel GetHomeViewModel();
+        Task<HomeViewModel> GetHomeViewModelAsync();
     }
 }
