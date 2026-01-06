@@ -17,10 +17,10 @@ namespace MyWeb.Services.Implementations
             _reviewRepo = reviewRepo;
         }
 
-        public PaginatedList<Product> GetAllProducts(string? keyword, string? type, string? value, int pageIndex = 1)
+        public async Task<PaginatedList<Product>> GetAllProductsAsync(string? keyword, string? type, string? value, int pageIndex = 1)
         {
-            int pageSize = 4; // Số lượng sản phẩm/trang (Ví dụ 12 cho đẹp grid 4 cột)
-            return _productRepo.GetProducts(keyword, type, value, pageIndex, pageSize);
+            int pageSize = 4; // Số lượng sản phẩm/trang
+            return await _productRepo.GetProductsAsync(keyword, type, value, pageIndex, pageSize);
         }
 
         public async Task<IEnumerable<Product>> SearchLiveAsync(string keyword)
@@ -30,19 +30,19 @@ namespace MyWeb.Services.Implementations
 
         public async Task<ProductDetailViewModel> GetProductDetailAsync(int id)
         {
-            //  Lấy thông tin sản phẩm (Vẫn giữ sync nếu repo của bạn là sync, không sao cả)
-            var mainProduct = _productRepo.GetById(id);
+            //  Lấy thông tin sản phẩm
+            var mainProduct = await _productRepo.GetByIdAsync(id);
             if (mainProduct == null)
                 throw new Exception("Product not found");
 
             //  Lấy sản phẩm liên quan
-            var relatedProducts = _productRepo.GetRelatedProducts(
+            var relatedProducts = await _productRepo.GetRelatedProductsAsync(
                 mainProduct.CategoryId,
                 id,
                 4
             );
 
-            //  Lấy TẤT CẢ review để tính toán thống kê (Gọi hàm Async từ Repo)
+            //  Lấy TẤT CẢ review để tính toán thống kê
             var allReviews = await _reviewRepo.GetAllReviewsByProductIdAsync(id);
 
             //  Tính toán số liệu thống kê

@@ -17,9 +17,9 @@ namespace MyWeb.Controllers
             _homeService = homeService;
 		}
 
-		public IActionResult Index()
+		public async Task<IActionResult> Index()
 		{
-            var viewModel = _homeService.GetHomeViewModel();
+            var viewModel = await _homeService.GetHomeViewModelAsync();
 
             return View(viewModel);
 		}

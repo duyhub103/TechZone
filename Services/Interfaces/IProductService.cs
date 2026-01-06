@@ -5,7 +5,7 @@ namespace MyWeb.Services.Interfaces
 {
     public interface IProductService
     {
-        PaginatedList<Product> GetAllProducts(string? keyword, string? type, string? value, int pageIndex = 1);
+        Task<PaginatedList<Product>> GetAllProductsAsync(string? keyword, string? type, string? value, int pageIndex = 1);
 
         Task<IEnumerable<Product>> SearchLiveAsync(string keyword);
 

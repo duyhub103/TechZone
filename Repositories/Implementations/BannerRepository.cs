@@ -1,4 +1,5 @@
-﻿using MyWeb.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using MyWeb.Data;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
 
@@ -13,20 +14,20 @@ namespace MyWeb.Repositories.Implementations
             _context = context;
         }
 
-        public IEnumerable<Banner> GetMainSliders()
+        public async Task<List<Banner>> GetMainSlidersAsync()
         {
-            return _context.Banners
+            return await _context.Banners
                 .Where(b => b.IsActive && b.Position == BannerPosition.MainSlider)
                 .OrderBy(b => b.DisplayOrder)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Banner? GetPromoBanner()
+        public async Task<Banner?> GetPromoBannerAsync()
         {
-            return _context.Banners
+            return await _context.Banners
                 .Where(b => b.IsActive && b.Position == BannerPosition.PromoSection)
                 .OrderBy(b => b.DisplayOrder)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
     }
 }

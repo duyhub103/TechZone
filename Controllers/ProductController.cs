@@ -18,7 +18,7 @@ namespace MyWeb.Controllers
             _productService = productService;
         }
 
-        public IActionResult Index(string? search, string? type, string? value, int page = 1)
+        public async Task<IActionResult> Index(string? search, string? type, string? value, int page = 1)
         {
             // Nếu page < 1 thì ép nó về 1 để tránh lỗi SQL Offset
             if (page < 1) page = 1;
@@ -29,7 +29,7 @@ namespace MyWeb.Controllers
             ViewData["CurrentType"] = type;
             ViewData["CurrentValue"] = value;
 
-            var products = _productService.GetAllProducts(search, type, value, page);
+            var products = await _productService.GetAllProductsAsync(search, type, value, page);
             return View(products);
         }
 

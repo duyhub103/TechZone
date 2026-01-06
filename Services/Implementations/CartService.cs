@@ -62,7 +62,7 @@ namespace MyWeb.Services.Implementations
         {
             var cart = await _cartRepo.GetCartByUserIdAsync(userId);
 
-            var product = _productRepo.GetById(productId);
+            var product = await _productRepo.GetByIdAsync(productId);
 
             int currentQtyItem = 0;
 
@@ -119,7 +119,7 @@ namespace MyWeb.Services.Implementations
 
         public async Task UpdateQuantityAsync(string userId, int productId, int quantity)
         {
-            var product = _productRepo.GetById(productId); //check stock
+            var product = await _productRepo.GetByIdAsync(productId); //check stock
             if (product == null)
             {
                 throw new Exception("Sản phẩm không tồn tại.");

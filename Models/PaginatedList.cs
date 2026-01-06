@@ -1,4 +1,6 @@
-﻿namespace MyWeb.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MyWeb.Models
 {
     public class PaginatedList<T> : List<T>
     {
@@ -29,14 +31,16 @@
             }
         }
 
-        public static PaginatedList<T> Create(IQueryable<T> source, int pageIndex, int pageSize)
+        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
         {
-            var count = source.Count();
+            var count = await source.CountAsync();
 
             // Đảm bảo skip luôn >= 0
             var skipCount = Math.Max(0, (pageIndex - 1) * pageSize);
 
-            var items = source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToList();
+            var items = await source
+                              .Skip((pageIndex - 1) * pageSize)
+                              .Take(pageSize).ToListAsync();
             return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }
