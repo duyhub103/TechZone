@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Services.Interfaces;
 using MyWeb.ViewModels;
+using System.Globalization;
 using System.Security.Claims;
 
 namespace MyWeb.Controllers
@@ -57,24 +58,27 @@ namespace MyWeb.Controllers
             return PartialView("Partials/_ReviewList", reviews);
         }
 
+        // API cho Live Search (Popup gợi ý sản phẩm)
         [HttpGet]
         public async Task<IActionResult> SearchLive(string query)
         {
             if (string.IsNullOrWhiteSpace(query)) return Json(null);
 
-            // Gọi Service -> Repo (giả sử bạn đã map service)
-            var result = await _productService.SearchLiveAsync(query);
+            // Lấy danh sách sản phẩm gợi ý
+            var products = await _productService.SearchLiveAsync(query);
 
-            // Trả về JSON, Price chưa format
+            if (!products.Any()) return Json(new { products = new object[] { } });
+
+            // Trả về JSON để JS hiển thị
+            var culture = CultureInfo.GetCultureInfo("vi-VN");
             return Json(new
             {
-                suggestions = result.Suggestions,
-                products = result.Products.Select(p => new {
+                products = products.Select(p => new
+                {
                     id = p.Id,
                     name = p.Name,
                     price = p.Price,
-                    oldPrice = p.Price * 1.1m,
-                    image = p.ImageUrl ?? "default.png"
+                    image = p.ImageUrl ?? "/images/default.png"
                 })
             });
         }

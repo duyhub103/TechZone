@@ -16,14 +16,50 @@ namespace MyWeb.Repositories.Implementations
             _context = context;
         }
 
-        public IEnumerable<Product> GetAllActive()
+        public PaginatedList<Product> GetProducts(string? keyword, string? type, string? value, int pageIndex, int pageSize)
         {
-            return _context.Products
+            // 1. Khởi tạo query cơ bản
+            var query = _context.Products
                 .Where(p => p.IsActive)
                 .Include(p => p.Category)
                 .Include(p => p.Brand)
                 .Include(p => p.Attributes)
-                .ToList();
+                .AsQueryable();
+
+            // 2. Xử lý Tìm kiếm (Search)
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                // Tìm trong Tên, Danh mục, Thương hiệu hoặc Attribute
+                query = query.Where(p =>
+                    p.Name.Contains(keyword) ||
+                    p.Category.Name.Contains(keyword) ||
+                    p.Brand.Name.Contains(keyword) ||
+                    p.Attributes.Any(a => a.Value.Contains(keyword))
+                );
+            }
+
+            // 3. Xử lý Lọc (Filter theo Type/Value từ Sidebar)
+            if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(value))
+            {
+                switch (type.ToLower())
+                {
+                    case "category":
+                        query = query.Where(p => p.Category.Name == value);
+                        break;
+                    case "brand":
+                        query = query.Where(p => p.Brand.Name == value);
+                        break;
+                    case "attribute":
+                        query = query.Where(p => p.Attributes.Any(a => a.Value == value));
+                        break;
+                }
+            }
+
+            // 4. Sắp xếp (Mặc định mới nhất lên đầu)
+            //query = query.OrderByDescending(p => p.CreatedAt);
+
+            // 5. Trả về PaginatedList (Nó sẽ tự chạy Count và Skip/Take)
+            return PaginatedList<Product>.Create(query, pageIndex, pageSize);
         }
 
         public Product? GetById(int id)
@@ -60,119 +96,20 @@ namespace MyWeb.Repositories.Implementations
                 .ToList();
         }
 
-        public IEnumerable<Product> GetByFilter(string type, string value)
+        //popup gợi ý khi gõ từ khóa
+        public async Task<IEnumerable<Product>> SearchLiveAsync(string keyword)
         {
-            var query = _context.Products
-                .Where(p => p.IsActive)
-                .Include(p => p.Category)
-                .Include(p => p.Brand)
-                .Include(p => p.Attributes)
-                .AsQueryable();
-
-            switch (type.ToLower())
-            {
-                case "category":                 
-                    query = query.Where(p => p.Category.Name == value);
-                    break;
-                case "brand":
-                    query = query.Where(p => p.Brand.Name == value);
-                    break;
-                case "attribute":
-                    query = query.Where(p => p.Attributes.Any(a => a.Value == value));
-                    break;
-            }
-
-            return query.ToList();  
-        }
-
-        public PaginatedList<Product> GetProducts(string? search, string? type, string? value, int pageIndex, int pageSize)
-        {
-            // init query, chưa exc
-            var query = _context.Products
-                .Where(p => p.IsActive)
-                .Include(p => p.Category)
-                .Include(p => p.Brand)
-                .Include(p => p.Attributes)
-                //.OrderByDescending(p => p.CreateAt)
-                .AsQueryable();
-
-            //search
-            if (!string.IsNullOrEmpty(search))
-            {
-                // Tìm theo tên, hãng,, thuộc tính
-                query = query.Where(p => p.Name.Contains(search)
-                                      || p.Category.Name.Contains(search)
-                                      || p.Attributes.Any(a => a.Value.Contains(search))
-                                      || p.Brand.Name.Contains(search));
-            }
-
-
-            if (!string.IsNullOrEmpty(type) && !string.IsNullOrEmpty(value))
-            {
-                switch (type.ToLower())
-                {
-                    case "category":
-                        query = query.Where(p => p.Category.Name == value);
-                        break;
-                    case "brand":
-                        query = query.Where(p => p.Brand.Name == value);
-                        break;
-                    case "attribute":
-                        query = query.Where(p => p.Attributes.Any(a => a.Value == value));
-                        break;
-                }
-            }
-
-            //hàm Create của PaginatedList để chạy Skip/Take và Count
-            return PaginatedList<Product>.Create(query, pageIndex, pageSize);
-        }
-
-
-        public async Task<LiveSearchViewModel> SearchAsync(string query)
-        {
-            var model = new LiveSearchViewModel();
-
-            // gợi ý theo keyword
-            var suggestionsCategories = await _context.Categories
-                .Where(c => c.Name.Contains(query))
-                .Select(c => c.Name)
-                .Take(3)
-                .ToListAsync();
-
-            var suggestionsBrands = await _context.Brands
-                .Where(b => b.Name.Contains(query))
-                .Select(b => b.Name)
-                .Take(3)
-                .ToListAsync();
-
-            model.Suggestions.AddRange(suggestionsCategories);
-            model.Suggestions.AddRange(suggestionsBrands);
-
-            // tìm sản phẩm theo keyword
-            model.Products = await _context.Products
-                .Include(p => p.Category)
+            return await _context.Products
+                .Include(p => p.Category) // Include để lấy ảnh/giá nếu cần
                 .Where(p => p.IsActive && (
-                    p.Name.Contains(query) ||
-                    p.Attributes.Any(a => a.Value.Contains(query))
+                    p.Name.Contains(keyword) ||
+                    p.Category.Name.Contains(keyword) ||
+                    p.Attributes.Any(a => a.Value.Contains(keyword))
                 ))
-                .OrderByDescending(p => p.Name.StartsWith(query)) // Ưu tiên khớp đầu từ
-                .Take(5)
+                .OrderByDescending(p => p.Name.StartsWith(keyword)) // Ưu tiên khớp đầu tên
+                .Take(5) // Chỉ lấy 5 sản phẩm
                 .ToListAsync();
-
-            return model;
         }
 
-
-
-
-        //public async Task<bool> ReduceStockAndIncreaseSoldAsync(int productId, int quantity)
-        //{
-        //    // check stock khi update
-        //    string sql = "UPDATE Product SET Stock = Stock - {0}, Sold = Sold + {0} WHERE Id = {1} AND Stock >= {0}";
-
-        //    int result = await _context.Database.ExecuteSqlRawAsync(sql, quantity, productId);
-
-        //    return result > 0;
-        //}  chuyển qua order repo
     }
 }

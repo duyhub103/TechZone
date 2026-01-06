@@ -1,17 +1,18 @@
 ﻿using MyWeb.Models;
-using MyWeb.ViewModels;
+using MyWeb.ViewModels; // Nếu cần
 
 namespace MyWeb.Repositories.Interfaces
 {
     public interface IProductRepository
     {
-        IEnumerable<Product> GetAllActive();
+
+        PaginatedList<Product> GetProducts(string? keyword, string? type, string? value, int pageIndex, int pageSize);
+
+        Task<IEnumerable<Product>> SearchLiveAsync(string keyword);
+
         Product? GetById(int id);
         IEnumerable<Product> GetFeatured(int take);
-        IEnumerable<Product> GetByFilter(string type, string value);
         IEnumerable<Product> GetRelatedProducts(int categoryId, int excludeProductId, int take);
 
-        PaginatedList<Product> GetProducts(string? search, string? type, string? value, int pageIndex, int pageSize);
-        Task<LiveSearchViewModel> SearchAsync(string query);
     }
 }
