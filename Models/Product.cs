@@ -34,6 +34,9 @@ namespace MyWeb.Models
         public int BrandId { get; set; }
         public Brand? Brand { get; set; }
 
+        [Required]
+        public DateTime CreatedAt { get; set; }
+
         // navigation properties
         public ICollection<ProductAttribute>? Attributes { get; set; }
         public ICollection<ProductImage>? Images { get; set; }

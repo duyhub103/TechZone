@@ -56,7 +56,7 @@ namespace MyWeb.Repositories.Implementations
             }
 
             // Sắp xếp (Mặc định mới nhất lên đầu)
-            //query = query.OrderByDescending(p => p.CreatedAt);
+            query = query.OrderByDescending(p => p.CreatedAt);
 
             // Trả về PaginatedList (Nó sẽ tự chạy Count và Skip/Take)
             return await PaginatedList<Product>.CreateAsync(query, pageIndex, pageSize);
@@ -75,10 +75,35 @@ namespace MyWeb.Repositories.Implementations
         public async Task<List<Product>> GetFeaturedAsync(int take)
         {
             return await _context.Products
+                .AsNoTracking()
                 .Where(p => p.IsActive && p.IsFeatured)
                 .Include(p => p.Category)
                 .Include(p => p.Attributes)
                 .OrderByDescending(p => p.Id)
+                .Take(take)
+                .ToListAsync();
+        }
+
+        public async Task<List<Product>> GetLatestAsync(int take)
+        {
+            return await _context.Products
+                .AsNoTracking()
+                .Where(p => p.IsActive)
+                .Include(p => p.Category)
+                .Include(p => p.Attributes)
+                .OrderByDescending(p => p.CreatedAt)
+                .Take(take)
+                .ToListAsync();
+        }
+
+        public async Task<List<Product>> GetBestSellingAsync(int take)
+        {
+            return await _context.Products
+                .AsNoTracking()
+                .Where(p => p.IsActive)
+                .Include(p => p.Category)
+                .Include(p => p.Attributes)
+                .OrderByDescending(p => p.Sold)
                 .Take(take)
                 .ToListAsync();
         }

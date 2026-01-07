@@ -9,16 +9,13 @@ namespace MyWeb.Services.Implementations
     {
         private readonly IProductRepository _productRepo;
         private readonly IBannerRepository _bannerRepo;
-        private readonly TechZoneDbContext _context;
 
         public HomeService(
             IProductRepository productRepo,
-            IBannerRepository bannerRepo,
-            TechZoneDbContext context)
+            IBannerRepository bannerRepo)
         {
             _productRepo = productRepo;
             _bannerRepo = bannerRepo;
-            _context = context;
         }
 
         public async Task<HomeViewModel> GetHomeViewModelAsync()
@@ -26,11 +23,11 @@ namespace MyWeb.Services.Implementations
             return new HomeViewModel
             {
                 FeaturedProducts = await _productRepo.GetFeaturedAsync(4),
+                LatestProducts = await _productRepo.GetLatestAsync(4),
+                BestSellingProducts = await _productRepo.GetBestSellingAsync(4),
                 MainSliders = await _bannerRepo.GetMainSlidersAsync(),
                 PromoBanner = await _bannerRepo.GetPromoBannerAsync(),
-                PopularCategories = await _context.HomeCategories
-                                    .OrderBy(x => x.DisplayOrder)
-                                    .ToListAsync()
+                PopularCategories = await _bannerRepo.GetPopularCategoriesAsync()
             };
         }
     }

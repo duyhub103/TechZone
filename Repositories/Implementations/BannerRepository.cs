@@ -5,7 +5,7 @@ using MyWeb.Repositories.Interfaces;
 
 namespace MyWeb.Repositories.Implementations
 {
-    public class BannerRepository : IBannerRepository
+    public class BannerRepository : IBannerRepository //homeRepo
     {
         private readonly TechZoneDbContext _context;
 
@@ -28,6 +28,14 @@ namespace MyWeb.Repositories.Implementations
                 .Where(b => b.IsActive && b.Position == BannerPosition.PromoSection)
                 .OrderBy(b => b.DisplayOrder)
                 .FirstOrDefaultAsync();
+        }
+
+        public async Task<List<HomeCategory>> GetPopularCategoriesAsync()
+        {
+            return await _context.HomeCategories
+                .AsNoTracking()
+                .OrderBy(x => x.DisplayOrder)
+                .ToListAsync();
         }
     }
 }
