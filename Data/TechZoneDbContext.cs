@@ -40,6 +40,12 @@ namespace MyWeb.Data
                 .Property(p => p.CreatedAt)
                 .HasDefaultValueSql("GETUTCDATE()")
                 .ValueGeneratedOnAdd();
+
+            //chống spam/double click, 1 request oke thì các request sau bị deny
+            builder.Entity<Review>()
+                .HasIndex(r => new { r.ProductId, r.UserId })
+                .IsUnique();
+
         }
 
     }

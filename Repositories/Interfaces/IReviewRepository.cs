@@ -11,5 +11,8 @@ namespace MyWeb.Repositories.Interfaces
         Task<List<Review>> GetAllReviewsByProductIdAsync(int productId);
 
         Task AddAsync(Review review);
+
+        //check user đã review sp chưa
+        Task<bool> HasUserReviewedProductAsync(int productId, string userId);
     }
 }

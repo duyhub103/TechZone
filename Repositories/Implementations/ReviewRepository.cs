@@ -16,11 +16,13 @@ namespace MyWeb.Repositories.Implementations
 
         public async Task<List<Review>> GetReviewsByProductAsync(int productId, int page, int pageSize)
         {
+            var skip = (page - 1) * pageSize;
             return await _context.Reviews
+                .AsNoTracking()
                 .Include(r => r.User) // Join bảng User để lấy FullName
                 .Where(r => r.ProductId == productId)
                 .OrderByDescending(r => r.CreatedAt) // Mới nhất lên đầu
-                .Skip((page - 1) * pageSize) // Bỏ qua các trang trước
+                .Skip(skip) // Bỏ qua các trang trước
                 .Take(pageSize) // Lấy số lượng cần thiết
                 .ToListAsync();
         }
@@ -29,6 +31,7 @@ namespace MyWeb.Repositories.Implementations
         public async Task<List<Review>> GetAllReviewsByProductIdAsync(int productId)
         {
             return await _context.Reviews
+                .AsNoTracking()
                 .Where(r => r.ProductId == productId)
                 .ToListAsync();
         }
@@ -37,6 +40,12 @@ namespace MyWeb.Repositories.Implementations
         {
             _context.Reviews.Add(review);
             await _context.SaveChangesAsync();
+        }
+
+        public async Task<bool> HasUserReviewedProductAsync(int productId, string userId)
+        {
+            return await _context.Reviews.AsNoTracking()
+                .AnyAsync(r => r.UserId == userId && r.ProductId == productId);
         }
 
     }

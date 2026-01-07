@@ -14,5 +14,7 @@ namespace MyWeb.ViewModels
 
         // Mảng chứa số lượng đánh giá cho từng sao (Index 0 = 1 sao, Index 4 = 5 sao)
         public int[] StarCounts { get; set; } = new int[5];
+
+        public bool CanReview { get; set; }
     }
 }
