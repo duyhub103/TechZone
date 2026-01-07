@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyWeb.Models;
-using MyWeb.Services.Interfaces;
+using MyWeb.Services.Implementations;
 using System.Security.Claims;
 
 namespace MyWeb.Controllers
@@ -9,10 +9,10 @@ namespace MyWeb.Controllers
     public class CartController : Controller
     {
 
-        private readonly ICartService _cartService;
+        private readonly CartService _cartService;
         
 
-        public CartController(ICartService cartService)
+        public CartController(CartService cartService)
         {
             _cartService = cartService;
         }

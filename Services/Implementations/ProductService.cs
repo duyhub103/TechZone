@@ -1,12 +1,11 @@
 ﻿using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Interfaces;
 using MyWeb.ViewModels;
 using Microsoft.EntityFrameworkCore; // Cần cái này nếu dùng Async methods của EF
 
 namespace MyWeb.Services.Implementations
 {
-    public class ProductService : IProductService
+    public class ProductService
     {
         private readonly IProductRepository _productRepo;
         private readonly IReviewRepository _reviewRepo;

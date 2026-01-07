@@ -1,10 +1,10 @@
-﻿using MyWeb.Services.Interfaces;
+﻿
 using System.Net;
 using System.Net.Mail;
 
 namespace MyWeb.Services.Implementations
 {
-    public class EmailSender : IEmailSender
+    public class EmailSender
     {
         private readonly IConfiguration _configuration;
 

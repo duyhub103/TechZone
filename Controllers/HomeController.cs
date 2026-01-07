@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Models;
-using MyWeb.Services.Interfaces;
+using MyWeb.Services.Implementations;
 using MyWeb.ViewModels;
 using System.Diagnostics;
 
@@ -10,9 +10,9 @@ namespace MyWeb.Controllers
 {
 	public class HomeController : Controller
     { 
-        private readonly IHomeService _homeService;
+        private readonly HomeService _homeService;
 
-		public HomeController(IHomeService homeService)
+		public HomeController(HomeService homeService)
 		{
             _homeService = homeService;
 		}

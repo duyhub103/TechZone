@@ -1,12 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Interfaces;
 using MyWeb.ViewModels;
 
 namespace MyWeb.Services.Implementations
 {
-    public class HomeService : IHomeService
+    public class HomeService 
     {
         private readonly IProductRepository _productRepo;
         private readonly IBannerRepository _bannerRepo;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
-using MyWeb.Services.Interfaces;
+using MyWeb.Services.Implementations;
 using MyWeb.ViewModels;
 using System.Globalization;
 using System.Security.Claims;
@@ -11,9 +11,9 @@ namespace MyWeb.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
+        private readonly ProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductController(ProductService productService)
         {
             _productService = productService;
         }
