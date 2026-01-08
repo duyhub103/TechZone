@@ -125,7 +125,7 @@ namespace MyWeb.Repositories.Implementations
         public async Task<IEnumerable<Product>> SearchLiveAsync(string keyword)
         {
             return await _context.Products
-                .Include(p => p.Category) // Include để lấy ảnh/giá nếu cần
+                .Include(p => p.Category) // Include để lấy ảnh/giá
                 .Where(p => p.IsActive && (
                     p.Name.Contains(keyword) ||
                     p.Category.Name.Contains(keyword) ||

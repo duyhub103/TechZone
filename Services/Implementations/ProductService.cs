@@ -170,7 +170,7 @@ namespace MyWeb.Services.Implementations
             // Validate business rule
             var hasPurchased = await _orderRepo.HasUserPurchasedProductAsync(review.UserId, review.ProductId);
             if (!hasPurchased)
-                throw new Exception("Chỉ khách đã mua hàng thành công mới được đánh giá.");
+                throw new Exception("Bạn chưa thể đánh giá khi chưa mua sản phẩm.");
 
             var hasReviewed = await _reviewRepo.HasUserReviewedProductAsync(review.ProductId, review.UserId);
             if (hasReviewed)
