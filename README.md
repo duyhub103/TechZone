@@ -84,7 +84,7 @@ Visual Studio 2022 hoặc VS Code
 
 ## Bước 1: Clone Repository
 ```bash
-git clone [https://github.com/duyhub103/MyWeb.git](https://github.com/duyhub103/MyWeb.git)
+git clone https://github.com/duyhub103/MyWeb.git
 cd MyWeb
 ```
 
