@@ -3,9 +3,9 @@ using MyWeb.Data;
 using MyWeb.Repositories.Interfaces;
 using MyWeb.ViewModels;
 
-namespace MyWeb.Services.Implementations
+namespace MyWeb.Services
 {
-    public class HomeService 
+    public class HomeService
     {
         private readonly IProductRepository _productRepo;
         private readonly IBannerRepository _bannerRepo;

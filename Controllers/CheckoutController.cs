@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Implementations;
+using MyWeb.Services;
 using MyWeb.ViewModels;
 
 namespace MyWeb.Controllers

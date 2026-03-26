@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using MyWeb.Models;
-using MyWeb.Services.Implementations;
+using MyWeb.Services;
 using System.Security.Claims;
 
 namespace MyWeb.Controllers

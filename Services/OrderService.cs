@@ -1,12 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
-using MyWeb.Helpers;    
+using MyWeb.Helpers;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
 using MyWeb.ViewModels;
 using System.Text;
 
-namespace MyWeb.Services.Implementations
+namespace MyWeb.Services
 {
     public class OrderService
     {
@@ -70,7 +70,7 @@ namespace MyWeb.Services.Implementations
             {
                 Console.WriteLine("Lỗi gửi mail: " + ex.Message);
             }
-            
+
 
             return orderId;
         }

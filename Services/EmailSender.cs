@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 
-namespace MyWeb.Services.Implementations
+namespace MyWeb.Services
 {
     public class EmailSender
     {
