@@ -2,13 +2,13 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.Models;
-using MyWeb.Services.Implementations;
+using MyWeb.Services;
 using MyWeb.ViewModels;
 using System.Diagnostics;
 
 namespace MyWeb.Controllers
 {
-	public class HomeController : Controller
+    public class HomeController : Controller
     { 
         private readonly HomeService _homeService;
 

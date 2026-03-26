@@ -4,8 +4,8 @@ using MyWeb.Data;
 using MyWeb.Models;
 using MyWeb.Repositories.Implementations;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Implementations;
 using Microsoft.Extensions.DependencyInjection;
+using MyWeb.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);

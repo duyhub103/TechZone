@@ -1,9 +1,9 @@
 ﻿using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
 using MyWeb.ViewModels;
-using Microsoft.EntityFrameworkCore; // Cần cái này nếu dùng Async methods của EF
+using Microsoft.EntityFrameworkCore;
 
-namespace MyWeb.Services.Implementations
+namespace MyWeb.Services
 {
     public class ProductService
     {
@@ -59,7 +59,7 @@ namespace MyWeb.Services.Implementations
                 .OrderByDescending(r => r.CreatedAt)
                 .Take(10)
                 .ToList();
-           
+
             return new ProductDetailViewModel
             {
                 MainProduct = mainProduct,
@@ -104,9 +104,9 @@ namespace MyWeb.Services.Implementations
                 // Đếm số lượng từng loại sao
                 starCounts[0] = allReviews.Count(r => r.Rating == 1); // 1 sao
                 starCounts[1] = allReviews.Count(r => r.Rating == 2); // 2 sao
-                starCounts[2] = allReviews.Count(r => r.Rating == 3); 
-                starCounts[3] = allReviews.Count(r => r.Rating == 4); 
-                starCounts[4] = allReviews.Count(r => r.Rating == 5); 
+                starCounts[2] = allReviews.Count(r => r.Rating == 3);
+                starCounts[3] = allReviews.Count(r => r.Rating == 4);
+                starCounts[4] = allReviews.Count(r => r.Rating == 5);
             }
 
             //  Lấy 10 review mới nhất để hiển thị ban đầu

@@ -1,12 +1,11 @@
 ﻿using MyWeb.Data;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Implementations;
 using MyWeb.ViewModels;
 
-namespace MyWeb.Services.Implementations
+namespace MyWeb.Services
 {
-    public class CartService 
+    public class CartService
     {
         private readonly ICartRepository _cartRepo;
         private readonly IProductRepository _productRepo;

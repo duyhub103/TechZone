@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
 using MyWeb.DTOs.Reviews;
 using MyWeb.Models;
-using MyWeb.Services.Implementations;
+using MyWeb.Services;
 using MyWeb.ViewModels;
 using System.Globalization;
 using System.Security.Claims;

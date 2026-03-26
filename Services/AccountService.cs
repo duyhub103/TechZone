@@ -4,7 +4,7 @@ using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using MyWeb.Models;
 
-namespace MyWeb.Services.Implementations
+namespace MyWeb.Services
 {
     public class AccountService
     {

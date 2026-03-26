@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MyWeb.Services.Implementations;
+using MyWeb.Services;
 using MyWeb.ViewModels;
 
 namespace MyWeb.Controllers
