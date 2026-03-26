@@ -84,8 +84,8 @@ Visual Studio 2022 hoặc VS Code
 
 ## Bước 1: Clone Repository
 ```bash
-git clone [https://github.com/duyhub103/MyWeb.git](https://github.com/duyhub103/MyWeb.git)
-cd MyWeb
+git clone https://github.com/duyhub103/TechZone.git
+cd TechZone
 ```
 
 ## Bước 2: Cấu hình Môi trường
@@ -134,7 +134,7 @@ MyWeb/
 │   │   ├── ProductService.cs     \# Logic tìm kiếm, tính toán sao đánh giá  
 │   │   ├── CartService.cs        \# Tính toán tổng tiền, phí ship  
 │   │   └── EmailSender.cs        \# Cấu hình SMTP gửi mail  
-│   └── Interfaces/               \# Định nghĩa Interface cho DI  
+│    
 │  
 ├── Repositories/                 \# Truy cập dữ liệu (Data Access)  
 │   ├── Implementations/  
@@ -170,4 +170,4 @@ MyWeb/
 ## 👉 Để xem chi tiết giao diện và các màn hình chức năng, vui lòng xem tại: [Views/README.md](Views/README.md)
 
 
-Developed by [duyhub103](https://github.com/duyhub103/MyWeb)
+Developed by [duyhub103](https://github.com/duyhub103/TechZone)
