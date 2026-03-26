@@ -84,13 +84,8 @@ Visual Studio 2022 hoặc VS Code
 
 ## Bước 1: Clone Repository
 ```bash
-<<<<<<< HEAD
 git clone https://github.com/duyhub103/TechZone.git
 cd TechZone
-=======
-git clone https://github.com/duyhub103/MyWeb.git
-cd MyWeb
->>>>>>> 8b6e4428b8299ae0981c776d17cd160974934000
 ```
 
 ## Bước 2: Cấu hình Môi trường
@@ -175,8 +170,4 @@ MyWeb/
 ## 👉 Để xem chi tiết giao diện và các màn hình chức năng, vui lòng xem tại: [Views/README.md](Views/README.md)
 
 
-<<<<<<< HEAD
 Developed by [duyhub103](https://github.com/duyhub103/TechZone)
-=======
-Developed by [duyhub103](https://github.com/duyhub103/MyWeb)
->>>>>>> 8b6e4428b8299ae0981c776d17cd160974934000
