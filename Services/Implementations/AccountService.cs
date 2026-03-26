@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using MyWeb.ViewModels;
-using MyWeb.Services.Interfaces;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.General;
 using Microsoft.VisualStudio.Web.CodeGenerators.Mvc.Templates.BlazorIdentity.Pages;
 using MyWeb.Models;
 
 namespace MyWeb.Services.Implementations
 {
-    public class AccountService : IAccountService
+    public class AccountService
     {
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly UserManager<ApplicationUser> _userManager;

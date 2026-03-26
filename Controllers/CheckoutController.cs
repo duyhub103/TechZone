@@ -2,20 +2,20 @@
 using Microsoft.AspNetCore.Mvc;
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Interfaces;
+using MyWeb.Services.Implementations;
 using MyWeb.ViewModels;
 
 namespace MyWeb.Controllers
 {
     public class CheckoutController : Controller
     {
-        private readonly ICartService _cartService;
-        private readonly IOrderService _orderService;
+        private readonly CartService _cartService;
+        private readonly OrderService _orderService;
         private readonly UserManager<ApplicationUser> _userManager;
 
         public CheckoutController(
-            ICartService cartService,
-            IOrderService orderService,
+            CartService cartService,
+            OrderService orderService,
             UserManager<ApplicationUser> userManager)
         {
             _cartService = cartService;

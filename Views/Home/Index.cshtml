@@ -11,7 +11,15 @@
 
 <partial name="Partials/_CategorySection" model="Model.PopularCategories"/>
 
-<partial name="Partials/_HomeProductList" model="Model.FeaturedProducts" />
+<partial name="Partials/_HomeProductList"
+         model="@(new HomeProductListSectionViewModel { Title = "Sản phẩm nổi bật", Products = Model.FeaturedProducts })" />
+
+<partial name="Partials/_HomeProductList"
+         model="@(new HomeProductListSectionViewModel { Title = "Sản phẩm mới nhất", Products = Model.LatestProducts })" />
+
+<partial name="Partials/_HomeProductList"
+         model="@(new HomeProductListSectionViewModel { Title = "Sản phẩm bán chạy", Products = Model.BestSellingProducts })" />
+
 
 @if (Model.PromoBanner != null)
 {

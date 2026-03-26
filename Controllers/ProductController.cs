@@ -1,8 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.DotNet.Scaffolding.Shared.Messaging;
 using Microsoft.EntityFrameworkCore;
 using MyWeb.Data;
-using MyWeb.Services.Interfaces;
+using MyWeb.DTOs.Reviews;
+using MyWeb.Models;
+using MyWeb.Services.Implementations;
 using MyWeb.ViewModels;
 using System.Globalization;
 using System.Security.Claims;
@@ -11,9 +14,9 @@ namespace MyWeb.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IProductService _productService;
+        private readonly ProductService _productService;
 
-        public ProductController(IProductService productService)
+        public ProductController(ProductService productService)
         {
             _productService = productService;
         }
@@ -37,7 +40,8 @@ namespace MyWeb.Controllers
         {
             try
             {
-                var viewModel = await _productService.GetProductDetailAsync(id);
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                var viewModel = await _productService.GetProductDetailAsync(id, userId);
                 return View(viewModel);
             }
             catch (Exception)
@@ -57,6 +61,43 @@ namespace MyWeb.Controllers
             //return PartialView
             return PartialView("Partials/_ReviewList", reviews);
         }
+
+        [Authorize]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> SubmitReview([FromBody] SubmitReviewRequest req)
+        {
+            try
+            {
+                // double check authorize cho an toàn code
+                var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return Unauthorized(new { message = "Bạn cần đăng nhập!" });
+                }
+
+                //map dto sang model (entity)
+                var review = new Review
+                {
+                    ProductId = req.ProductId,
+                    UserId = userId,
+                    Rating = req.Rating,
+                    Comment = req.Comment,
+                };
+
+                var create = await _productService.SubmitReviewAsync(review);
+
+                //trả partial để js append vào list
+                return PartialView("Partials/_ReviewItem", create);
+
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+
 
         // API cho Live Search (Popup gợi ý sản phẩm)
         [HttpGet]

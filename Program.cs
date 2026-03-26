@@ -5,7 +5,7 @@ using MyWeb.Models;
 using MyWeb.Repositories.Implementations;
 using MyWeb.Repositories.Interfaces;
 using MyWeb.Services.Implementations;
-using MyWeb.Services.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,12 +34,12 @@ builder.Services.AddScoped<ICartRepository, CartRepository>();
 
 
 // Services
-builder.Services.AddScoped<IProductService, ProductService>();
-builder.Services.AddScoped<IHomeService, HomeService>();
-builder.Services.AddScoped<IAccountService, AccountService>();
-builder.Services.AddScoped<ICartService, CartService>();
-builder.Services.AddScoped<IOrderService, OrderService>();
-builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<ProductService>();
+builder.Services.AddScoped<HomeService>();
+builder.Services.AddScoped<AccountService>();
+builder.Services.AddScoped<CartService>();
+builder.Services.AddScoped<OrderService>();
+builder.Services.AddScoped<EmailSender>();
 
 
 

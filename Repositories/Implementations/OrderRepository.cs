@@ -14,10 +14,10 @@ namespace MyWeb.Repositories.Implementations
             _context = context;
         }
 
-        public bool HasUserPurchasedProduct(string userId, int productId)
+        public async Task<bool> HasUserPurchasedProductAsync(string userId, int productId)
         {
-            return _context.Orders
-            .Any(o =>
+            return await _context.Orders
+            .AnyAsync(o =>
                 o.UserId == userId &&
                 o.Status == "Success" &&
                 o.OrderDetails!.Any(od => od.ProductId == productId)

@@ -12,6 +12,9 @@ namespace MyWeb.Repositories.Interfaces
 
         Task<Product?> GetByIdAsync(int id);
         Task<List<Product>> GetFeaturedAsync(int take);
+        Task<List<Product>> GetLatestAsync(int take);
+        Task<List<Product>> GetBestSellingAsync(int take);
+
         Task<List<Product>> GetRelatedProductsAsync(int categoryId, int excludeProductId, int take);
 
     }

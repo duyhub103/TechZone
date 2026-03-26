@@ -3,22 +3,21 @@ using MyWeb.Data;
 using MyWeb.Helpers;    
 using MyWeb.Models;
 using MyWeb.Repositories.Interfaces;
-using MyWeb.Services.Interfaces;
 using MyWeb.ViewModels;
 using System.Text;
 
 namespace MyWeb.Services.Implementations
 {
-    public class OrderService : IOrderService
+    public class OrderService
     {
-        private readonly ICartService _cartService;
+        private readonly CartService _cartService;
         private readonly IOrderRepository _orderRepo;
-        private readonly IEmailSender _emailSender;
+        private readonly EmailSender _emailSender;
 
         public OrderService(
-            ICartService cartService,
+            CartService cartService,
             IOrderRepository ordertRepo,
-            IEmailSender emailSender)
+            EmailSender emailSender)
         {
             _cartService = cartService;
             _orderRepo = ordertRepo;
