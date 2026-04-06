@@ -8,6 +8,11 @@ Dự án này mô phỏng quy trình kinh doanh thiết bị công nghệ. Hệ 
 
 Điểm nổi bật của dự án là khả năng xử lý đồng bộ dữ liệu chặt chẽ: từ việc kiểm tra tồn kho, trừ kho, tạo đơn hàng đến gửi email xác nhận đều được quản lý trong một Transaction đảm bảo tính toàn vẹn (ACID).
 
+# 🖼️ Hình ảnh Demo (Screenshots)
+
+## 👉 Để xem chi tiết giao diện và các màn hình chức năng, vui lòng xem tại: [Views/README.md](Views/README.md)
+
+
 # 🚀 Tính năng chính (Key Features)
 
 ## 🛍️ Trải nghiệm Mua sắm (Storefront)
@@ -165,9 +170,5 @@ MyWeb/
 │  
 └── Program.cs                    \# App Entry Point & DI Configuration
 ```
-# 🖼️ Hình ảnh Demo (Screenshots)
-
-## 👉 Để xem chi tiết giao diện và các màn hình chức năng, vui lòng xem tại: [Views/README.md](Views/README.md)
-
 
 Developed by [duyhub103](https://github.com/duyhub103/TechZone)
